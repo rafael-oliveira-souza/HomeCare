@@ -3,9 +3,12 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
+out/
+target/
 
 # Other files and folders
 .settings/
+*.iml
 
 # Executables
 *.swf
