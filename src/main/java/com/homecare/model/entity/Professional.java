@@ -9,13 +9,14 @@ import lombok.Setter;
 public class Professional {
 
     private Long id;
-    private String name;
-    private String profession;
+
+    private Profession profession;
+    private Person person;
 
     public Professional(){ }
 
-    public Professional(String name, String profession){
-        this.name = name;
+    public Professional(Person person, Profession profession){
         this.profession = profession;
+        this.person = person;
     }
 }

@@ -2,12 +2,12 @@ package com.homecare.service;
 
 import com.homecare.model.entity.Professional;
 import com.homecare.model.interfaces.ServiceInterface;
-import org.springframework.stereotype.Service;
 
+import javax.ejb.LocalBean;
 import java.util.LinkedList;
 import java.util.List;
 
-@Service("professionalService")
+@LocalBean
 public class ProfessionalService implements ServiceInterface<Professional> {
 
     @Override

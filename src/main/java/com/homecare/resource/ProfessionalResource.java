@@ -1,25 +1,22 @@
 package com.homecare.resource;
 
 import com.google.gson.Gson;
+import com.homecare.core.messages.RequestMessageEnum;
 import com.homecare.model.entity.Professional;
 import com.homecare.service.ProfessionalService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.inject.Inject;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Controller
+import static com.homecare.core.messages.RequestMessageEnum.SAVE_SUCCESS;
+
 @Path("/profissional")
 public class ProfessionalResource {
 
-    @Autowired
-    private ProfessionalService professionalService;
+    @Inject
+    private ProfessionalService professionalService = new ProfessionalService();
 
     @GET
     @Path("todos")
@@ -29,7 +26,7 @@ public class ProfessionalResource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("buscar/k {id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Long id){
         Professional profissional = this.professionalService.getById(id);
@@ -37,4 +34,11 @@ public class ProfessionalResource {
         return Response.ok(profissional).build();
     }
 
+    @POST
+    @Path("salvar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response save(Professional professional){
+        return Response.ok(new Gson().toJson(SAVE_SUCCESS)).build();
+    }
 }
