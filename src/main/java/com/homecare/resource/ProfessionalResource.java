@@ -1,7 +1,6 @@
 package com.homecare.resource;
 
 import com.google.gson.Gson;
-import com.homecare.core.messages.RequestMessageEnum;
 import com.homecare.model.entity.Professional;
 import com.homecare.service.ProfessionalService;
 
@@ -26,7 +25,7 @@ public class ProfessionalResource {
     }
 
     @GET
-    @Path("buscar/k {id}")
+    @Path("buscar/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Long id){
         Professional profissional = this.professionalService.getById(id);
