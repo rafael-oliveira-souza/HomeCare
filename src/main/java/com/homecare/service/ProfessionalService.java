@@ -1,30 +1,30 @@
 package com.homecare.service;
 
-import com.homecare.model.entity.Patient;
-import com.homecare.model.entity.Person;
-import com.homecare.model.entity.Professional;
-import com.homecare.model.interfaces.AbstractInterface;
+import com.homecare.model.ManagerFactory;
+import com.homecare.model.entity.persons.Professional;
+import com.homecare.repository.ProfessionalRepository;
 
 import javax.ejb.LocalBean;
 import java.util.LinkedList;
 import java.util.List;
 
 @LocalBean
-public class ProfessionalService {
+public class ProfessionalService extends ProfessionalRepository {
 
-    @Override
     public Professional getById(Long id) {
-        Person patient = new Patient();
-        patient.ge
-
-        Professional profissional = new Professional(new Person());
-//        profissional.cadastrar();
+        Professional profissional = super.getById(id);
 
         return profissional;
     }
 
-    @Override
     public List<Professional> getAll() {
         return new LinkedList<Professional>();
     }
+
+    public Professional save(Professional professional) {
+        Professional profissional = super.save(professional);
+
+        return profissional;
+    }
+
 }

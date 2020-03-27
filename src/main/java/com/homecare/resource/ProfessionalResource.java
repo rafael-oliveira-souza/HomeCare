@@ -1,7 +1,7 @@
 package com.homecare.resource;
 
 import com.google.gson.Gson;
-import com.homecare.model.entity.Professional;
+import com.homecare.model.entity.persons.Professional;
 import com.homecare.service.ProfessionalService;
 
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import static com.homecare.core.messages.RequestMessageEnum.SAVE_SUCCESS;
 public class ProfessionalResource {
 
     @Inject
-    private ProfessionalService professionalService = new ProfessionalService();
+    private ProfessionalService professionalService;
 
     @GET
     @Path("todos")
@@ -38,6 +38,9 @@ public class ProfessionalResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Professional professional){
+        Professional profissional = this.professionalService.save(professional);
+
+//        return Response.ok(profissional).build();
         return Response.ok(new Gson().toJson(SAVE_SUCCESS)).build();
     }
 }
