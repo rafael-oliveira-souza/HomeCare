@@ -19,7 +19,7 @@ public class ProfessionalRepository implements RepositoryInterface<Professional>
 
     @Override
     public List<Professional> getAll() {
-        return null;
+        return this.em.getAll(Professional.class);
     }
 
     @Override

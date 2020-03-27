@@ -1,12 +1,14 @@
 package com.homecare.model;
 
-import com.homecare.model.interfaces.RepositoryInterface;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class ManagerFactory<T> {
@@ -21,7 +23,8 @@ public class ManagerFactory<T> {
     }
 
     public T getById(Class<T> classe, Long id) {
-        T entity = null;
+        this.verifyObject(id);
+        T entity;
 
         entityManager  = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -31,11 +34,19 @@ public class ManagerFactory<T> {
         return entity;
     }
 
-    public List<T> getAll() {
-        return null;
+    public List<T> getAll(Class<T> classe) {
+        entityManager  = this.getEntityManager();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> cq = cb.createQuery(classe);
+        Root<T> rootEntry = cq.from(classe);
+        CriteriaQuery<T> all = cq.select(rootEntry);
+        TypedQuery<T> allQuery = entityManager.createQuery(all);
+
+        return allQuery.getResultList();
     }
 
     public T save(T entity) {
+        this.verifyObject(entity);
         entityManager  = this.getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
@@ -46,6 +57,7 @@ public class ManagerFactory<T> {
     }
 
     public T update(T entity) {
+        this.verifyObject(entity);
         entityManager  = this.getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
@@ -56,6 +68,7 @@ public class ManagerFactory<T> {
     }
 
     public void delete(T entity) {
+        this.verifyObject(entity);
         entityManager  = this.getEntityManager();
         entityManager.getTransaction().begin();
         if (entityManager.contains(entity)) {
@@ -65,5 +78,11 @@ public class ManagerFactory<T> {
         }
         entityManager.getTransaction().commit();
         entityManager.close();
+    }
+
+    private void verifyObject(Object obj){
+        if(obj == null){
+            throw new NullPointerException();
+        }
     }
 }

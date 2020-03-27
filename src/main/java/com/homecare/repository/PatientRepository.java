@@ -19,7 +19,7 @@ public class PatientRepository implements RepositoryInterface<Patient> {
 
     @Override
     public List<Patient> getAll() {
-        return null;
+        return this.em.getAll(Patient.class);
     }
 
     @Override

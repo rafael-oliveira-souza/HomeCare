@@ -21,6 +21,69 @@ public class Person {
     @Column(name = "idade")
     private Integer age;
 
+    @Column(name = "genero")
+    private String gender;
+
+    @Column(name = "email")
+    private String mail;
+
+    @Column(name = "telefone")
+    private String phone;
+
+    @Column(name = "endereco")
+    private String address;
+
+    public Person(){
+        this.height = 1.67;
+        this.weight = 80.0;
+        this.age = 43;
+        this.gender = "M";
+        this.name = "JOAO TESTE";
+        this.mail = "teste";
+        this.phone = "teste";
+        this.address = "teste";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getName() {
         return name;
     }

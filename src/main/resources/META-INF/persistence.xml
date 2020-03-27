@@ -6,7 +6,9 @@
 
     <persistence-unit name="homecare" transaction-type="RESOURCE_LOCAL">
 <!--        <non-jta-data-source>java:jboss/datasources/homecare</non-jta-data-source>-->
-        <jta-data-source>java:jboss/datasources/homecare</jta-data-source>
+        <jta-data-source>java:jboss/datasources/homecarePostgress</jta-data-source>
+<!--        <jta-data-source>java:jboss/datasources/homecareMysql</jta-data-source>-->
+
         <class>com.homecare.model.entity.persons.Person</class>
         <class>com.homecare.model.entity.persons.Patient</class>
         <class>com.homecare.model.entity.persons.Profession</class>
@@ -15,7 +17,8 @@
 
         <properties>
             <!--Configuracoes de Debug-->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="false" />
