@@ -23,8 +23,8 @@ public class PersonRepository implements RepositoryInterface<Person> {
     }
 
     @Override
-    public void delete(Person entity) {
-        this.em.delete(entity);
+    public void delete(Long id) {
+        this.em.delete(Person.class, id);
     }
 
     @Override

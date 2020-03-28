@@ -21,7 +21,7 @@ public class Patient extends AbstractPerson {
     public Patient(){}
 
     public Patient(Person person){
-//        this.person = person;
+        this.person = person;
     }
 
     public Long getId() {
@@ -47,4 +47,5 @@ public class Patient extends AbstractPerson {
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
     }
+
 }

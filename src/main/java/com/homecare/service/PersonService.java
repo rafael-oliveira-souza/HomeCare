@@ -16,7 +16,7 @@ public class PersonService extends PersonRepository {
     }
 
     public List<Person> getAll() {
-        return new LinkedList<Person>();
+        return super.getAll();
     }
 
     public Person save(Person Person) {

@@ -18,7 +18,9 @@ public class ApplicationFilter implements ContainerRequestFilter, ContainerRespo
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        responseContext.setEntity(new Gson().toJson(responseContext.getEntity()));
+        if(responseContext.getEntity() != null){
+            responseContext.setEntity(new Gson().toJson(responseContext.getEntity()));
+        }
     }
 
     public void addHeaders(ContainerRequestContext requestContext, String key, String value){

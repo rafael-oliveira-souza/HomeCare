@@ -23,8 +23,8 @@ public class PatientRepository implements RepositoryInterface<Patient> {
     }
 
     @Override
-    public void delete(Patient entity) {
-        this.em.delete(entity);
+    public void delete(Long id) {
+        this.em.delete(Patient.class, id);
     }
 
     @Override

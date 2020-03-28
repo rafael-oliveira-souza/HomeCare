@@ -22,7 +22,6 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(){
         List<Person> persons = this.personService.getAll();
-
         return Response
                 .status(Status.OK)
                 .entity(persons)
@@ -51,6 +50,31 @@ public class PersonResource {
         return Response
                 .status(Status.OK)
                 .entity(pessoa)
+                .build();
+    }
+
+    @POST
+    @Path("atualizar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(Person Person){
+        Person pessoa = this.personService.update(Person);
+
+        return Response
+                .status(Status.OK)
+                .entity(pessoa)
+                .build();
+    }
+
+    @DELETE
+    @Path("excluir/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") Long id){
+        this.personService.delete(id);
+
+        return Response
+                .status(Status.OK)
+                .entity(null)
                 .build();
     }
 }

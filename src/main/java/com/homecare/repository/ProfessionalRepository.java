@@ -23,8 +23,8 @@ public class ProfessionalRepository implements RepositoryInterface<Professional>
     }
 
     @Override
-    public void delete(Professional entity) {
-        this.em.delete(entity);
+    public void delete(Long id) {
+        this.em.delete(Professional.class, id);
     }
 
     @Override

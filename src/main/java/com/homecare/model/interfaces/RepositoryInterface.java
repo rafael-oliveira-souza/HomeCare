@@ -7,7 +7,7 @@ public interface RepositoryInterface<T> {
 
     List<T> getAll();
 
-    void delete(T entity);
+    void delete(Long id);
 
     T update(T entity);
 
