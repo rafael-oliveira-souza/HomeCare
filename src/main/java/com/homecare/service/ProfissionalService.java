@@ -17,7 +17,7 @@ public class ProfissionalService extends ProfissionalRepository {
     }
 
     public List<Profissional> getAll() {
-        return new LinkedList<Profissional>();
+        return super.getAll();
     }
 
     public Profissional save(Profissional profissional) {
