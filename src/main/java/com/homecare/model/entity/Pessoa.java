@@ -1,43 +1,49 @@
 package com.homecare.model.entity;
 
+import com.homecare.model.enums.TipoUsuarioEnum;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "pessoa")
 public class Pessoa {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "nome")
-    private String name;
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
-    @Column(name = "altura")
-    private Double height;
+    @Column(name = "cpf", unique = true, length = 14, nullable = false)
+    private String cpf;
 
-    @Column(name = "peso")
-    private Double weight;
+    @Column(name = "altura", length = 3)
+    private Double altura;
 
-    @Column(name = "idade")
-    private Integer age;
+    @Column(name = "peso", length = 3)
+    private Double peso;
 
-    @Column(name = "genero")
-    private String gender;
+    @Column(name = "idade", length = 3)
+    private Integer idade;
 
-    @Column(name = "email")
-    private String mail;
+    @Column(name = "genero", length = 1)
+    private char genero;
+
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
 
     @Column(name = "telefone")
-    private String phone;
+    private String telefone;
 
     @Column(name = "endereco")
-    private String address;
+    private String endereco;
+
+    @Column(name = "tipo_usuario", length = 1, nullable = false)
+    private TipoUsuarioEnum tipoUsuario;
 
 }

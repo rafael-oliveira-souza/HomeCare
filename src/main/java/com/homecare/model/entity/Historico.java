@@ -11,7 +11,7 @@ public class Historico {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
 //    @ManyToOne

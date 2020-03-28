@@ -14,14 +14,14 @@ public class Paciente {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 //
 //    @OneToMany
 //    @JoinTable(name = "historicoo", joinColumns = @JoinColumn(name = "id"))
 //    private Collection<Historico> historicos;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Pessoa pessoa;
 
     public Paciente(){}

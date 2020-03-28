@@ -10,11 +10,11 @@ import javax.persistence.*;
 public class Profissional {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "id", nullable = false)
     private Pessoa pessoa;
 //
 //    @Column("quadro")

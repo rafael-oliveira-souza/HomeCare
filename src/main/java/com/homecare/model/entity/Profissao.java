@@ -10,10 +10,10 @@ import javax.persistence.*;
 public class Profissao {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String name;
 
     @Column(name = "tipo")

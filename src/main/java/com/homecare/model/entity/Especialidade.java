@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Especialidade {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
 }

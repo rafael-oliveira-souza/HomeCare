@@ -34,16 +34,34 @@ CREATE TABLE public.especializacao (
 -- DROP TABLE public.pessoa;
 
 CREATE TABLE public.pessoa (
-	nome varchar NOT NULL,
-	idade int2 NOT NULL,
-	genero varchar NULL,
-	telefone varchar NULL,
-	endereco varchar NULL,
 	id int8 NOT NULL,
-	altura varchar NOT NULL,
-	peso varchar NOT NULL,
-	email varchar NULL,
-	CONSTRAINT pessoa_pk PRIMARY KEY (id)
+	altura float8 NULL,
+	cpf varchar(14) NOT NULL,
+	email varchar(255) NOT NULL,
+	endereco varchar(255) NULL,
+	genero bpchar(1) NULL,
+	idade int4 NULL,
+	nome varchar(255) NOT NULL,
+	peso float8 NULL,
+	telefone varchar(255) NULL,
+	tipo_usuario bpchar(1) NOT NULL,
+	CONSTRAINT pessoa_pkey null,
+	CONSTRAINT uk_mc87q8fpvldpdyfo9o5633o5l null,
+	CONSTRAINT uk_nlwiu48rutiltbnjle59krljo null
+);
+
+
+-- public.paciente definition
+
+-- Drop table
+
+-- DROP TABLE public.paciente;
+
+CREATE TABLE public.paciente (
+	id int8 NOT NULL,
+	pessoa_id int8 NOT NULL,
+	CONSTRAINT paciente_pk null,
+	CONSTRAINT pessoa_fk null
 );
 
 
@@ -88,39 +106,15 @@ CREATE TABLE public.profissional (
 );
 
 
--- public.historicoo definition
+-- public.historico definition
 
 -- Drop table
 
--- DROP TABLE public.historicoo;
+-- DROP TABLE public.historico;
 
-CREATE TABLE public.historicoo (
+CREATE TABLE public.historico (
 	id int8 NOT NULL,
 	paciente_id int8 NULL,
-	CONSTRAINT historicoo_pk PRIMARY KEY (id)
+	CONSTRAINT historico_pk PRIMARY KEY (id),
+	CONSTRAINT paciente_fk FOREIGN KEY (paciente_id) REFERENCES paciente(id)
 );
-
-
--- public.paciente definition
-
--- Drop table
-
--- DROP TABLE public.paciente;
-
-CREATE TABLE public.paciente (
-	id int4 NOT NULL,
-	historicoo_id int4 NOT NULL,
-	pessoa_id int4 NOT NULL,
-	CONSTRAINT paciente_pk PRIMARY KEY (id)
-);
-
-
--- public.historicoo foreign keys
-
-ALTER TABLE public.historicoo ADD CONSTRAINT paciente_fk FOREIGN KEY (paciente_id) REFERENCES paciente(id);
-
-
--- public.paciente foreign keys
-
-ALTER TABLE public.paciente ADD CONSTRAINT historicoo_fk FOREIGN KEY (id) REFERENCES historicoo(id);
-ALTER TABLE public.paciente ADD CONSTRAINT pessoa_fk FOREIGN KEY (id) REFERENCES pessoa(id);
