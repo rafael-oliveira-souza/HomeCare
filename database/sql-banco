@@ -1,0 +1,45 @@
+-- homecare.profissional definition
+
+-- Drop table
+
+-- DROP TABLE homecare.profissional;
+
+CREATE TABLE homecare.profissional (
+
+);
+
+
+-- homecare.pessoa definition
+
+-- Drop table
+
+-- DROP TABLE homecare.pessoa;
+
+CREATE TABLE homecare.pessoa (
+	nome varchar NOT NULL,
+	idade int NOT NULL,
+	genero varchar NULL,
+	telefone int NULL,
+	"endereco moradia" varchar NULL,
+	"cidades atendimento" varchar NULL,
+	"mapa atendimento" varchar NULL
+);
+
+
+-- homecare.profissao definition
+
+-- Drop table
+
+-- DROP TABLE homecare.profissao;
+
+CREATE TABLE homecare.profissao (
+	profissao varchar NULL,
+	especializacao varchar NULL,
+	universidade varchar NULL,
+	posgraduacao varchar NULL,
+	residencia varchar NULL,
+	"tempo mercado de trabalho" varchar NULL,
+	"informacao livre" varchar NULL
+)
+TABLESPACE pg_default
+;
