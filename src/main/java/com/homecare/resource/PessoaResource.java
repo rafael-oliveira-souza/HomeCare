@@ -1,8 +1,7 @@
 package com.homecare.resource;
 
-import com.google.gson.Gson;
-import com.homecare.model.entity.persons.Person;
-import com.homecare.service.PersonService;
+import com.homecare.model.entity.Pessoa;
+import com.homecare.service.PessoaService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -12,40 +11,27 @@ import javax.ws.rs.core.Response.Status;
 import java.util.List;
 
 @Path("/pessoa")
-public class PersonResource {
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public class PessoaResource{
 
     @Inject
-    private PersonService personService;
+    private PessoaService pessoaService;
 
     @GET
     @Path("todos")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(){
-        List<Person> persons = this.personService.getAll();
+        List<Pessoa> pessoas = this.pessoaService.getAll();
         return Response
                 .status(Status.OK)
-                .entity(persons)
+                .entity(pessoas)
                 .build();
     }
 
     @GET
     @Path("buscar/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Long id){
-        Person person = this.personService.getById(id);
-
-        return Response
-                .status(Status.OK)
-                .entity(person)
-                .build();
-    }
-
-    @POST
-    @Path("salvar")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response save(Person Person){
-        Person pessoa = this.personService.save(Person);
+        Pessoa pessoa = this.pessoaService.getById(id);
 
         return Response
                 .status(Status.OK)
@@ -54,11 +40,19 @@ public class PersonResource {
     }
 
     @POST
+    @Path("salvar")
+    public Response save(Pessoa pessoa){
+        pessoa = this.pessoaService.save(pessoa);
+        return Response
+                .status(Status.OK)
+                .entity(pessoa)
+                .build();
+    }
+
+    @POST
     @Path("atualizar")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response update(Person Person){
-        Person pessoa = this.personService.update(Person);
+    public Response update(Pessoa pessoa){
+        pessoa = this.pessoaService.update(pessoa);
 
         return Response
                 .status(Status.OK)
@@ -68,9 +62,8 @@ public class PersonResource {
 
     @DELETE
     @Path("excluir/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id){
-        this.personService.delete(id);
+        this.pessoaService.delete(id);
 
         return Response
                 .status(Status.OK)

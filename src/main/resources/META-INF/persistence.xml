@@ -9,11 +9,12 @@
         <jta-data-source>java:jboss/datasources/homecarePostgress</jta-data-source>
 <!--        <jta-data-source>java:jboss/datasources/homecareMysql</jta-data-source>-->
 
-        <class>com.homecare.model.entity.persons.Person</class>
-        <class>com.homecare.model.entity.persons.Patient</class>
-        <class>com.homecare.model.entity.persons.Profession</class>
-        <class>com.homecare.model.entity.persons.Professional</class>
-        <class>com.homecare.model.entity.persons.Specialty</class>
+        <class>com.homecare.model.entity.Pessoa</class>
+        <class>com.homecare.model.entity.Paciente</class>
+        <class>com.homecare.model.entity.Profissao</class>
+        <class>com.homecare.model.entity.Profissional</class>
+        <class>com.homecare.model.entity.Especialidade</class>
+        <class>com.homecare.model.entity.Historico</class>
 
         <properties>
             <!--Configuracoes de Debug-->

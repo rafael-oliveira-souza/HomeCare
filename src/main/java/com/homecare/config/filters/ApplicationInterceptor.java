@@ -16,8 +16,6 @@ public class ApplicationInterceptor implements WriterInterceptor, ReaderIntercep
 
     @Override
     public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
-        context.proceed();
-
-        return null;
+        return context.proceed();
     }
 }
