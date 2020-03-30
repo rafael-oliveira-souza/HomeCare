@@ -21,9 +21,9 @@ public class PacienteHistorico {
 
 //    @Column(name = "paciente_id", nullable = false)
     @JoinColumn(name = "paciente_id",nullable = false, foreignKey = @ForeignKey(name = "fk_pac_hist_pac"))
-    private Long PacienteId;
+    private Long paciente;
 
 //    @Column(name = "historico_id", nullable = false)
     @JoinColumn(name = "historico_id",nullable = false, foreignKey = @ForeignKey(name = "fk_pac_hist_hist"))
-    private Long HistoricoId;
+    private Long historico;
 }

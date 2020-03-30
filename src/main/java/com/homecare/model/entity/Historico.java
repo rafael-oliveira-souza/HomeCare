@@ -20,7 +20,7 @@ public class Historico {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "descricao", nullable = false)

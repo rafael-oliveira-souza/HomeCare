@@ -26,18 +26,18 @@ public class ApplicationFilter implements ContainerResponseFilter, ContainerRequ
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        if(responseContext.getStatus() != httpResponse.SC_OK && responseContext.getEntity() == null) {
-            httpResponse.setContentType(MediaType.APPLICATION_JSON);
-            httpResponse.getWriter().write(
-                    new Gson().toJson(
-                            ResponseError
-                                    .builder()
-                                    .status(responseContext.getStatus())
-                                    .description(ExceptionMessages.ERRO_EXECUCAO)
-                                    .build()
-                    )
-            );
-        }
+//        if(responseContext.getStatus() != httpResponse.SC_OK && responseContext.getEntity() == null) {
+//            httpResponse.setContentType(MediaType.APPLICATION_JSON);
+//            httpResponse.getWriter().write(
+//                    new Gson().toJson(
+//                            ResponseError
+//                                    .builder()
+//                                    .status(responseContext.getStatus())
+//                                    .description(ExceptionMessages.ERRO_EXECUCAO)
+//                                    .build()
+//                    )
+//            );
+//        }
     }
 
     public void addHeaders(ContainerRequestContext requestContext, String key, String value){
