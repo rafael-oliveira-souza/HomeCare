@@ -12,20 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "especialidade")
-public class Especialidade {
+@Table(name = "educacao")
+public class Educacao {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "nome", nullable = false)
-    private String nome;
-
-    @Column(name = "tipo")
-    private String tipo;
-
-    @Column(name = "descricao")
-    private String descricao;
-
 }

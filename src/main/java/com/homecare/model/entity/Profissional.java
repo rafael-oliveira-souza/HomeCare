@@ -1,58 +1,30 @@
 package com.homecare.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "profissional")
 public class Profissional {
     @Id
     @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_prof_pes"))
     private Pessoa pessoa;
-//
-//    @Column("quadro")
-//    private List<Profissao> professions = new LinkedList<Profissao>();
-//
-//    @Column("quadro")
-//    private List<Especialidade> specialties = new LinkedList<Especialidade>();
 
-    public Profissional(){}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Profissao> profissao;
 
-    public  Profissional(Pessoa pessoa){
-        this.pessoa = pessoa;
-    }
-
-//    public Profissional(Pessoa pessoa, List<Profissao> professions){
-//        this.pessoa = pessoa;
-//        this.professions = professions;
-//    }
-//
-//    public Profissional(Pessoa pessoa, List<Profissao> professions, List<Especialidade> specialties){
-//        this.pessoa = pessoa;
-//        this.professions = professions;
-//        this.specialties = specialties;
-//    }
-
-//    public List<Profissao> getProfissaos() {
-//        return professions;
-//    }
-//
-//    public void setProfissaos(List<Profissao> professions) {
-//        this.professions = professions;
-//    }
-//
-//    public List<Especialidade> getSpecialties() {
-//        return specialties;
-//    }
-//
-//    public void setSpecialties(List<Especialidade> specialties) {
-//        this.specialties = specialties;
-//    }
 }

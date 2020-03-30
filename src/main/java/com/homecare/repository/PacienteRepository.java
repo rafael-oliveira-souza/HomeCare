@@ -4,6 +4,8 @@ import com.homecare.model.ManagerFactory;
 import com.homecare.model.entity.Historico;
 import com.homecare.model.entity.Paciente;
 import com.homecare.model.interfaces.RepositoryInterface;
+import com.homecare.utils.exceptions.custom.ErrorResouceException;
+import com.homecare.utils.messages.ExceptionMessages;
 
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;

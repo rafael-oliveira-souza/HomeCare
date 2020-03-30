@@ -1,7 +1,11 @@
 package com.homecare.model;
 
+import com.homecare.config.interceptor.TransactionalInterceptor;
+import com.homecare.utils.exceptions.custom.ErrorResouceException;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+@Interceptors(TransactionalInterceptor.class)
 public class ManagerFactory<T> {
     private EntityManager entityManager;
 
@@ -23,8 +28,7 @@ public class ManagerFactory<T> {
 
     public T getById(Class<T> classe, Long id) {
         this.verifyObject(id);
-        entityManager  = this.getEntityManager();
-        entityManager.getTransaction().begin();
+        this.openTransaction();
         T entity = entityManager.find(classe, id);
         entityManager.close();
 
@@ -32,8 +36,7 @@ public class ManagerFactory<T> {
     }
 
     public List<T> getAll(Class<T> classe) {
-        entityManager  = this.getEntityManager();
-        entityManager.getTransaction().begin();
+        this.openTransaction();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(classe);
         Root<T> rootEntry = cq.from(classe);
@@ -43,32 +46,27 @@ public class ManagerFactory<T> {
 
         return listAll;
     }
-
+    
     public T save(T entity) {
         this.verifyObject(entity);
-        entityManager  = this.getEntityManager();
-        entityManager.getTransaction().begin();
+        this.openTransaction();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        this.closeTransaction();
 
         return entity;
     }
 
     public T update(T entity) {
         this.verifyObject(entity);
-        entityManager  = this.getEntityManager();
-        entityManager.getTransaction().begin();
+        this.openTransaction();
         entityManager.merge(entity);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        this.closeTransaction();
 
         return  entity;
     }
-
+    
     public void delete(Class<T> classe, Long id)  {
-        entityManager  = this.getEntityManager();
-        entityManager.getTransaction().begin();
+        this.openTransaction();
         T entity = entityManager.find(classe, id);
         this.verifyObject(entity);
         if (entityManager.contains(entity)) {
@@ -76,13 +74,22 @@ public class ManagerFactory<T> {
         } else {
             entityManager.merge(entity);
         }
+        this.closeTransaction();
+    }
+
+    private void openTransaction(){
+        entityManager  = this.getEntityManager();
+        entityManager.getTransaction().begin();
+    }
+
+    private void closeTransaction(){
         entityManager.getTransaction().commit();
         entityManager.close();
     }
 
     private void verifyObject(Object obj){
         if(obj == null){
-            throw new NullPointerException();
+            throw new ErrorResouceException();
         }
     }
 }

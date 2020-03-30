@@ -2,17 +2,17 @@ package com.homecare.model.enums;
 
 import com.homecare.model.interfaces.EnumInterface;
 
-public enum TipoUsuarioEnum implements EnumInterface {
-    PACIENTE,
-    PROFISSIONAL;
+public enum GeneroEnum implements EnumInterface {
+    MASCULINO("M"),
+    OUTROS("O"),
+    FEMININO("F");
 
     private String tipo;
 
-    TipoUsuarioEnum() {
+    GeneroEnum(String tipo) {
         this.tipo = tipo;
     }
 
-    @Override
     public String getValue() {
         return this.tipo;
     }

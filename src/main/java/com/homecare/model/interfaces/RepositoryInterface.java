@@ -1,5 +1,7 @@
 package com.homecare.model.interfaces;
 
+import com.homecare.utils.exceptions.custom.ErrorResouceException;
+
 import java.util.List;
 
 public interface RepositoryInterface<T> {

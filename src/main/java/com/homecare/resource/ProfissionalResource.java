@@ -9,8 +9,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static com.homecare.core.messages.RequestMessageEnum.SAVE_SUCCESS;
-
 @Path("/profissional")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +36,6 @@ public class ProfissionalResource {
     public Response save(Profissional profissional){
         profissional = this.profissionalService.save(profissional);
 //        return Response.ok(profissional).build();
-        return Response.ok(new Gson().toJson(SAVE_SUCCESS)).build();
+        return Response.ok(new Gson().toJson("teste")).build();
     }
 }
