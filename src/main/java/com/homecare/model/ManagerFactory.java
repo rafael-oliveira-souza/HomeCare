@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.SQLException;
 import java.util.List;
 
 @Interceptors(TransactionalInterceptor.class)
@@ -29,13 +30,12 @@ public class ManagerFactory<T> {
     public T getById(Class<T> classe, Long id) {
         T entity = null;
         try {
-            this.verifyObject(id);
             this.openTransaction();
             entity = entityManager.find(classe, id);
             entityManager.close();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             entityManager.getTransaction().rollback();
-            throw new ErrorResouceException(e.getMessage());
+            throw new ErrorResouceException(e);
         }
 
         return entity;
@@ -51,9 +51,10 @@ public class ManagerFactory<T> {
             CriteriaQuery<T> all = cq.select(rootEntry);
             listAll = entityManager.createQuery(all).getResultList();
             entityManager.close();
-        } catch (Exception e) {
+        }
+        catch (Throwable e) {
             entityManager.getTransaction().rollback();
-            throw new ErrorResouceException(e.getMessage());
+            throw new ErrorResouceException(e);
         }
 
         return listAll;
@@ -61,13 +62,13 @@ public class ManagerFactory<T> {
 
     public T save(T entity) {
         try {
-            this.verifyObject(entity);
             this.openTransaction();
             entityManager.persist(entity);
             this.closeTransaction();
-        } catch (Exception e) {
+        }
+        catch (Throwable e) {
             entityManager.getTransaction().rollback();
-            throw new ErrorResouceException(e.getMessage());
+            throw new ErrorResouceException(e);
         }
 
         return entity;
@@ -75,14 +76,12 @@ public class ManagerFactory<T> {
 
     public T update(T entity) {
         try {
-            this.verifyObject(entity);
             this.openTransaction();
             entityManager.merge(entity);
             this.closeTransaction();
-
-        } catch (Exception e) {
+        } catch (Throwable e) {
             entityManager.getTransaction().rollback();
-            throw new ErrorResouceException(e.getMessage());
+            throw new ErrorResouceException(e);
         }
 
         return entity;
@@ -92,16 +91,15 @@ public class ManagerFactory<T> {
         try {
             this.openTransaction();
             T entity = entityManager.find(classe, id);
-            this.verifyObject(entity);
             if (entityManager.contains(entity)) {
                 entityManager.remove(entity);
             } else {
                 entityManager.merge(entity);
             }
             this.closeTransaction();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             entityManager.getTransaction().rollback();
-            throw new ErrorResouceException(e.getMessage());
+            throw new ErrorResouceException(e);
         }
     }
 
@@ -111,13 +109,9 @@ public class ManagerFactory<T> {
     }
 
     private void closeTransaction() {
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    private void verifyObject(Object obj) {
-        if (obj == null) {
-            throw new ErrorResouceException();
+        if(entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().commit();
+            entityManager.close();
         }
     }
 }

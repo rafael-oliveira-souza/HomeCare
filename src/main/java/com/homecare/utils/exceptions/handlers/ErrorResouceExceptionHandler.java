@@ -31,5 +31,4 @@ public class ErrorResouceExceptionHandler implements ExceptionMapper<ErrorResouc
                         .build())
             ).build();
     }
-
 }

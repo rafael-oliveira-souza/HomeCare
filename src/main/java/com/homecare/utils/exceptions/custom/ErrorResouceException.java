@@ -11,4 +11,17 @@ public class ErrorResouceException extends RuntimeException {
     public ErrorResouceException(String description)  {
             super(description);
     }
+
+    public ErrorResouceException(Throwable e) {
+        String description = recoverCause(e);
+        throw new ErrorResouceException(description);
+    }
+
+    public String recoverCause(Throwable e){
+        if(e.getCause() != null){
+           return recoverCause(e.getCause());
+        }
+
+        return e.getMessage();
+    }
 }
