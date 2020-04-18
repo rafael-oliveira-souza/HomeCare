@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 @Provider
-public class ApplicationFilter implements ContainerResponseFilter, ContainerRequestFilter {
+public class  ApplicationFilter implements ContainerResponseFilter, ContainerRequestFilter {
     @Context
     private HttpServletResponse httpResponse;
 
