@@ -11,17 +11,23 @@
 
         <class>com.homecare.model.entity.Pessoa</class>
         <class>com.homecare.model.entity.Paciente</class>
+        <class>com.homecare.model.entity.PacienteDoenca</class>
+        <class>com.homecare.model.entity.PacienteMedicamento</class>
         <class>com.homecare.model.entity.Profissao</class>
+        <class>com.homecare.model.entity.ProfissaoEspecialidade</class>
         <class>com.homecare.model.entity.Profissional</class>
+        <class>com.homecare.model.entity.ProfissionalProfissao</class>
         <class>com.homecare.model.entity.Especialidade</class>
-        <class>com.homecare.model.entity.Historico</class>
+        <class>com.homecare.model.entity.Atendimento</class>
+        <class>com.homecare.model.entity.Doenca</class>
+        <class>com.homecare.model.entity.Medicamento</class>
 
         <properties>
             <!--Configuracoes de Debug-->
 <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-<!--            <property name="hibernate.hbm2ddl.auto" value="create" />-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="use_sql_comments" value="true" />

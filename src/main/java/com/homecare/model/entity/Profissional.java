@@ -25,6 +25,10 @@ public class Profissional {
     private Pessoa pessoa;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Profissao> profissao;
+    private List<Profissao> profissoes;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_prof_cur"))
+    private Curriculo curriculo;
 
 }

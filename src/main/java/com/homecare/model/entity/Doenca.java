@@ -6,30 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "profissao")
-public class Profissao {
+@Table(name = "doenca")
+public class Doenca {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome", nullable = false)
-    private String nome;
-
-    @Column(name = "tipo")
-    private String tipo;
-
-    @Column(name = "descricao")
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Especialidade> especialidades;
+    @Column(name = "dataInicio")
+    private Date dataInicio;
 
+    @Column(name = "dataFim")
+    private Date dataFim;
 }

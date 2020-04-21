@@ -2,7 +2,6 @@ package com.homecare.model.entity;
 
 import com.homecare.model.enums.GeneroEnum;
 import com.homecare.model.enums.TipoUsuarioEnum;
-import com.homecare.utils.regexs.Regex;
 import com.homecare.utils.validators.interfaces.Cpf;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import java.util.List;
 
 import static com.homecare.utils.messages.ExceptionMessages.CAMPO_VAZIO;
 import static com.homecare.utils.regexs.Regex.REGEX_MAIL;
@@ -30,9 +31,12 @@ public class Pessoa {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "{nome.not.blank}")
+    @NotBlank(message = CAMPO_VAZIO)
     @Column(name = "nome", nullable = false)
     private String nome;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Atendimento> atendimentos;
 
     @Cpf
     @Size(min = 14, max = 14, message = CAMPO_VAZIO)

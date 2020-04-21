@@ -1,11 +1,9 @@
 package com.homecare.resource;
 
-import com.homecare.model.entity.Historico;
 import com.homecare.model.entity.Paciente;
 import com.homecare.service.PacienteService;
 import com.homecare.utils.exceptions.custom.ErrorResouceException;
 import com.homecare.utils.messages.ExceptionMessages;
-import lombok.SneakyThrows;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -29,16 +27,6 @@ public class PacienteResource {
 
         return Response
                 .accepted(pacientes)
-                .build();
-    }
-
-    @GET
-    @Path("{id}/historicoos")
-    public Response getHistoricoByPaciente(@PathParam("id") Long id){
-        List<Historico> historicos = this.pacienteService.getHistoricoByPaciente(id);
-
-        return Response
-                .accepted(historicos)
                 .build();
     }
 

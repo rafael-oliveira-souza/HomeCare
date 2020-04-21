@@ -1,11 +1,8 @@
 package com.homecare.repository;
 
 import com.homecare.model.ManagerFactory;
-import com.homecare.model.entity.Historico;
 import com.homecare.model.entity.Paciente;
 import com.homecare.model.interfaces.RepositoryInterface;
-import com.homecare.utils.exceptions.custom.ErrorResouceException;
-import com.homecare.utils.messages.ExceptionMessages;
 
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
@@ -41,11 +38,11 @@ public class PacienteRepository implements RepositoryInterface<Paciente> {
         return this.em.save(entity);
     }
 
-    public List<Historico> getHistoricoByPaciente(Long id){
-        TypedQuery<Historico> typed = em.getEntityManager()
-                .createQuery("SELECT h FROM  Historico h WHERE id =: id ", Historico.class)
-                .setParameter("id", id);
-
-        return typed.getResultList();
-    }
+//    public List<Historico> getHistoricoByPaciente(Long id){
+//        TypedQuery<Historico> typed = em.getEntityManager()
+//                .createQuery("SELECT h FROM  Historico h WHERE id =: id ", Historico.class)
+//                .setParameter("id", id);
+//
+//        return typed.getResultList();
+//    }
 }

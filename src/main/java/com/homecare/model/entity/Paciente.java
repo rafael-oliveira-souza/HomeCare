@@ -25,11 +25,14 @@ public class Paciente implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Historico> historico;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_pac_pes"))
     private Pessoa pessoa;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Doenca> doencas;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Medicamento> medicamentos;
 
 }

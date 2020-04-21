@@ -1,11 +1,7 @@
 package com.homecare.service;
 
-import com.homecare.model.entity.Historico;
 import com.homecare.model.entity.Paciente;
 import com.homecare.repository.PacienteRepository;
-import com.homecare.utils.exceptions.custom.ErrorResouceException;
-import com.homecare.utils.messages.ExceptionMessages;
-import lombok.SneakyThrows;
 
 import java.util.List;
 
@@ -25,9 +21,4 @@ public class PacienteService extends PacienteRepository {
     public Paciente save(Paciente paciente) {
         return  super.save(paciente);
     }
-
-    public List<Historico> getHistoricoByPaciente(Long id){
-        return super.getHistoricoByPaciente(id);
-    }
-
 }
