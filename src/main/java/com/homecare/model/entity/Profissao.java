@@ -30,6 +30,7 @@ public class Profissao {
     private String descricao;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="id")
     private List<Especialidade> especialidades;
 
 }
