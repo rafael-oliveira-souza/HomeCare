@@ -6,18 +6,88 @@ import java.util.List;
 @AllArgsConstructor
 public class ErrorResponse {
 
-    private final String message;
-    private final int code;
-    private final String status;
-    private final String objectName;
-    private final List<ObjectError> errors;
+    private String message;
+    private int code;
+    private String status;
+    private String objectName;
+    private List<ObjectError> errors;
 
 
     @AllArgsConstructor
     public class ObjectError {
 
-        private final String message;
-        private final String field;
-        private final Object parameter;
+        private String message;
+        private String field;
+		private Object parameter;
+		
+        public String getMessage() {
+			return message;
+		}
+		public void setMessage(String message) {
+			this.message = message;
+		}
+		public String getField() {
+			return field;
+		}
+		public void setField(String field) {
+			this.field = field;
+		}
+		public Object getParameter() {
+			return parameter;
+		}
+		public void setParameter(Object parameter) {
+			this.parameter = parameter;
+		}
     }
+
+
+	public String getMessage() {
+		return message;
+	}
+
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+	public int getCode() {
+		return code;
+	}
+
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getObjectName() {
+		return objectName;
+	}
+
+
+	public void setObjectName(String objectName) {
+		this.objectName = objectName;
+	}
+
+
+	public List<ObjectError> getErrors() {
+		return errors;
+	}
+
+
+	public void setErrors(List<ObjectError> errors) {
+		this.errors = errors;
+	}
+
 }
