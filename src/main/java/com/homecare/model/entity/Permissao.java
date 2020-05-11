@@ -6,31 +6,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+
+import static com.homecare.utils.messages.ExceptionMessages.CAMPO_VAZIO;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "profissao")
-public class Profissao {
+@Table(name = "permissao")
+public class Permissao {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome", nullable = false)
+    @NotBlank(message = CAMPO_VAZIO)
+    @Column(name = "nome", nullable = false, unique = true)
     private String nome;
 
-    @Column(name = "tipo")
-    private String tipo;
-
-    @Column(name = "descricao")
+    @NotBlank(message = CAMPO_VAZIO)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="profissao_id")
-    private List<Especialidade> especialidades;
-
 }

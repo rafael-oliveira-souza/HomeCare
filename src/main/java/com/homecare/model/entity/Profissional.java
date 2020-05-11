@@ -25,7 +25,7 @@ public class Profissional {
     private Pessoa pessoa;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @JoinColumn(name="profissional_id")
     private List<Profissao> profissoes;
 
     @OneToOne(cascade = CascadeType.ALL)

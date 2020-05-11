@@ -36,7 +36,7 @@ public class Pessoa {
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @JoinColumn(name="pessoa_id")
     private List<Atendimento> atendimentos;
 
     @Cpf

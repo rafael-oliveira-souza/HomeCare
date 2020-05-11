@@ -21,13 +21,16 @@
         <class>com.homecare.model.entity.Atendimento</class>
         <class>com.homecare.model.entity.Doenca</class>
         <class>com.homecare.model.entity.Medicamento</class>
+        <class>com.homecare.model.entity.Usuario</class>
+        <class>com.homecare.model.entity.Permissao</class>
+        <class>com.homecare.model.entity.Curriculo</class>
 
         <properties>
             <!--Configuracoes de Debug-->
 <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+<!--            <property name="hibernate.hbm2ddl.auto" value="create" />-->
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="use_sql_comments" value="true" />

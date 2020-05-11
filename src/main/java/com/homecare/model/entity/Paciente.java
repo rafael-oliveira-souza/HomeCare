@@ -30,11 +30,11 @@ public class Paciente implements Serializable {
     private Pessoa pessoa;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @JoinColumn(name="paciente_id")
     private List<Doenca> doencas;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @JoinColumn(name="paciente_id")
     private List<Medicamento> medicamentos;
 
 }

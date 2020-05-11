@@ -39,6 +39,13 @@
         <extension module="org.wildfly.extension.security.manager"/>
         <extension module="org.wildfly.extension.undertow"/>
     </extensions>
+
+    <system-properties>
+        <property name="application.server.urlfull.7" value="http://localhost:8080/app/homecare"/>
+        <property name="application.secret.app" value="app-homecare-secret-key"/>
+        <property name="application.secret.key" value="EaKrFkT4x94Ui0u0ISqa02NLE3TZUMjcCQRCf8GzXTGMOc9obXP5RKXgQklSp5jlOPXMfOS0jokMMAtp8gozdCnhiJUcjzNMGd3lWEc2dyjXxkO8H5rsrJjK6ydNVWF3"/>
+    </system-properties>
+
     <management>
         <security-realms>
             <security-realm name="ManagementRealm">
