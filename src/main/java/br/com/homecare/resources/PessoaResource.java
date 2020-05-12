@@ -9,28 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.homecare.models.entities.Usuario;
-import br.com.homecare.services.LoginService;
+import br.com.homecare.models.entities.Pessoa;
+import br.com.homecare.services.PessoaService;
 
 @RestController
-@RequestMapping("/login")
-public class LoginResource {
-
-	@Autowired
-	private LoginService service;
+@RequestMapping("/pessoa")
+public class PessoaResource {
 	
-	@RequestMapping(method=RequestMethod.GET)
-	public Usuario login() {
-		Usuario user = new Usuario("teste", "oi");
+	@Autowired
+	private PessoaService service;
 
-		return user;
-	}
-
-
-	@RequestMapping(value="/buscar/(id)", method=RequestMethod.GET)
+	@RequestMapping(value="/(id)", method=RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable Long id) {
-		Optional<Usuario> usuario = this.service.buscar(id);
+		Optional<Pessoa> pessoa = this.service.buscar(id);
 		
-		return ResponseEntity.ok().body(usuario);
+		return ResponseEntity.ok().body(pessoa);
 	}
+
 }

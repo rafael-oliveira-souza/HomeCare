@@ -1,4 +1,4 @@
-package br.com.homecare.models;
+package br.com.homecare.models.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,28 +7,29 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuario")
+//@Table(name = "usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
 	private Long id;
 
-    @Column(name = "email", nullable = false)
+//    @Column(name = "email", nullable = false)
 	private String email;
 
-    @Column(name = "senha", nullable = false)
+//    @Column(name = "senha", nullable = false)
 	private String senha;
 
 //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinColumn(name="pessoa_id")
-	private List<String> permissoes = new ArrayList<String>();
+//	private List<String> permissoes = new ArrayList<String>();
 
 	public Usuario() {}
 	
@@ -55,10 +56,10 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public List<String> getPermissoes() {
-		return permissoes;
-	}
-	public void setPermissoes(List<String> permissoes) {
-		this.permissoes = permissoes;
-	}
+//	public List<String> getPermissoes() {
+//		return permissoes;
+//	}
+//	public void setPermissoes(List<String> permissoes) {
+//		this.permissoes = permissoes;
+//	}
 }
