@@ -1,4 +1,4 @@
-package br.com.homecare;
+package br.com.homecare.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
