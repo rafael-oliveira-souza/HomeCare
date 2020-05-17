@@ -3,12 +3,12 @@ package br.com.homecare.models.enums;
 import br.com.homecare.models.interfaces.EnumInterface;
 
 public enum TipoUsuarioEnum implements EnumInterface {
-    PACIENTE,
-    PROFISSIONAL;
+    PACIENTE("PACIENTE"),
+    PROFISSIONAL("PROFISSIONAL");
 
     private String tipo;
 
-    TipoUsuarioEnum() {
+    TipoUsuarioEnum(String tipo) {
         this.tipo = tipo;
     }
 

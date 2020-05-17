@@ -34,11 +34,9 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
-    @Size(min = 3, max = 3)
     @Column(name = "altura", length = 3)
     private Double altura;
 
-    @Size(min = 3, max = 3)
     @Column(name = "peso", length = 3)
     private Double peso;
 

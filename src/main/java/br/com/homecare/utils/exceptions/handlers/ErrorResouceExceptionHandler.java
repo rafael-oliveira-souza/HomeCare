@@ -16,7 +16,7 @@ public class ErrorResouceExceptionHandler {
 
     public ResponseEntity<StandardError> toResponse(ErrorResouceException e, HttpServletRequest request, HttpServletResponse response) {
     	if(response.getStatus() > 0) {
-        	this.status = HttpStatus.valueOf(response.getStatus());
+        	status = HttpStatus.valueOf(response.getStatus());
     	}
    
     	StandardError error = new StandardError(status.value() , e.getMessage(), System.currentTimeMillis());

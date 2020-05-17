@@ -6,24 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.homecare.models.entities.Pessoa;
-import br.com.homecare.repositories.PessoaRepository;
+import br.com.homecare.models.entities.Profissional;
+import br.com.homecare.repositories.ProfissionalRepository;
 
 @Service
-public class PessoaService {
+public class ProfissionalService {
 	
 	@Autowired
-	private PessoaRepository repo;
+	private ProfissionalRepository repo;
 
-	public Optional<Pessoa> buscar(Long id) {
+	public Optional<Profissional> buscar(Long id) {
 		return this.repo.findById(id);
 	}
 
-	public List<Pessoa> getAll() {
+	public List<Profissional> getAll() {
 		return this.repo.findAll();
 	}
-
-	public Pessoa salvar(Pessoa entity) {
+	
+	public Profissional salvar(Profissional entity) {
 		return this.repo.save(entity);
 	}
 
