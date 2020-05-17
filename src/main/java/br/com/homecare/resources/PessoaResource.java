@@ -30,7 +30,7 @@ public class PessoaResource {
 		return ResponseEntity.ok().body(todos);
 	}
 
-	@GetMapping("/employees/{id}")
+	@GetMapping("/pessoa/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id) {
 		Optional<Pessoa> objeto = service.buscar(id);
 

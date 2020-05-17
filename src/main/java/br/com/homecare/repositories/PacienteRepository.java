@@ -7,5 +7,6 @@ import br.com.homecare.models.entities.Paciente;
 
 @Repository
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
+	
 
 }

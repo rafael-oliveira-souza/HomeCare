@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.homecare.utils.exceptions.StandardError;
 import br.com.homecare.utils.exceptions.custom.ErrorResouceException;
@@ -14,6 +15,7 @@ import br.com.homecare.utils.exceptions.custom.ErrorResouceException;
 public class ErrorResouceExceptionHandler {
 	private HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
+	@ExceptionHandler(ErrorResouceException.class)
     public ResponseEntity<StandardError> toResponse(ErrorResouceException e, HttpServletRequest request, HttpServletResponse response) {
     	if(response.getStatus() > 0) {
         	status = HttpStatus.valueOf(response.getStatus());
