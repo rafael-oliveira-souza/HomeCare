@@ -1,27 +1,53 @@
 package br.com.homecare.models.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import br.com.homecare.models.enums.TipoUsuarioEnum;
 
 @Entity
 public class Paciente extends Pessoa {
 	private static final long serialVersionUID = 3271111213059443885L;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "paciente")
-    private List<Doenca> doencas;
+    private List<Doenca> doencas = new ArrayList<Doenca>();
 
+	@JsonManagedReference
     @OneToMany(mappedBy = "paciente")
-    private List<Medicamento> medicamentos;
+    private List<Medicamento> medicamentos = new ArrayList<Medicamento>();
 
-	public Paciente() {}
+	public Paciente() {
+		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+	}
 	
 	public Paciente(builder builder) {
 		this.medicamentos = builder.medicamentos;
 		this.doencas = builder.doencas;
+		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
 	}
-
+	
+	public void setPessoa(Pessoa pessoa) {
+		this.setId(pessoa.getId());
+		this.setCpf(pessoa.getCpf());
+		this.setNome(pessoa.getNome());
+		this.setPeso(pessoa.getPeso());
+		this.setIdade(pessoa.getIdade());
+		this.setEmail(pessoa.getEmail());
+		this.setGenero(pessoa.getGenero());
+		this.setAltura(pessoa.getAltura());
+		this.setTelefone(pessoa.getTelefone());
+		this.setEndereco(pessoa.getEndereco());
+		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+	}
+	
 	public List<Doenca> getDoencas() {
 		return doencas;
 	}

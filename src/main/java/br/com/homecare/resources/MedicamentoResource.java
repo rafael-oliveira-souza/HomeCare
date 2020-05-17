@@ -10,37 +10,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.homecare.models.entities.Paciente;
-import br.com.homecare.models.entities.Pessoa;
-import br.com.homecare.services.PacienteService;
+import br.com.homecare.models.entities.Medicamento;
+import br.com.homecare.services.MedicamentoService;
 
 @RestController
-@RequestMapping("/paciente")
-public class PacienteResource {
+@RequestMapping("/medicamento")
+public class MedicamentoResource {
 
 	@Autowired
-	private PacienteService service;
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Paciente>> getAll() {
-		List<Paciente> todos = service.getAll();
-		
+	private MedicamentoService service;
+
+	@GetMapping("/todos")
+	public ResponseEntity<List<Medicamento>> getAll() {
+		List<Medicamento> todos = service.getAll();
+
 		return ResponseEntity.ok().body(todos);
 	}
 
-	@GetMapping("/buscar/{id}")
+	@GetMapping("/medicamento/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id) {
-		Optional<Paciente> objeto = service.buscar(id);
-		
+		Optional<Medicamento> objeto = service.buscar(id);
+
 		return ResponseEntity.ok().body(objeto);
 	}
-	
+
+
 	@PostMapping("/salvar")	
-	public ResponseEntity<Paciente> salvar(@RequestBody Paciente paciente) {
-		Paciente objeto = service.salvar(paciente);
+	public ResponseEntity<Medicamento> salvar(@RequestBody Medicamento medicamento) {
+		Medicamento objeto = service.salvar(medicamento);
 
 		return ResponseEntity.ok().body(objeto);
 	}

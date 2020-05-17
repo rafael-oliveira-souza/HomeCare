@@ -1,11 +1,8 @@
 package br.com.homecare.config.interceptors;
 
-import static br.com.homecare.utils.messages.ExceptionMessages.ERRO_TKN_INV;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -17,7 +14,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) throws Exception {
 		if (exception != null) {
-			throw new ErrorResouceException(ERRO_TKN_INV);
+			throw new ErrorResouceException(exception.getMessage());
 		}
 
 	}

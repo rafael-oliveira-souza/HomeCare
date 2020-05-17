@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
 
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.enums.GeneroEnum;
@@ -150,7 +149,7 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 	public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
