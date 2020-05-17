@@ -9,6 +9,9 @@ public class ErrorResouceException extends RuntimeException {
         super(ExceptionMessages.ERRO_EXECUCAO);
     }
 
+	public ErrorResouceException(ErrorResouceException e) {
+        super(e.getMessage());
+    }
 
     public ErrorResouceException(String description)  {
             super(description);

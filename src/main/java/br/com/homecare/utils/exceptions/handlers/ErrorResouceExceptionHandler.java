@@ -1,31 +1,26 @@
-//package com.homecare.utils.exceptions.handlers;
-//
-//import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
-//
-//import javax.ws.rs.core.MediaType;
-//import javax.ws.rs.core.Response;
-//import javax.ws.rs.ext.ExceptionMapper;
-//import javax.ws.rs.ext.Provider;
-//
-//import com.google.gson.Gson;
-//import com.homecare.utils.exceptions.custom.ErrorResouceException;
-//import com.homecare.utils.exceptions.custom.ResponseError;
-//
-//@Provider
-//public class ErrorResouceExceptionHandler implements ExceptionMapper<ErrorResouceException> {
-//
-//    @Override
-//    public Response toResponse(ErrorResouceException e) {
-//        return Response
-//            .status(INTERNAL_SERVER_ERROR)
-//            .type(MediaType.APPLICATION_JSON_TYPE)
-//            .entity(
-//                new Gson().toJson(
-//                    new ResponseError
-//                    	.builder()
-//                        .status(INTERNAL_SERVER_ERROR.getStatusCode())
-//                        .description(e.getMessage())
-//                        .build())
-//            ).build();
-//    }
-//}
+package br.com.homecare.utils.exceptions.handlers;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+import br.com.homecare.utils.exceptions.StandardError;
+import br.com.homecare.utils.exceptions.custom.ErrorResouceException;
+
+@ControllerAdvice
+public class ErrorResouceExceptionHandler {
+	private HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+    public ResponseEntity<StandardError> toResponse(ErrorResouceException e, HttpServletRequest request, HttpServletResponse response) {
+    	if(response.getStatus() > 0) {
+        	this.status = HttpStatus.valueOf(response.getStatus());
+    	}
+   
+    	StandardError error = new StandardError(status.value() , e.getMessage(), System.currentTimeMillis());
+    
+    	return ResponseEntity.status(status).body(error);
+    }
+}

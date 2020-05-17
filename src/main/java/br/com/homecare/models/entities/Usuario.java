@@ -1,6 +1,5 @@
 package br.com.homecare.models.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,27 +8,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+
+import br.com.homecare.commons.AbstractEntity;
 
 @Entity
-//@Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Usuario extends AbstractEntity<Usuario> {
+    /**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id")
 	private Long id;
 
-//    @Column(name = "email", nullable = false)
-	private String email;
+	@Column(name = "email")
+    private String email;
 
-//    @Column(name = "senha", nullable = false)
+	@Column(name = "senha")
 	private String senha;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name="pessoa_id")
-//	private List<String> permissoes = new ArrayList<String>();
+    @OneToMany(mappedBy = "usuario")
+	private List<Permissao> permissoes = new ArrayList<Permissao>();
 
 	public Usuario() {}
 	
@@ -56,10 +57,15 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-//	public List<String> getPermissoes() {
-//		return permissoes;
-//	}
-//	public void setPermissoes(List<String> permissoes) {
-//		this.permissoes = permissoes;
-//	}
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj, this.id);
+	}
 }

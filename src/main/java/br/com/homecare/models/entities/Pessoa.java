@@ -7,53 +7,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
+import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.enums.GeneroEnum;
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
 @Entity
-//@Table(name = "pessoa")
-public class Pessoa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id")
-    private Long id;
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Pessoa extends AbstractEntity<Pessoa> {
+	private static final long serialVersionUID = 1L;
 
-//    @Column(name = "nome", nullable = false)
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name="pessoa_id")
-//    private List<Atendimento> atendimentos;
+    @OneToMany(mappedBy = "pessoa")
+    private List<Atendimento> atendimentos;
 
-//    @Column(name = "cpf", unique = true, length = 14, nullable = false)
+    @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
-//    @Size(min = 3, max = 3, message = CAMPO_VAZIO)
-//    @Column(name = "altura", length = 3)
+    @Size(min = 3, max = 3)
+    @Column(name = "altura", length = 3)
     private Double altura;
 
-//    @Size(min = 3, max = 3, message = CAMPO_VAZIO)
-//    @Column(name = "peso", length = 3)
+    @Size(min = 3, max = 3)
+    @Column(name = "peso", length = 3)
     private Double peso;
 
-//    @Column(name = "idade", length = 3)
+    @Column(name = "idade", length = 3)
     private Integer idade;
 
-//    @Column(name = "genero")
     private GeneroEnum genero;
 
-//    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-//    @Column(name = "telefone")
     private String telefone;
 
-//    @Column(name = "endereco")
     private String endereco;
 
-//    @Column(name = "tipo_usuario", nullable = false)
+    @Column(name = "tipo_usuario", nullable = false)
     private TipoUsuarioEnum tipoUsuario;
 
 	public Long getId() {
@@ -67,18 +68,18 @@ public class Pessoa {
 	public String getNome() {
 		return nome;
 	}
-
+		
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-//	public List<Atendimento> getAtendimentos() {
-//		return atendimentos;
-//	}
-//
-//	public void setAtendimentos(List<Atendimento> atendimentos) {
-//		this.atendimentos = atendimentos;
-//	}
+	public List<Atendimento> getAtendimentos() {
+		return atendimentos;
+	}
+
+	public void setAtendimentos(List<Atendimento> atendimentos) {
+		this.atendimentos = atendimentos;
+	}
 
 	public String getCpf() {
 		return cpf;
@@ -150,6 +151,12 @@ public class Pessoa {
 
 	public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj, this.id);
 	}
 
 }
