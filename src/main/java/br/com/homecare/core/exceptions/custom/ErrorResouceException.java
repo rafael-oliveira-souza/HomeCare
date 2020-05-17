@@ -1,4 +1,4 @@
-package br.com.homecare.utils.exceptions.custom;
+package br.com.homecare.core.exceptions.custom;
 
 import br.com.homecare.utils.messages.ExceptionMessages;
 

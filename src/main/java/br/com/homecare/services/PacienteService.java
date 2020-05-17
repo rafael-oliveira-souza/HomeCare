@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.homecare.models.entities.Paciente;
 import br.com.homecare.repositories.PacienteRepository;
-import br.com.homecare.utils.exceptions.custom.ErrorResouceException;
 
 @Service
 public class PacienteService {

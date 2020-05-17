@@ -1,4 +1,4 @@
-package br.com.homecare.utils.exceptions;
+package br.com.homecare.core.exceptions;
 
 import java.io.Serializable;
 
@@ -7,12 +7,14 @@ public class StandardError implements Serializable{
 	
 	private Integer status;
 	private String msg;
+	private String method;
 	private Long timestamp;
 	
-	public StandardError(Integer status, String msg, long timestamp) {
+	public StandardError(Integer status, String msg, String method, long timestamp) {
 		this.timestamp = timestamp;
 		this.status = status;
 		this.msg = msg;
+		this.setMethod(method);
 	}
 	
 	public Integer getStatus() {
@@ -32,6 +34,14 @@ public class StandardError implements Serializable{
 	}
 	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
 }
