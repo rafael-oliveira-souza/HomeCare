@@ -5,10 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.ManyToMany;
 
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
@@ -16,12 +13,10 @@ import br.com.homecare.models.enums.TipoUsuarioEnum;
 public class Paciente extends Pessoa {
 	private static final long serialVersionUID = 3271111213059443885L;
 
-	@JsonManagedReference
-	@OneToMany(mappedBy = "paciente")
+	@ManyToMany(mappedBy = "pacientes")
     private List<Doenca> doencas = new ArrayList<Doenca>();
-
-	@JsonManagedReference
-    @OneToMany(mappedBy = "paciente")
+	
+	@ManyToMany(mappedBy = "pacientes")
     private List<Medicamento> medicamentos = new ArrayList<Medicamento>();
 
 	public Paciente() {

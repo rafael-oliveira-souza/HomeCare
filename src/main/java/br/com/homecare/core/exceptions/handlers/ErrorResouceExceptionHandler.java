@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.homecare.core.exceptions.StandardError;
-import br.com.homecare.core.exceptions.custom.ErrorResouceException;
+import br.com.homecare.core.exceptions.custom.RequestErrorException;
 
 @ControllerAdvice
 public class ErrorResouceExceptionHandler {
 	private HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-	@ExceptionHandler(ErrorResouceException.class)
-    public ResponseEntity<StandardError> toResponse(ErrorResouceException e, HttpServletRequest request, HttpServletResponse response) {
+	@ExceptionHandler(RequestErrorException.class)
+    public ResponseEntity<StandardError> toResponse(RequestErrorException e, HttpServletRequest request, HttpServletResponse response) {
     	StandardError error = new StandardError(status.value() , e.getMessage(), request.getMethod(), System.currentTimeMillis());
     
     	return ResponseEntity.status(status).body(error);

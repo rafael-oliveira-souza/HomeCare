@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.homecare.models.entities.Paciente;
-import br.com.homecare.models.entities.Pessoa;
 import br.com.homecare.services.PacienteService;
 
 @RestController
@@ -23,8 +21,8 @@ public class PacienteResource {
 
 	@Autowired
 	private PacienteService service;
-	
-	@RequestMapping(method=RequestMethod.GET)
+
+	@GetMapping("/todos")
 	public ResponseEntity<List<Paciente>> getAll() {
 		List<Paciente> todos = service.getAll();
 		

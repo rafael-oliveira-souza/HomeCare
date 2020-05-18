@@ -13,8 +13,6 @@ import br.com.homecare.models.enums.TipoUsuarioEnum;
 public class Profissional extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
-	private Pessoa pessoa;
-
     @OneToMany(mappedBy = "profissional")
     private List<Profissao> profissoes;
 

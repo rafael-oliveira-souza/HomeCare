@@ -8,26 +8,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.entities.Profissional;
-import br.com.homecare.repositories.ProfissionalRepository;
+import br.com.homecare.models.entities.Doenca;
+import br.com.homecare.repositories.DoencaRepository;
 
 @Service
 @Transactional(rollbackFor = RequestErrorException.class)
-public class ProfissionalService {
-	
-	@Autowired
-	private ProfissionalRepository repo;
+public class DoencaService {
 
-	public Optional<Profissional> buscar(Long id) {
+	@Autowired
+	private DoencaRepository repo;
+
+	public Optional<Doenca> buscar(Long id) {
 		return this.repo.findById(id);
 	}
 
-	public List<Profissional> getAll() {
+	public List<Doenca> getAll() {
 		return this.repo.findAll();
 	}
-	
-	public Profissional salvar(Profissional entity) {
+
+	public Doenca salvar(Doenca entity) {
 		return this.repo.save(entity);
 	}
-
 }

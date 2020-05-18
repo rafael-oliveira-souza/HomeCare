@@ -1,16 +1,21 @@
 package br.com.homecare.models.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Medicamento {
@@ -27,11 +32,14 @@ public class Medicamento {
     @Column(name = "dataFim")
     private Date dataFim;
 
-    @ManyToOne
-	@JsonBackReference
-    @JoinColumn(name="paciente_id")
-    private Paciente paciente;
 
+    @JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "paciente_medicamento",
+            joinColumns = @JoinColumn(name = "paciente_id"),
+            inverseJoinColumns = @JoinColumn(name = "medicamento_id"))
+	private List<Paciente> pacientes = new ArrayList<Paciente>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -64,4 +72,12 @@ public class Medicamento {
 		this.dataFim = dataFim;
 	}
 
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
+	
 }

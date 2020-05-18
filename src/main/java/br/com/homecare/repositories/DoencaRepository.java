@@ -3,9 +3,10 @@ package br.com.homecare.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.homecare.models.entities.Paciente;
+import br.com.homecare.models.entities.Doenca;
 
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Long> {
+public interface DoencaRepository extends JpaRepository<Doenca, Long> {
+	
 
 }

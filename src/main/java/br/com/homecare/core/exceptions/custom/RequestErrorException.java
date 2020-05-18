@@ -2,24 +2,24 @@ package br.com.homecare.core.exceptions.custom;
 
 import br.com.homecare.utils.messages.ExceptionMessages;
 
-public class ErrorResouceException extends RuntimeException {
+public class RequestErrorException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	public ErrorResouceException() {
+	public RequestErrorException() {
         super(ExceptionMessages.ERRO_EXECUCAO);
     }
 
-	public ErrorResouceException(ErrorResouceException e) {
+	public RequestErrorException(RequestErrorException e) {
         super(e.getMessage());
     }
 
-    public ErrorResouceException(String description)  {
+    public RequestErrorException(String description)  {
             super(description);
     }
 
-    public ErrorResouceException(Throwable e) {
+    public RequestErrorException(Throwable e) {
         String description = recoverCause(e);
-        throw new ErrorResouceException(description);
+        throw new RequestErrorException(description);
     }
 
     public String recoverCause(Throwable e){

@@ -29,7 +29,7 @@ public class MedicamentoResource {
 		return ResponseEntity.ok().body(todos);
 	}
 
-	@GetMapping("/medicamento/{id}")
+	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id) {
 		Optional<Medicamento> objeto = service.buscar(id);
 

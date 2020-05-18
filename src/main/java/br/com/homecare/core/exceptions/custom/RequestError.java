@@ -2,20 +2,20 @@ package br.com.homecare.core.exceptions.custom;
 
 import java.util.Date;
 
-public class ResponseError {
+public class RequestError {
     private int status;
     private String description;
     private Date data;
 
-    public ResponseError(){}
+    public RequestError(){}
 
-    public ResponseError(int status, String description, Date data) {
+    public RequestError(int status, String description, Date data) {
         this.status = status;
         this.description = description;
         this.data = data;
     }
 
-    public ResponseError(builder builder) {
+    public RequestError(builder builder) {
         this.status = builder.status;
         this.description = builder.description;
         this.data = builder.data;
@@ -65,8 +65,8 @@ public class ResponseError {
 			return this;
 	    }
 	    
-	    public ResponseError build() {
-	    	return new ResponseError(this);
+	    public RequestError build() {
+	    	return new RequestError(this);
 	    }
 	}
 

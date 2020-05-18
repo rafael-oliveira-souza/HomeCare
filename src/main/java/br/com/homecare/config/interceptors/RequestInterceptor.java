@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import br.com.homecare.core.exceptions.custom.ErrorResouceException;;
+import br.com.homecare.core.exceptions.custom.RequestErrorException;;
 
 public class RequestInterceptor extends HandlerInterceptorAdapter {
 	
@@ -14,7 +14,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) throws Exception {
 		if (exception != null) {
-			throw new ErrorResouceException(exception.getMessage());
+			throw new RequestErrorException(exception.getMessage());
 		}
 
 	}

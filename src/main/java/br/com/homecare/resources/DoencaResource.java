@@ -10,37 +10,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.homecare.models.entities.Pessoa;
-import br.com.homecare.services.PessoaService;
+import br.com.homecare.models.entities.Doenca;
+import br.com.homecare.services.DoencaService;
 
 @RestController
-@RequestMapping("/pessoa")
-public class PessoaResource {
+@RequestMapping("/doenca")
+public class DoencaResource {
 
 	@Autowired
-	private PessoaService service;
+	private DoencaService service;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Pessoa>> getAll() {
-		List<Pessoa> todos = service.getAll();
+	@GetMapping("/todos")
+	public ResponseEntity<List<Doenca>> getAll() {
+		List<Doenca> todos = service.getAll();
 
 		return ResponseEntity.ok().body(todos);
 	}
 
 	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id) {
-		Optional<Pessoa> objeto = service.buscar(id);
+		Optional<Doenca> objeto = service.buscar(id);
 
 		return ResponseEntity.ok().body(objeto);
 	}
 
 
 	@PostMapping("/salvar")	
-	public ResponseEntity<Pessoa> salvar(@RequestBody Pessoa pessoa) {
-		Pessoa objeto = service.salvar(pessoa);
+	public ResponseEntity<Doenca> salvar(@RequestBody Doenca Doenca) {
+		Doenca objeto = service.salvar(Doenca);
 
 		return ResponseEntity.ok().body(objeto);
 	}
