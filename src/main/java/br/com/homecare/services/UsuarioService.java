@@ -3,6 +3,7 @@ package br.com.homecare.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
@@ -14,9 +15,15 @@ import br.com.homecare.utils.messages.ExceptionMessages;
 public class UsuarioService {
 	
 	@Autowired
+	private BCryptPasswordEncoder crypt;
+	
+	@Autowired
 	private UsuarioRepository repo;
 
 	public Usuario login(Usuario usuario) {
+		if(usuario.getSenha() == null || usuario.getEmail() == null) {
+			throw new RequestErrorException(ExceptionMessages.CAMPOS_VAZIOS);
+		}
 		
 		return usuario;
 	}
@@ -25,14 +32,19 @@ public class UsuarioService {
 		return this.repo.findById(id);
 	}
 
-	public Usuario save(Usuario entity) {
+	public Usuario save(Usuario usuario) {
+		if(usuario.getSenha() == null || usuario.getEmail() == null) {
+			throw new RequestErrorException(ExceptionMessages.CAMPOS_VAZIOS);
+		}
+		
 		try {
-			entity = this.repo.save(entity);
+			usuario.setSenha(this.crypt.encode(usuario.getSenha()));
+			usuario = this.repo.save(usuario);
 		}catch (Exception e) {
 			throw new RequestErrorException(e.getCause());
 		}
 		
-		return entity;
+		return usuario;
 	}
 	
 	public Usuario update(Usuario entity)  {

@@ -1,16 +1,19 @@
 package br.com.homecare.models.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.enums.PerfilEnum;
 
 @Entity
 public class Usuario extends AbstractEntity<Usuario> {
@@ -29,14 +32,18 @@ public class Usuario extends AbstractEntity<Usuario> {
 	@Column(name = "senha")
 	private String senha;
 
-    @OneToMany(mappedBy = "usuario")
-	private List<Permissao> permissoes = new ArrayList<Permissao>();
+	@CollectionTable(name = "perfil")
+    @ElementCollection( fetch = FetchType.EAGER)
+	private Set<PerfilEnum> perfis = new HashSet<PerfilEnum>();
 
-	public Usuario() {}
+	public Usuario() {
+		this.perfis.add(PerfilEnum.VISITANTE);
+	}
 	
 	public Usuario(String email, String senha) {
 		this.email = email;
 		this.senha = senha;
+		this.perfis.add(PerfilEnum.VISITANTE);
 	}
 	
 	public Long getId() {
@@ -57,11 +64,17 @@ public class Usuario extends AbstractEntity<Usuario> {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public List<Permissao> getPermissoes() {
-		return permissoes;
+
+	public Set<PerfilEnum> getPerfis() {
+		return perfis;
 	}
-	public void setPermissoes(List<Permissao> permissoes) {
-		this.permissoes = permissoes;
+
+	public void setPerfis(Set<PerfilEnum> perfis) {
+		this.perfis = perfis;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
