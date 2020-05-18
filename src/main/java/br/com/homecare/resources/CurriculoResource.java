@@ -14,40 +14,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.homecare.models.entities.Paciente;
-import br.com.homecare.services.PacienteService;
+import br.com.homecare.models.entities.Curriculo;
+import br.com.homecare.services.CurriculoService;
 
 @RestController
-@RequestMapping("/paciente")
-public class PacienteResource {
+@RequestMapping("/curriculo")
+public class CurriculoResource {
 
 	@Autowired
-	private PacienteService service;
+	private CurriculoService service;
 
 	@GetMapping("/todos")
-	public ResponseEntity<List<Paciente>> getAll() {
-		List<Paciente> todos = service.getAll();
+	public ResponseEntity<List<Curriculo>> getAll() {
+		List<Curriculo> todos = service.getAll();
 
 		return ResponseEntity.ok().body(todos);
 	}
 
 	@GetMapping("/buscar/{id}")
-	public ResponseEntity<Optional<Paciente>> find(@PathVariable(value = "id") Long id) {
-		Optional<Paciente> objeto = service.find(id);
+	public ResponseEntity<Optional<Curriculo>> find(@PathVariable(value = "id") Long id) {
+		Optional<Curriculo> objeto = service.find(id);
 
 		return ResponseEntity.ok().body(objeto);
 	}
 
 	@PostMapping("/salvar")
-	public ResponseEntity<Paciente> save(@RequestBody Paciente paciente) {
-		Paciente objeto = service.save(paciente);
+	public ResponseEntity<Curriculo> save(@RequestBody Curriculo curriculo) {
+		Curriculo objeto = service.save(curriculo);
 
 		return ResponseEntity.ok().body(objeto);
 	}
 
 	@PutMapping("/atualizar")
-	public ResponseEntity<Paciente> update(@RequestBody Paciente paciente) {
-		Paciente objeto = service.update(paciente);
+	public ResponseEntity<Curriculo> update(@RequestBody Curriculo curriculo) {
+		Curriculo objeto = service.update(curriculo);
 
 		return ResponseEntity.ok().body(objeto);
 	}

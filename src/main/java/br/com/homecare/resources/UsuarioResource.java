@@ -1,6 +1,5 @@
 package br.com.homecare.resources;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,40 +13,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.homecare.models.entities.Paciente;
-import br.com.homecare.services.PacienteService;
+import br.com.homecare.models.entities.Usuario;
+import br.com.homecare.services.UsuarioService;
 
 @RestController
-@RequestMapping("/paciente")
-public class PacienteResource {
+@RequestMapping("/usuario")
+public class UsuarioResource {
 
 	@Autowired
-	private PacienteService service;
+	private UsuarioService service;
 
-	@GetMapping("/todos")
-	public ResponseEntity<List<Paciente>> getAll() {
-		List<Paciente> todos = service.getAll();
+	@PostMapping("/login")
+	public Usuario login(@RequestBody Usuario usuario) {
+		usuario = this.service.login(usuario);
 
-		return ResponseEntity.ok().body(todos);
-	}
-
-	@GetMapping("/buscar/{id}")
-	public ResponseEntity<Optional<Paciente>> find(@PathVariable(value = "id") Long id) {
-		Optional<Paciente> objeto = service.find(id);
-
-		return ResponseEntity.ok().body(objeto);
+		return usuario;
 	}
 
 	@PostMapping("/salvar")
-	public ResponseEntity<Paciente> save(@RequestBody Paciente paciente) {
-		Paciente objeto = service.save(paciente);
+	public ResponseEntity<Usuario>  salvar(@RequestBody Usuario usuario) {
+		usuario = this.service.save(usuario);
 
-		return ResponseEntity.ok().body(objeto);
+		return ResponseEntity.ok().body(usuario);
+	}
+
+	@GetMapping("/buscar/{id}")
+	public ResponseEntity<?> buscar(@PathVariable Long id) {
+		Optional<Usuario> usuario = this.service.find(id);
+
+		return ResponseEntity.ok().body(usuario);
 	}
 
 	@PutMapping("/atualizar")
-	public ResponseEntity<Paciente> update(@RequestBody Paciente paciente) {
-		Paciente objeto = service.update(paciente);
+	public ResponseEntity<Usuario> update(@RequestBody Usuario usuario) {
+		Usuario objeto = service.update(usuario);
 
 		return ResponseEntity.ok().body(objeto);
 	}
@@ -55,7 +54,7 @@ public class PacienteResource {
 	@DeleteMapping("/excluir/{id}")
 	public ResponseEntity<?> Delete(@PathVariable(value = "id") Long id) {
 		service.delete(id);
-		
+
 		return ResponseEntity.ok().body(null);
 	}
 }

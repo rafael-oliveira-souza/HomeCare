@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.models.entities.Medicamento;
 import br.com.homecare.repositories.MedicamentoRepository;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Service
 @Transactional(rollbackFor = RequestErrorException.class)
@@ -18,7 +19,7 @@ public class MedicamentoService {
 	@Autowired
 	private MedicamentoRepository repo;
 
-	public Optional<Medicamento> buscar(Long id) {
+	public Optional<Medicamento> find(Long id) {
 		return this.repo.findById(id);
 	}
 
@@ -26,7 +27,39 @@ public class MedicamentoService {
 		return this.repo.findAll();
 	}
 
-	public Medicamento salvar(Medicamento entity) {
-		return this.repo.save(entity);
+	public Medicamento save(Medicamento entity) {
+		try { 
+			entity = this.repo.save(entity);
+		}catch (Exception e) {
+			throw new RequestErrorException(e.getCause());
+		}
+		
+		return entity;
+	}
+	
+	public Medicamento update(Medicamento entity) {
+		if (entity.getId() == null) {
+			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
+		}
+
+		Optional<Medicamento> objeto = this.find(entity.getId());
+		if (objeto.isPresent()) {
+			return this.repo.save(entity);
+		} else {
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Medicamento"));
+		}
+	}
+
+	public void delete(final Long id) {
+		if (id == null) {
+			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
+		}
+
+		Optional<Medicamento> objeto = this.repo.findById(id);
+		if (objeto.isPresent()) {
+			this.repo.delete(objeto.get());
+		} else {
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Medicamento"));
+		}
 	}
 }

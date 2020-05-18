@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.enums.GeneroEnum;
@@ -27,7 +27,7 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "pessoa")
+	@ManyToMany(mappedBy = "pessoas")
     private List<Atendimento> atendimentos;
 
     @Column(name = "cpf", unique = true, nullable = false)

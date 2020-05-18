@@ -14,6 +14,7 @@ import br.com.homecare.models.entities.Paciente;
 import br.com.homecare.repositories.DoencaRepository;
 import br.com.homecare.repositories.MedicamentoRepository;
 import br.com.homecare.repositories.PacienteRepository;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Service
 @Transactional(rollbackFor = RequestErrorException.class)
@@ -27,7 +28,7 @@ public class PacienteService {
 	@Autowired
 	private PacienteRepository repo;
 
-	public Optional<Paciente> buscar(Long id) {
+	public Optional<Paciente> find(final Long id) {
 		return this.repo.findById(id);
 	}
 
@@ -35,21 +36,21 @@ public class PacienteService {
 		return this.repo.findAll();
 	}
 
-	public Paciente salvar(Paciente entity) {
+	public Paciente save(Paciente entity) {
 		try {
-//			entity = this.repo.save(entity);
+			entity = this.repo.save(entity);
+
+			List<Doenca> doencas = entity.getDoencas();
+			List<Medicamento> medicamentos = entity.getMedicamentos();
+			for(Medicamento medicamento : medicamentos) {
+				medicamento.getPacientes().add(entity);
+			}
 //
-//			List<Doenca> doencas = entity.getDoencas();
-//			List<Medicamento> medicamentos = entity.getMedicamentos();
-//			for(Medicamento medicamento : medicamentos) {
-//				medicamento.getPacientes().add(entity);
-//			}
-////
-//			for (Doenca doenca: doencas) {
-//				doenca.getPacientes().add(entity);
-//			}
-//			this.medRepo.saveAll(medicamentos);
-//			this.doencaRepo.saveAll(doencas);
+			for (Doenca doenca: doencas) {
+				doenca.getPacientes().add(entity);
+			}
+			this.medRepo.saveAll(medicamentos);
+			this.doencaRepo.saveAll(doencas);
 			
 			entity = this.repo.save(entity);
 		}catch (Exception e) {
@@ -57,5 +58,31 @@ public class PacienteService {
 		}
 		
 		return entity;
+	}
+	
+	public Paciente update(Paciente entity)  {
+		if(entity.getId() == null) {
+			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
+		}
+		
+		Optional<Paciente> objeto = this.find(entity.getId());
+        if(objeto.isPresent()){
+             return this.repo.save(entity);
+        }else {
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Paciente"));
+        }
+	}
+	
+	public void delete(final Long id) {
+		if(id == null) {
+			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
+		}
+		
+		Optional<Paciente> objeto = this.repo.findById(id);
+        if(objeto.isPresent()){
+    		this.repo.delete(objeto.get());
+        }else {
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Paciente"));
+        }
 	}
 }

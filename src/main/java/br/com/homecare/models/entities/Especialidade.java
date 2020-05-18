@@ -9,9 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.homecare.commons.AbstractEntity;
 
@@ -29,17 +30,41 @@ public class Especialidade extends AbstractEntity<Especialidade> {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@ManyToMany
-	@JoinTable(	name="sintoma_especialidade", 
-				joinColumns = @JoinColumn(name="sintoma_id"),
-				inverseJoinColumns = @JoinColumn(name="especialidade_id")
-	)
+	@ManyToMany(mappedBy = "especialidades")
 	private List<Sintoma> sintomas = new ArrayList<Sintoma>();
 	
-
     @ManyToOne
+    @JsonBackReference
 	@JoinColumn(name = "profissao_id")
 	private Profissao profissao; 
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Sintoma> getSintomas() {
+		return sintomas;
+	}
+
+	public void setSintomas(List<Sintoma> sintomas) {
+		this.sintomas = sintomas;
+	}
+
+	public Profissao getProfissao() {
+		return profissao;
+	}
+
+	public void setProfissao(Profissao profissao) {
+		this.profissao = profissao;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public String getNome() {
 		return nome;
