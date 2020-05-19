@@ -6,7 +6,7 @@ public abstract class AbstractEntity<T> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	public abstract  boolean equals(Object obj);
+	public abstract boolean equals(Object obj);
 
 	@SuppressWarnings("unchecked")
 	public  boolean equals(Object obj, Object id) {

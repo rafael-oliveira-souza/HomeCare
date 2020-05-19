@@ -1,5 +1,13 @@
 package br.com.homecare.models.interfaces;
 
-public interface EnumInterface {
-    Object getValue();
+import br.com.homecare.models.enums.EnumCommon;
+
+public interface EnumInterface<T>  {
+	final static EnumCommon ENUM_COMMONS= new EnumCommon();
+	
+	Object getValue();
+    
+    Integer getCode();
+    
+    T toEnum(Integer codigo);
 }

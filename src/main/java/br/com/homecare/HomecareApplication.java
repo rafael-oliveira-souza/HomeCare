@@ -21,7 +21,6 @@ public class HomecareApplication implements CommandLineRunner {
 	// Operacao de instanciacao. Instancia objetos ao subir o servidor
 	@Override
 	public void run(String... args) throws Exception {
-
 	}
 
 }

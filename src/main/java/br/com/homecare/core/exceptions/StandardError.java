@@ -7,14 +7,21 @@ public class StandardError implements Serializable{
 	
 	private Integer status;
 	private String msg;
+	private String description;
 	private String method;
 	private Long timestamp;
 	
-	public StandardError(Integer status, String msg, String method, long timestamp) {
+	public StandardError(Integer status, String msg, String description, String method, long timestamp) {
 		this.timestamp = timestamp;
 		this.status = status;
 		this.msg = msg;
-		this.setMethod(method);
+		this.method = method;
+		this.description = description;
+	}
+	
+	public StandardError(String msg, String description) {
+		this.msg = msg;
+		this.description = description;
 	}
 	
 	public Integer getStatus() {
@@ -42,6 +49,14 @@ public class StandardError implements Serializable{
 
 	public void setMethod(String method) {
 		this.method = method;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

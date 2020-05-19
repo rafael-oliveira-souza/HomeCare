@@ -19,6 +19,12 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository repo;
+	
+
+	public Optional<Usuario> findByEmail(Long id) {
+		return null;
+//		return this.repo.findByEmail(email);
+	}
 
 	public Usuario login(Usuario usuario) {
 		if(usuario.getSenha() == null || usuario.getEmail() == null) {

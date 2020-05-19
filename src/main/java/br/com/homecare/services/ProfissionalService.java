@@ -5,6 +5,11 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,16 +25,16 @@ import br.com.homecare.utils.messages.ExceptionMessages;
 @Service
 @Transactional(rollbackFor = RequestErrorException.class)
 public class ProfissionalService {
-	
+
 	@Autowired
 	private ProfissionalRepository repo;
 
 	@Autowired
 	private AtendimentoService atendimentoService;
-	
+
 	@Autowired
 	private ProfissaoService profissaoService;
-	
+
 	@Autowired
 	private CurriculoService curriculoService;
 
@@ -47,57 +52,63 @@ public class ProfissionalService {
 	public Profissional save(Profissional entity) {
 		try {
 			entity = this.repo.save(entity);
-			
+
 			Curriculo curriculo = entity.getCurriculo();
 			curriculo.setProfissional(entity);
-			
+
 			List<Atendimento> atendimentos = entity.getAtendimentos();
-			for(Atendimento atendimento : atendimentos) {
+			for (Atendimento atendimento : atendimentos) {
 				Pessoa pessoa = modelMapper.map(entity, Pessoa.class);
 				atendimento.getPessoas().add(pessoa);
 			}
 
 			List<Profissao> profissoes = entity.getProfissoes();
-			for (Profissao profissao: profissoes) {
+			for (Profissao profissao : profissoes) {
 				profissao.getProfissionais().add(entity);
 			}
-			
+
 			this.curriculoService.save(curriculo);
 			this.profissaoService.saveAll(profissoes);
 			this.atendimentoService.saveAll(atendimentos);
-			
+
 			entity = this.repo.save(entity);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new RequestErrorException(e.getCause());
 		}
-		
+
 		return entity;
 	}
-	
-	public Profissional update(Profissional entity)  {
-		if(entity.getId() == null) {
+
+	public Profissional update(Profissional entity) {
+		if (entity.getId() == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
-		
+
 		Optional<Profissional> objeto = this.find(entity.getId());
-        if(objeto.isPresent()){
-             return this.repo.save(entity);
-        }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissional"));
-        }
+		if (objeto.isPresent()) {
+			return this.repo.save(entity);
+		} else {
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissional"));
+		}
 	}
-	
+
 	public void delete(final Long id) {
-		if(id == null) {
+		if (id == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
-		
+
 		Optional<Profissional> objeto = this.repo.findById(id);
-        if(objeto.isPresent()){
-    		this.repo.delete(objeto.get());
-        }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissional"));
-        }
+		if (objeto.isPresent()) {
+			this.repo.delete(objeto.get());
+		} else {
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissional"));
+		}
+	}
+
+	public Page<Profissional> findPage(Integer nrPagina, Integer nrLinhas, String ordenaPor, String direcao) {
+		Pageable page = PageRequest.of(nrPagina, nrLinhas, Sort.by(Direction.valueOf(direcao), ordenaPor));
+		
+		return repo.findAll(page);
 	}
 
 }

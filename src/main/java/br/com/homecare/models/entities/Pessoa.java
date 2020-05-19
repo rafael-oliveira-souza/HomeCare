@@ -10,10 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.enums.GeneroEnum;
 import br.com.homecare.models.enums.TipoUsuarioEnum;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,12 +28,16 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
+	@Length(min = 5, max = 80, message = ExceptionMessages.NOME_INVALIDO )
     @Column(name = "nome", nullable = false)
     private String nome;
 
 	@ManyToMany(mappedBy = "pessoas")
     private List<Atendimento> atendimentos;
 
+	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
+	@Length(min = 14, max = 14, message = ExceptionMessages.CPF_INVALIDO )
     @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
@@ -44,6 +52,7 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 
     private GeneroEnum genero;
 
+	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
