@@ -27,7 +27,13 @@ public enum TipoUsuarioEnum implements EnumInterface<TipoUsuarioEnum> {
 
 	@Override
 	public TipoUsuarioEnum toEnum(Integer codigo) {
-		return (TipoUsuarioEnum) ENUM_COMMONS.toEnum(TipoUsuarioEnum.class, codigo);
+		for(TipoUsuarioEnum enumObj: TipoUsuarioEnum.values()) {
+			if(enumObj.getCode() == codigo) {
+				return enumObj;
+			}
+		}
+		
+		return null;
 	}
 }
 

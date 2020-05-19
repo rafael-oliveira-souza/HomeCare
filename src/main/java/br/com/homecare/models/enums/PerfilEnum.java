@@ -29,6 +29,12 @@ public enum PerfilEnum implements EnumInterface<PerfilEnum> {
 
 	@Override
 	public PerfilEnum toEnum(Integer codigo) {
-		return (PerfilEnum) ENUM_COMMONS.toEnum(PerfilEnum.class, codigo);
+		for(PerfilEnum enumObj: PerfilEnum.values()) {
+			if(enumObj.getCode() == codigo) {
+				return enumObj;
+			}
+		}
+		
+		return null;
 	}
 }

@@ -21,14 +21,17 @@ public class UsuarioService {
 	private UsuarioRepository repo;
 	
 
-	public Optional<Usuario> findByEmail(Long id) {
-		return null;
-//		return this.repo.findByEmail(email);
+	public Usuario findByEmail(String email) {
+		return this.repo.findByEmail(email);
 	}
 
 	public Usuario login(Usuario usuario) {
 		if(usuario.getSenha() == null || usuario.getEmail() == null) {
 			throw new RequestErrorException(ExceptionMessages.CAMPOS_VAZIOS);
+		}
+		
+		if(findByEmail(usuario.getEmail()) == null) {
+			throw new RequestErrorException(ExceptionMessages.EMAIL_NAO_ENCONTRATO);
 		}
 		
 		return usuario;

@@ -28,7 +28,13 @@ public enum GeneroEnum implements EnumInterface<GeneroEnum> {
 
 	@Override
 	public GeneroEnum toEnum(Integer codigo) {
-		return (GeneroEnum)ENUM_COMMONS.toEnum(GeneroEnum.class , codigo);
+		for(GeneroEnum enumObj: GeneroEnum.values()) {
+			if(enumObj.getCode() == codigo) {
+				return enumObj;
+			}
+		}
+		
+		return null;
 	}
 }
 

@@ -12,6 +12,7 @@ public abstract class ExceptionMessages {
     public static final String NOME_INVALIDO = "O nome deve possuir entre 5 e 80 caracteres.";
     public static final String CPF_INVALIDO = "CPF invalido.";
     public static final String EMAIL_INVALIDO = "Email invalido.";
+    public static final String EMAIL_NAO_ENCONTRATO = "Email não encontrado.";
     
 
     public ExceptionMessages(){}

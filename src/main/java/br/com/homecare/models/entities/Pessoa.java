@@ -13,11 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.enums.GeneroEnum;
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 import br.com.homecare.utils.messages.ExceptionMessages;
+import br.com.homecare.utils.validators.interfaces.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -36,6 +38,7 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 	@ManyToMany(mappedBy = "pessoas")
     private List<Atendimento> atendimentos;
 
+	@CPF
 	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
 	@Length(min = 14, max = 14, message = ExceptionMessages.CPF_INVALIDO )
     @Column(name = "cpf", unique = true, nullable = false)
@@ -52,7 +55,8 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 
     private GeneroEnum genero;
 
-	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
+    @Email
+	@NotEmpty(message = "Email não preenchido.")
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 

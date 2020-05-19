@@ -11,13 +11,13 @@ import br.com.homecare.services.commons.DbService;
 @Profile("test")
 public class TestConfig {
 	
-	@Autowired
-	private DbService dbService;
-	
-	@Bean
-	public boolean initConfigDatabase() {
-		this.dbService.initializeDatabase();
-		
-		return true;
-	}
+//	@Autowired
+//	private DbService dbService;
+//	
+//	@Bean
+//	public boolean initConfigDatabase() {
+//		this.dbService.initializeDatabase();
+//		
+//		return true;
+//	}
 }

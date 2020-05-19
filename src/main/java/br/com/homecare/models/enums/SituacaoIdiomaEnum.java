@@ -28,7 +28,13 @@ public enum SituacaoIdiomaEnum implements EnumInterface<SituacaoIdiomaEnum> {
 
 	@Override
 	public SituacaoIdiomaEnum toEnum(Integer codigo) {
-		return (SituacaoIdiomaEnum) ENUM_COMMONS.toEnum(SituacaoIdiomaEnum.class, codigo);
+		for(SituacaoIdiomaEnum enumObj: SituacaoIdiomaEnum.values()) {
+			if(enumObj.getCode() == codigo) {
+				return enumObj;
+			}
+		}
+		
+		return null;
 	}
 }
 
