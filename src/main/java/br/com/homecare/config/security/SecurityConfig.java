@@ -1,4 +1,4 @@
-package br.com.homecare.config;
+package br.com.homecare.config.security;
 
 import java.util.Arrays;
 
@@ -34,31 +34,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	};
 
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		if(Arrays.asList(this.enviroment.getActiveProfiles()).contains("test")) {
-			http.headers().frameOptions().disable();
-		}
-		
-		http.cors().and().csrf().disable(); 
-		http.authorizeRequests()
-			.antMatchers(PUBLIC_MATCHERS)
-			.permitAll()
-			.anyRequest()
-			.authenticated();
-
-		//Nao cria sessao pra aplicacao
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	}
-	
-	//Configurar acesso de outras portas
-	@Bean
-	public CorsConfigurationSource corsConfigurationSource() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-		
-		return source;
-	}
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		if(Arrays.asList(this.enviroment.getActiveProfiles()).contains("test")) {
+//			http.headers().frameOptions().disable();
+//		}
+//		
+//		http.cors().and().csrf().disable(); 
+//		http.authorizeRequests()
+//			.antMatchers(PUBLIC_MATCHERS)
+//			.permitAll()
+//			.anyRequest()
+//			.authenticated();
+//
+//		//Nao cria sessao pra aplicacao
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//	}
+//	
+//	//Configurar acesso de outras portas
+//	@Bean
+//	CorsConfigurationSource corsConfigurationSource() {
+//		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+//		
+//		return source;
+//	}
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder(){
