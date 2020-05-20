@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.homecare.config.filters.JwtAuthenticationFilter;
+import br.com.homecare.config.filters.JwtAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -58,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.authenticated();
 
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userSecurityService));
 		//Nao cria sessao pra aplicacao
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
@@ -70,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	//Configurar acesso de outras portas
 	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
+	public CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		

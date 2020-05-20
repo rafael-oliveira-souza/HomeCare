@@ -16,6 +16,7 @@ public abstract class ExceptionMessages {
     public static final String SENHA_INCORRETA = "Senha incorreta.";
     public static final String EMAIL_NAO_ENCONTRATO = "Email não encontrado.";
     public static final String EMAIL_CADASTRADO = "Email já foi cadastrado.";
+    public static final String FALHA_REC_CLAIMS = "Falha ao recuperar claims.";
     
 
     public ExceptionMessages(){}
