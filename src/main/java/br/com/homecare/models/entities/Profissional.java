@@ -14,7 +14,7 @@ import br.com.homecare.models.enums.TipoUsuarioEnum;
 @Entity
 public class Profissional extends Pessoa {
 	private static final long serialVersionUID = 1L;
-
+	
     @ManyToMany(mappedBy = "profissionais")
     private List<Profissao> profissoes = new ArrayList<Profissao>();
 
@@ -39,7 +39,7 @@ public class Profissional extends Pessoa {
 		this.setEndereco(pessoa.getEndereco());
 		this.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 	}
-
+	
 	public List<Profissao> getProfissoes() {
 		return profissoes;
 	}
