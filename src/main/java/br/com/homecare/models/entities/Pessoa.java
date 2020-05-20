@@ -31,7 +31,7 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     private Long id;
     
 	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
-	@Length(min = 5, max = 80, message = ExceptionMessages.NOME_INVALIDO )
+	@Length(min = 5, max = 80, message = ExceptionMessages.NUM_CARACTER_INVALIDO )
     @Column(name = "nome", nullable = false)
     private String nome;
 

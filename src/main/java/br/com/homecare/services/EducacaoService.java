@@ -56,7 +56,7 @@ public class EducacaoService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Educacao"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Educacao"));
         }
 	}
 	
@@ -69,7 +69,7 @@ public class EducacaoService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Educacao"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Educacao"));
         }
 	}
 

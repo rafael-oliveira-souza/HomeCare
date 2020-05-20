@@ -62,7 +62,7 @@ public class PessoaService {
 		if (objeto.isPresent()) {
 			return this.repo.save(entity);
 		} else {
-			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Pessoa"));
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Pessoa"));
 		}
 	}
 
@@ -75,7 +75,7 @@ public class PessoaService {
 		if (objeto.isPresent()) {
 			this.repo.delete(objeto.get());
 		} else {
-			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Pessoa"));
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Pessoa"));
 		}
 	}
 }

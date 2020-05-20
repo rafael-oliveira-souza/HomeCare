@@ -67,7 +67,7 @@ public class AtendimentoService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Atendimento"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Atendimento"));
         }
 	}
 	
@@ -80,7 +80,7 @@ public class AtendimentoService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Atendimento"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Atendimento"));
         }
 	}
 

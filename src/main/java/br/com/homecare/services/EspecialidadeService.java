@@ -47,7 +47,7 @@ public class EspecialidadeService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Especialidade"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
         }
 	}
 	
@@ -60,7 +60,7 @@ public class EspecialidadeService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Especialidade"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
         }
 	}
 

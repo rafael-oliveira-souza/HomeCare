@@ -3,7 +3,6 @@ package br.com.homecare.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +11,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.models.entities.Atendimento;
@@ -38,9 +40,6 @@ public class ProfissionalService {
 	@Autowired
 	private CurriculoService curriculoService;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
 	public Optional<Profissional> find(final Long id) {
 		return this.repo.findById(id);
 	}
@@ -51,6 +50,7 @@ public class ProfissionalService {
 
 	public Profissional save(Profissional entity) {
 		try {
+			String json = new Gson().toJson(entity);
 			entity = this.repo.save(entity);
 
 			Curriculo curriculo = entity.getCurriculo();
@@ -58,7 +58,7 @@ public class ProfissionalService {
 
 			List<Atendimento> atendimentos = entity.getAtendimentos();
 			for (Atendimento atendimento : atendimentos) {
-				Pessoa pessoa = modelMapper.map(entity, Pessoa.class);
+				Pessoa pessoa = new ObjectMapper().readValue(json, Pessoa.class);
 				atendimento.getPessoas().add(pessoa);
 			}
 
@@ -88,7 +88,7 @@ public class ProfissionalService {
 		if (objeto.isPresent()) {
 			return this.repo.save(entity);
 		} else {
-			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissional"));
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissional"));
 		}
 	}
 
@@ -101,7 +101,7 @@ public class ProfissionalService {
 		if (objeto.isPresent()) {
 			this.repo.delete(objeto.get());
 		} else {
-			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissional"));
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissional"));
 		}
 	}
 

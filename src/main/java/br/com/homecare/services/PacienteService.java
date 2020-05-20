@@ -69,7 +69,7 @@ public class PacienteService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Paciente"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Paciente"));
         }
 	}
 	
@@ -82,7 +82,7 @@ public class PacienteService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Paciente"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Paciente"));
         }
 	}
 }

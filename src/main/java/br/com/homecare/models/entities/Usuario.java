@@ -11,9 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.enums.PerfilEnum;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Entity
 public class Usuario extends AbstractEntity<Usuario> {
@@ -26,14 +31,17 @@ public class Usuario extends AbstractEntity<Usuario> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "email")
+	@NotEmpty(message = "Email não preenchido.")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-	@Column(name = "senha")
+	@Column(name = "senha", nullable = false)
+	@Size(min = 6, max = 80, message = ExceptionMessages.NUM_CARACTER_INVALIDO )
 	private String senha;
 
-	@CollectionTable(name = "perfil")
-    @ElementCollection( fetch = FetchType.EAGER)
+	@CollectionTable(name = "usuario_perfil")
+    @ElementCollection(fetch = FetchType.EAGER)
+	@Column( name = "perfil_id")
 	private Set<PerfilEnum> perfis = new HashSet<PerfilEnum>();
 
 	public Usuario() {

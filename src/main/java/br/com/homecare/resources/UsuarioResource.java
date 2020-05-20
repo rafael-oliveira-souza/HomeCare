@@ -17,7 +17,6 @@ import br.com.homecare.models.entities.Usuario;
 import br.com.homecare.services.UsuarioService;
 
 @RestController
-@RequestMapping("/usuario")
 public class UsuarioResource {
 
 	@Autowired
@@ -30,28 +29,28 @@ public class UsuarioResource {
 		return usuario;
 	}
 
-	@PostMapping("/salvar")
+	@PostMapping("/usuario/salvar")
 	public ResponseEntity<Usuario>  salvar(@RequestBody Usuario usuario) {
 		usuario = this.service.save(usuario);
 
 		return ResponseEntity.ok().body(usuario);
 	}
 
-	@GetMapping("/buscar/{id}")
+	@GetMapping("/usuario/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id) {
 		Optional<Usuario> usuario = this.service.find(id);
 
 		return ResponseEntity.ok().body(usuario);
 	}
 
-	@PutMapping("/atualizar")
+	@PutMapping("/usuario/atualizar")
 	public ResponseEntity<Usuario> update(@RequestBody Usuario usuario) {
 		Usuario objeto = service.update(usuario);
 
 		return ResponseEntity.ok().body(objeto);
 	}
 
-	@DeleteMapping("/excluir/{id}")
+	@DeleteMapping("/usuario/excluir/{id}")
 	public ResponseEntity<?> Delete(@PathVariable(value = "id") Long id) {
 		service.delete(id);
 

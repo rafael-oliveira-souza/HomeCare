@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.com.homecare.models.entities.Profissional;
-import br.com.homecare.models.sql.ProfissionalSql;
+import br.com.homecare.queries.ProfissionalSql;
 
 @Repository
 public interface ProfissionalRepository extends JpaRepository<Profissional, Long> {

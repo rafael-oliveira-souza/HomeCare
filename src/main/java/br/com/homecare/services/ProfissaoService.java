@@ -66,7 +66,7 @@ public class ProfissaoService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissao"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));
         }
 	}
 	
@@ -79,7 +79,7 @@ public class ProfissaoService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Profissao"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));
         }
 	}
 

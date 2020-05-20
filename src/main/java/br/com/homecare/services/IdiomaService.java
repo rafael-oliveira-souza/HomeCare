@@ -54,7 +54,7 @@ public class IdiomaService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Idioma"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Idioma"));
         }
 	}
 	
@@ -67,7 +67,7 @@ public class IdiomaService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Idioma"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Idioma"));
         }
 	}
 

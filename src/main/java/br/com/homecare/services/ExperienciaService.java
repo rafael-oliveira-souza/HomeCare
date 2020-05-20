@@ -54,7 +54,7 @@ public class ExperienciaService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Experiencia"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Experiencia"));
         }
 	}
 	
@@ -67,7 +67,7 @@ public class ExperienciaService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Experiencia"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Experiencia"));
         }
 	}
 

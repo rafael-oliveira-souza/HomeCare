@@ -46,7 +46,7 @@ public class MedicamentoService {
 		if (objeto.isPresent()) {
 			return this.repo.save(entity);
 		} else {
-			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Medicamento"));
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Medicamento"));
 		}
 	}
 
@@ -59,7 +59,7 @@ public class MedicamentoService {
 		if (objeto.isPresent()) {
 			this.repo.delete(objeto.get());
 		} else {
-			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Medicamento"));
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Medicamento"));
 		}
 	}
 }

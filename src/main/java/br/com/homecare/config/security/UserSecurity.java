@@ -1,11 +1,13 @@
 package br.com.homecare.config.security;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import br.com.homecare.models.entities.Usuario;
 import br.com.homecare.services.UsuarioService;
 
 public class UserSecurity implements UserDetails{
@@ -14,50 +16,62 @@ public class UserSecurity implements UserDetails{
 	private String email;
 	private String senha;
 	private Collection<? extends GrantedAuthority> autorizacoes;
-	
-	@Autowired
-	private UsuarioService usuarioService;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.autorizacoes;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.senha;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.email;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	public UserSecurity() {
+		
+	}
+	
+	public UserSecurity(Long id, String email, String senha, Collection<? extends GrantedAuthority> autorizacoes,
+			UsuarioService usuarioService) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.autorizacoes = autorizacoes;
+	}
+
+	public UserSecurity(Usuario usuario) {
+		this.id = usuario.getId();
+		this.email = usuario.getEmail();
+		this.senha = usuario.getSenha();
+		this.autorizacoes = usuario.getPerfis().stream()
+				.map(perf -> new SimpleGrantedAuthority(perf.getValue()))
+				.collect(Collectors.toList());
 	}
 
 	public Long getId() {
@@ -90,13 +104,5 @@ public class UserSecurity implements UserDetails{
 
 	public void setAutorizacoes(Collection<? extends GrantedAuthority> autorizacoes) {
 		this.autorizacoes = autorizacoes;
-	}
-
-	public UsuarioService getUsuarioService() {
-		return usuarioService;
-	}
-
-	public void setUsuarioService(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
 	}
 }

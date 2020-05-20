@@ -1,4 +1,4 @@
-package br.com.homecare.models.sql;
+package br.com.homecare.queries;
 
 public class ProfissionalSql {
 	public static final String RELACAO_PROFISSIONAL_ESPECIALIDADE_SINTOMA = 

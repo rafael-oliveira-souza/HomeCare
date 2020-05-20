@@ -2,11 +2,14 @@ package br.com.homecare.core.exceptions;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class StandardError implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer status;
 	private String msg;
+	@JsonIgnore
 	private String description;
 	private String method;
 	private Long timestamp;

@@ -79,7 +79,7 @@ public class CurriculoService {
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Curriculo"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Curriculo"));
         }
 	}
 	
@@ -92,7 +92,7 @@ public class CurriculoService {
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrato("Curriculo"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Curriculo"));
         }
 	}
 

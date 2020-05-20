@@ -22,17 +22,24 @@ import br.com.homecare.core.exceptions.custom.RequestErrorException;
 
 @ControllerAdvice
 public class RequestErrorExceptionHandler {
-
+	
+	@ExceptionHandler(Exception.class)
+    public ResponseEntity<StandardError> exceptionError(RequestErrorException e, HttpServletRequest request, HttpServletResponse response) {
+    	StandardError error = new StandardError(INTERNAL_SERVER_ERROR.value(), e.getMessage(), null, request.getMethod(), System.currentTimeMillis());
+   
+    	return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(error);
+    }
+	
 	@ExceptionHandler(RequestErrorException.class)
     public ResponseEntity<StandardError> standardError(RequestErrorException e, HttpServletRequest request, HttpServletResponse response) {
-    	StandardError error = new StandardError(INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName(), request.getMethod(), System.currentTimeMillis());
+    	StandardError error = new StandardError(INTERNAL_SERVER_ERROR.value(), e.getMessage(), null, request.getMethod(), System.currentTimeMillis());
    
     	return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(error);
     }
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<StandardError> dataIntegrityError(RequestErrorException e, HttpServletRequest request, HttpServletResponse response) {
-    	StandardError error = new StandardError(BAD_REQUEST.value() , e.getMessage(), e.getClass().getName(), request.getMethod(), System.currentTimeMillis());
+    	StandardError error = new StandardError(BAD_REQUEST.value() , e.getMessage(), null, request.getMethod(), System.currentTimeMillis());
     
     	return ResponseEntity.status(BAD_REQUEST).body(error);
     }
@@ -46,7 +53,7 @@ public class RequestErrorExceptionHandler {
 
 	@ExceptionHandler(SQLException.class)
     public ResponseEntity<StandardError> sqlError(RequestErrorException e, HttpServletRequest request, HttpServletResponse response) {
-    	StandardError error = new StandardError(BAD_REQUEST.value() , e.getMessage(), e.getClass().getName(), request.getMethod(), System.currentTimeMillis());
+    	StandardError error = new StandardError(BAD_REQUEST.value() , e.getMessage(), null, request.getMethod(), System.currentTimeMillis());
     
     	
     	return ResponseEntity.status(BAD_REQUEST).body(error);
