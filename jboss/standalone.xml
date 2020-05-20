@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<!-- <?xml version='1.0' encoding='UTF-8'?>
 
 <server xmlns="urn:jboss:domain:12.0">
     <extensions>
@@ -173,7 +173,6 @@
                         <share-prepared-statements>true</share-prepared-statements>
                     </statement>
                 </datasource>
-<<<<<<< HEAD
                 <datasource jta="true" jndi-name="java:jboss/datasources/homecare" pool-name="homecare" enabled="true" use-java-context="true">
                     <connection-url>jdbc:postgresql://localhost:3308/homecare</connection-url>
                     <driver>postgresql</driver>
@@ -192,8 +191,6 @@
                         <share-prepared-statements>true</share-prepared-statements>
                     </statement>
                 </datasource>
-=======
->>>>>>> df59a64c67cf4cadc4cfc18d2c290de8891addef
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
                     <driver>h2</driver>
@@ -206,12 +203,9 @@
                     <driver name="mysql" module="com.mysql">
                         <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
                     </driver>
-<<<<<<< HEAD
                     <driver name="postgresql" module="org.postgresql">
                          <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
                     </driver>
-=======
->>>>>>> df59a64c67cf4cadc4cfc18d2c290de8891addef
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
@@ -581,4 +575,4 @@
             <fs-exploded path="/Users/rafaeloliveiradesouza/Documents/workspace-homecare/homecare/target/app"/>
         </deployment>
     </deployments>
-</server>
+</server> -->

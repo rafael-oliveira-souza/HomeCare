@@ -13,6 +13,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtil {
+	public final  String AUTHENTICATION = "Authentication";
+	public final  String BEARER = "Bearer ";
 
 	@Value("${jwt.secret}")
 	private String secret;

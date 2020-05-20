@@ -17,9 +17,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import br.com.homecare.config.security.JwtUtil;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-	private final static String AUTHENTICATION = "Authentication";
-	private final static String BEARER = "Bearer ";
-	
 	private UserDetailsService userDetailService;
 	
 	private JwtUtil jwtUtil;
@@ -34,10 +31,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		String authHeader = request.getHeader(AUTHENTICATION);
-		if(authHeader != null && authHeader.startsWith(BEARER)) {
+		String authHeader = request.getHeader(jwtUtil.AUTHENTICATION);
+		if(authHeader != null && authHeader.startsWith(jwtUtil.BEARER)) {
 			//remover bearer
-			String tokenNoBearer = authHeader.replaceAll(BEARER, "");
+			String tokenNoBearer = authHeader.replaceAll(jwtUtil.BEARER, "");
+//			String tokenNoBearer = authHeader.substring(7);
 			UsernamePasswordAuthenticationToken auth = getAuthentication(request, tokenNoBearer);
 			if(auth != null) {
 				SecurityContextHolder.getContext().setAuthentication(auth);
