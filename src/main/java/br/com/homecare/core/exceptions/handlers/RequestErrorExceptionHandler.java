@@ -44,12 +44,12 @@ public class RequestErrorExceptionHandler {
     	return ResponseEntity.status(BAD_REQUEST).body(error);
     }
 
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<StandardError>> methdoArgumentNotValidError(MethodArgumentNotValidException e, HttpServletRequest request, HttpServletResponse response) {
-		List<StandardError> errors = getErrors(BAD_REQUEST.value(), e, request);
-		
-    	return ResponseEntity.status(BAD_REQUEST).body(errors);
-    }
+//	@ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<List<StandardError>> methdoArgumentNotValidError(MethodArgumentNotValidException e, HttpServletRequest request, HttpServletResponse response) {
+//		List<StandardError> errors = getErrors(BAD_REQUEST.value(), e, request);
+//		
+//    	return ResponseEntity.status(BAD_REQUEST).body(errors);
+//    }
 
 	@ExceptionHandler(SQLException.class)
     public ResponseEntity<StandardError> sqlError(RequestErrorException e, HttpServletRequest request, HttpServletResponse response) {
