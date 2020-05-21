@@ -4,9 +4,10 @@ import br.com.homecare.models.interfaces.EnumInterface;
 
 public enum PerfilEnum implements EnumInterface<PerfilEnum> {
 	ADMIN(1, "ROLE_ADMIN"), 
-	PACIENTE(2, "ROLE_PACIENTE"), 
-	VISITANTE(3, "ROLE_VISITANTE"),
-	PROFISSIONAL(4, "ROLE_PROFISSIONAL");
+	CLIENTE(2, "ROLE_CLIENTE"),
+	PACIENTE(3, "ROLE_PACIENTE"), 
+	VISITANTE(4, "ROLE_VISITANTE"),
+	PROFISSIONAL(5, "ROLE_PROFISSIONAL");
 
 	private String tipo;
 	private Integer codigo;
