@@ -1,8 +1,10 @@
 package br.com.homecare.models.enums;
 
-import br.com.homecare.models.interfaces.EnumInterface;
+import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.models.interfaces.InterfaceEnum;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
-public enum GeneroEnum implements EnumInterface<GeneroEnum> {
+public enum GeneroEnum implements InterfaceEnum<GeneroEnum> {
     MASCULINO(1, "Masculino"),
     OUTROS(2, "Outros"),
     FEMININO(3, "Feminino");
@@ -26,15 +28,14 @@ public enum GeneroEnum implements EnumInterface<GeneroEnum> {
 		return this.codigo;
 	}
 
-	@Override
-	public GeneroEnum toEnum(Integer codigo) {
+	public static GeneroEnum toEnum(Integer codigo) {
 		for(GeneroEnum enumObj: GeneroEnum.values()) {
 			if(enumObj.getCode() == codigo) {
 				return enumObj;
 			}
 		}
 		
-		return null;
+		throw new RequestErrorException(ExceptionMessages.enumInvalido(codigo, GeneroEnum.class));
 	}
 }
 

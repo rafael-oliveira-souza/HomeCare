@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import br.com.homecare.config.security.JwtUtil;
+import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	private UserDetailsService userDetailService;
@@ -31,7 +33,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		String authHeader = request.getHeader(jwtUtil.AUTHENTICATION);
+		String authHeader = request.getHeader(jwtUtil.AUTHORIZATION);
 		if(authHeader != null && authHeader.startsWith(jwtUtil.BEARER)) {
 			//remover bearer
 			String tokenNoBearer = authHeader.replaceAll(jwtUtil.BEARER, "");
@@ -40,6 +42,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 			if(auth != null) {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
+		}else {
+			throw new RequestErrorException(ExceptionMessages.FALHA_AUTENTICACAO);
 		}
 		
 		chain.doFilter(request, response);

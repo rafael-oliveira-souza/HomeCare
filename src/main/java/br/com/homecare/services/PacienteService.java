@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.entities.Doenca;
-import br.com.homecare.models.entities.Medicamento;
 import br.com.homecare.models.entities.Paciente;
-import br.com.homecare.repositories.DoencaRepository;
-import br.com.homecare.repositories.MedicamentoRepository;
+import br.com.homecare.models.enums.TipoUsuarioEnum;
 import br.com.homecare.repositories.PacienteRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
@@ -20,10 +17,10 @@ import br.com.homecare.utils.messages.ExceptionMessages;
 @Transactional(rollbackFor = RequestErrorException.class)
 public class PacienteService {
 	@Autowired
-	private MedicamentoRepository medRepo;
+	private MedicamentoService medService;
 
 	@Autowired
-	private DoencaRepository doencaRepo;
+	private DoencaService doencaService;
 
 	@Autowired
 	private PacienteRepository repo;
@@ -35,29 +32,25 @@ public class PacienteService {
 	public List<Paciente> getAll() {
 		return this.repo.findAll();
 	}
-
+	
+	public List<Paciente> saveAll(List<Paciente> list) {
+		 for(Paciente paciente : list) {
+			 this.save(paciente);
+		 }
+		 
+		 return list;
+	}
+	
 	public Paciente save(Paciente entity) {
 		try {
-			entity = this.repo.save(entity);
-
-			List<Doenca> doencas = entity.getDoencas();
-			List<Medicamento> medicamentos = entity.getMedicamentos();
-			for(Medicamento medicamento : medicamentos) {
-				medicamento.getPacientes().add(entity);
-			}
-//
-			for (Doenca doenca: doencas) {
-				doenca.getPacientes().add(entity);
-			}
-			this.medRepo.saveAll(medicamentos);
-			this.doencaRepo.saveAll(doencas);
+			entity.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+			this.medService.saveAll(entity.getMedicamentos());
+			this.doencaService.saveAll(entity.getDoencas());
 			
-			entity = this.repo.save(entity);
+			return this.repo.save(entity);
 		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return entity;
 	}
 	
 	public Paciente update(Paciente entity)  {

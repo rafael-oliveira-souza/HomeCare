@@ -10,7 +10,8 @@ public class RequestErrorException extends RuntimeException {
     }
 
 	public RequestErrorException(RequestErrorException e) {
-        super(e.getMessage());
+        String description = recoverCause(e);
+        throw new RequestErrorException(description);
     }
 
     public RequestErrorException(String description)  {
@@ -23,6 +24,10 @@ public class RequestErrorException extends RuntimeException {
     }
 
     public String recoverCause(Throwable e){
+		if(e.getMessage() == null && e.getCause() == null) {
+			return ExceptionMessages.ERRO_DESCONHECIDO;
+		}
+		
         if(e.getCause() != null){
            return recoverCause(e.getCause());
         }

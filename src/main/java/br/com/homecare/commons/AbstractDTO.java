@@ -3,26 +3,30 @@ package br.com.homecare.commons;
 import java.io.Serializable;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractEntity<T> implements Serializable{
+public abstract class AbstractDTO<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@Override
 	public abstract boolean equals(Object obj);
-	
-	public <E> E toDto(T obj, Class<E> classe) {
-		return (E)new ModelMapper().map(obj, classe);
+
+	public <E> E toEntity(Class<E> classe, T obj) {
+		return modelMapper.map(obj, classe);
 	}
 
 	@SuppressWarnings("unchecked")
-	public  boolean equals(Object obj, Object id) {
+	public boolean equals(Object obj, Object id) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EntitySerializable<T> other = (EntitySerializable<T>) obj;
+		DTOSerializable<T> other = (DTOSerializable<T>) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -31,9 +35,9 @@ public abstract class AbstractEntity<T> implements Serializable{
 		}
 		return true;
 	}
-	
+
 	@SuppressWarnings("hiding")
-	private class EntitySerializable<T> {
+	private class DTOSerializable<T> {
 		private Long id;
 	}
 }

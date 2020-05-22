@@ -13,9 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.SintomaDTO;
 
 @Entity
-public class Sintoma extends AbstractEntity<Sintoma> {
+public class Sintoma extends AbstractEntity<SintomaDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,11 +30,26 @@ public class Sintoma extends AbstractEntity<Sintoma> {
 	private String descricao;
 	
 	@ManyToMany
-	@JoinTable(	name="sintoma_especialidade", 
+	@JoinTable(	name="especialidade_sintoma", 
 				joinColumns = @JoinColumn(name="especialidade_id"),
 				inverseJoinColumns = @JoinColumn(name="sintoma_id")
 	)
-	private List<Especialidade> especialidades = new ArrayList<Especialidade>();
+	private List<Especialidade> especialidades = new ArrayList<Especialidade>(0);
+
+	@ManyToMany
+	@JoinTable(	name="doenca_sintoma", 
+				joinColumns = @JoinColumn(name="doenca_id"),
+				inverseJoinColumns = @JoinColumn(name="sintoma_id")
+	)
+	private List<Doenca> doencas = new ArrayList<Doenca>(0);
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -49,6 +65,22 @@ public class Sintoma extends AbstractEntity<Sintoma> {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Especialidade> getEspecialidades() {
+		return especialidades;
+	}
+
+	public void setEspecialidades(List<Especialidade> especialidades) {
+		this.especialidades = especialidades;
+	}
+
+	public List<Doenca> getDoencas() {
+		return doencas;
+	}
+
+	public void setDoencas(List<Doenca> doencas) {
+		this.doencas = doencas;
 	}
 
 	@Override

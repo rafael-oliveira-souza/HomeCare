@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.homecare.config.security.JwtUtil;
 import br.com.homecare.config.security.UserSecurity;
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.entities.Usuario;
+import br.com.homecare.models.dtos.UsuarioDTO;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			throws AuthenticationException {
 		
 		try {
-			Usuario usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
+			UsuarioDTO usuario = new ObjectMapper().readValue(request.getInputStream(), UsuarioDTO.class);
 			
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
 			Authentication auth = authManager.authenticate(authToken);
@@ -55,6 +55,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		UserSecurity user = (UserSecurity)authResult.getPrincipal();
 		String email = user.getEmail();
 		String token = jwtUtil.generateToken(email);
-		response.addHeader(jwtUtil.AUTHENTICATION, jwtUtil.BEARER + token);
+		response.addHeader(jwtUtil.AUTHORIZATION, jwtUtil.BEARER + token);
 	}
 }

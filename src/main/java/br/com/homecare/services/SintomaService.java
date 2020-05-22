@@ -1,3 +1,4 @@
+
 package br.com.homecare.services;
 
 import java.util.List;
@@ -8,63 +9,77 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.models.entities.Doenca;
 import br.com.homecare.models.entities.Especialidade;
-import br.com.homecare.models.entities.Profissao;
-import br.com.homecare.repositories.ProfissaoRepository;
+import br.com.homecare.models.entities.Sintoma;
+import br.com.homecare.repositories.SintomaRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Service
 @Transactional(rollbackFor = RequestErrorException.class)
-public class ProfissaoService {
+public class SintomaService {
 	
 	@Autowired
-	private ProfissaoRepository repo;
-	
-	@Autowired
-	private EspecialidadeService especialidadeService;
+	private SintomaRepository repo;
 
-	public Optional<Profissao> find(final Long id) {
+	@Autowired
+	private EspecialidadeService especService;
+	
+	@Autowired
+	private DoencaService doencaService;
+	
+	public Optional<Sintoma> find(final Long id) {
 		return this.repo.findById(id);
 	}
 
-	public List<Profissao> getAll() {
+	public List<Sintoma> getAll() {
 		return this.repo.findAll();
 	}
 	
-	public List<Profissao> saveAll(List<Profissao> entity) {
-		for (Profissao profissao: entity) {
-			this.save(profissao);
+	public List<Sintoma> saveAll(List<Sintoma> list) {
+		for (Sintoma sintoma : list) {
+			this.save(sintoma);
 		}
 		
-		return entity;
+		return list;
 	}
-
-	public Profissao save(Profissao entity) {
+	
+	public Sintoma save(Sintoma entity) {
 		try {
 			entity = this.repo.save(entity);
 			
 			List<Especialidade> especialidades = entity.getEspecialidades();
-			for (Especialidade especialidade: especialidades) {
-				especialidade.getProfissoes().add(entity);
+			for(Especialidade espec: especialidades) {
+				if(espec.getId() == null) {
+					espec.getSintomas().add(entity);
+					this.especService.save(espec);
+				}
 			}
-			this.especialidadeService.saveAll(especialidades);
 
+			List<Doenca> doencas = entity.getDoencas();
+			for(Doenca doenca: doencas) {
+				if(doenca.getId() == null) {
+					doenca.getSintomas().add(entity);
+					this.doencaService.save(doenca);
+				}
+			}
+			
 			return this.repo.save(entity);
 		}catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
 		}
 	}
 	
-	public Profissao update(Profissao entity)  {
+	public Sintoma update(Sintoma entity)  {
 		if(entity.getId() == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
 		
-		Optional<Profissao> objeto = this.find(entity.getId());
+		Optional<Sintoma> objeto = this.find(entity.getId());
         if(objeto.isPresent()){
              return this.repo.save(entity);
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
         }
 	}
 	
@@ -73,11 +88,11 @@ public class ProfissaoService {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
 		
-		Optional<Profissao> objeto = this.repo.findById(id);
+		Optional<Sintoma> objeto = this.repo.findById(id);
         if(objeto.isPresent()){
     		this.repo.delete(objeto.get());
         }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));
+        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
         }
 	}
 

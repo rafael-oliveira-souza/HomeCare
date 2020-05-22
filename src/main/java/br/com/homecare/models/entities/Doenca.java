@@ -7,19 +7,19 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.DoencaDTO;
 
 @Entity
-public class Doenca {
-    @Id
+public class Doenca extends AbstractEntity<DoencaDTO> {
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,14 +31,10 @@ public class Doenca {
 
     @Column(name = "dataFim")
     private Date dataFim;
-    
-    @JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "paciente_doenca",
-            joinColumns = @JoinColumn(name = "paciente_id"),
-            inverseJoinColumns = @JoinColumn(name = "doenca_id"))
-	private List<Paciente> pacientes = new ArrayList<Paciente>();
 
+	@ManyToMany(mappedBy = "doencas")
+	private List<Sintoma> sintomas = new ArrayList<Sintoma>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,12 +67,17 @@ public class Doenca {
 		this.dataFim = dataFim;
 	}
 
-	public List<Paciente> getPacientes() {
-		return pacientes;
+	public List<Sintoma> getSintomas() {
+		return sintomas;
 	}
 
-	public void setPacientes(List<Paciente> pacientes) {
-		this.pacientes = pacientes;
+	public void setSintomas(List<Sintoma> sintomas) {
+		this.sintomas = sintomas;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj, this.id);
 	}
     
     

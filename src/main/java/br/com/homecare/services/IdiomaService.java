@@ -26,23 +26,17 @@ public class IdiomaService {
 	public List<Idioma> getAll() {
 		return this.repo.findAll();
 	}
-
-	public List<Idioma> saveAll(List<Idioma> entity) {
-		for (Idioma idioma: entity) {
-			this.save(idioma);
-		}
-		
-		return entity;
+	
+	public List<Idioma> saveAll(List<Idioma> list) {
+		 return this.repo.saveAll((Iterable<Idioma>)list);
 	}
 
 	public Idioma save(Idioma entity) {
 		try {
-			entity = this.repo.save(entity);
+			return this.repo.save(entity);
 		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return entity;
 	}
 	
 	public Idioma update(Idioma entity)  {

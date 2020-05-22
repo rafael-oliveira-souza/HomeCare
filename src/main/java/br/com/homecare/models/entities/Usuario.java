@@ -14,14 +14,13 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
-
 import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.UsuarioDTO;
 import br.com.homecare.models.enums.PerfilEnum;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Entity
-public class Usuario extends AbstractEntity<Usuario> {
+public class Usuario extends AbstractEntity<UsuarioDTO> {
     /**
 	 * 
 	 */
@@ -42,7 +41,7 @@ public class Usuario extends AbstractEntity<Usuario> {
 	@CollectionTable(name = "usuario_perfil")
     @ElementCollection(fetch = FetchType.EAGER)
 	@Column( name = "perfil_id")
-	private Set<PerfilEnum> perfis = new HashSet<PerfilEnum>();
+	private Set<PerfilEnum> perfis = new HashSet<PerfilEnum>(0);
 
 	public Usuario() {
 		this.perfis.add(PerfilEnum.VISITANTE);
@@ -53,22 +52,27 @@ public class Usuario extends AbstractEntity<Usuario> {
 		this.senha = senha;
 		this.perfis.add(PerfilEnum.VISITANTE);
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -79,10 +83,6 @@ public class Usuario extends AbstractEntity<Usuario> {
 
 	public void setPerfis(Set<PerfilEnum> perfis) {
 		this.perfis = perfis;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	@Override

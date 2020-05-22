@@ -1,22 +1,30 @@
 package br.com.homecare.models.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.CurriculoDTO;
 
 @Entity
-public class Curriculo {
-    @Id
+public class Curriculo extends AbstractEntity<CurriculoDTO> {
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
@@ -26,17 +34,20 @@ public class Curriculo {
     @JoinColumn(name="profissional_id")
     private Profissional profissional;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "curriculo")
-    private List<Educacao> educacao;
+    @ElementCollection(fetch = FetchType.LAZY)
+	@Column( name = "educacao_id")
+	@CollectionTable(name = "curriculo_educacao")
+    private List<Educacao> educacoes = new ArrayList<Educacao>(0);
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "curriculo")
-    private List<Experiencia> experiencia;
+    @ElementCollection(fetch = FetchType.LAZY)
+	@Column( name = "experiencia_id")
+	@CollectionTable(name = "curriculo_experiencia")
+    private List<Experiencia> experiencias = new ArrayList<Experiencia>(0);
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "curriculo")
-    private List<Idioma> idioma;
+    @ElementCollection(fetch = FetchType.LAZY)
+	@Column( name = "idioma_id")
+	@CollectionTable(name = "curriculo_idioma")
+    private List<Idioma> idiomas = new ArrayList<Idioma>(0);
 
 	public Long getId() {
 		return id;
@@ -54,28 +65,33 @@ public class Curriculo {
 		this.profissional = profissional;
 	}
 
-	public List<Educacao> getEducacao() {
-		return educacao;
+	public List<Educacao> getEducacoes() {
+		return educacoes;
 	}
 
-	public void setEducacao(List<Educacao> educacao) {
-		this.educacao = educacao;
+	public void setEducacoes(List<Educacao> educacoes) {
+		this.educacoes = educacoes;
 	}
 
-	public List<Experiencia> getExperiencia() {
-		return experiencia;
+	public List<Experiencia> getExperiencias() {
+		return experiencias;
 	}
 
-	public void setExperiencia(List<Experiencia> experiencia) {
-		this.experiencia = experiencia;
+	public void setExperiencia(List<Experiencia> experiencias) {
+		this.experiencias = experiencias;
 	}
 
-	public List<Idioma> getIdioma() {
-		return idioma;
+	public List<Idioma> getIdiomas() {
+		return idiomas;
 	}
 
-	public void setIdioma(List<Idioma> idioma) {
-		this.idioma = idioma;
+	public void setIdiomas(List<Idioma> idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj, this.id);
 	}
     
 }

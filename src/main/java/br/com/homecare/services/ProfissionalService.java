@@ -3,7 +3,6 @@ package br.com.homecare.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,11 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.entities.Atendimento;
-import br.com.homecare.models.entities.Curriculo;
-import br.com.homecare.models.entities.Pessoa;
-import br.com.homecare.models.entities.Profissao;
 import br.com.homecare.models.entities.Profissional;
+import br.com.homecare.models.enums.TipoUsuarioEnum;
 import br.com.homecare.repositories.ProfissionalRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
@@ -30,16 +26,13 @@ public class ProfissionalService {
 	private ProfissionalRepository repo;
 
 	@Autowired
-	private AtendimentoService atendimentoService;
+	private CurriculoService curriculoService;
 
 	@Autowired
 	private ProfissaoService profissaoService;
 
 	@Autowired
-	private CurriculoService curriculoService;
-	
-	@Autowired
-	private ModelMapper modelMapper;
+	private AtendimentoService atendimentoService;
 
 	public Optional<Profissional> find(final Long id) {
 		return this.repo.findById(id);
@@ -48,35 +41,29 @@ public class ProfissionalService {
 	public List<Profissional> getAll() {
 		return this.repo.findAll();
 	}
-
+	
+	public List<Profissional> saveAll(List<Profissional> entity) {
+		for (Profissional profissional: entity) {
+			this.save(profissional);
+		}
+		
+		return entity;
+	}
+	
 	public Profissional save(Profissional entity) {
 		try {
+			this.atendimentoService.saveAll(entity.getAtendimentos());
+			this.profissaoService.saveAll(entity.getProfissoes());
+			entity.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 			entity = this.repo.save(entity);
-
-			Curriculo curriculo = entity.getCurriculo();
-			curriculo.setProfissional(entity);
-
-			List<Atendimento> atendimentos = entity.getAtendimentos();
-			for (Atendimento atendimento : atendimentos) {
-				Pessoa pessoa = modelMapper.map(entity, Pessoa.class);
-				atendimento.getPessoas().add(pessoa);
-			}
-
-			List<Profissao> profissoes = entity.getProfissoes();
-			for (Profissao profissao : profissoes) {
-				profissao.getProfissionais().add(entity);
-			}
-
-			this.curriculoService.save(curriculo);
-			this.profissaoService.saveAll(profissoes);
-			this.atendimentoService.saveAll(atendimentos);
-
-			entity = this.repo.save(entity);
+			
+			entity.getCurriculo().setProfissional(entity);
+			this.curriculoService.save(entity.getCurriculo());
+			
+			return this.repo.save(entity);
 		} catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e);
 		}
-
-		return entity;
 	}
 
 	public Profissional update(Profissional entity) {

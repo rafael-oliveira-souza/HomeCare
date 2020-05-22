@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.entities.Atendimento;
 import br.com.homecare.models.entities.Pessoa;
 import br.com.homecare.repositories.PessoaRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
@@ -19,6 +18,9 @@ public class PessoaService {
 
 	@Autowired
 	private PessoaRepository repo;
+
+	@Autowired
+	private AtendimentoService atendimentoService;
 
 	public Optional<Pessoa> find(Long id) {
 		return this.repo.findById(id);
@@ -38,16 +40,10 @@ public class PessoaService {
 
 	public Pessoa save(Pessoa entity) {
 		try {
-			entity = this.repo.save(entity);
-
-			List<Atendimento> atendimentos = entity.getAtendimentos();
-			for(Atendimento atendimento : atendimentos) {
-				atendimento.getPessoas().add(entity);
-			}
-
+			this.atendimentoService.saveAll(entity.getAtendimentos());
 			entity = this.repo.save(entity);
 		} catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
 
 		return entity;

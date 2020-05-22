@@ -36,10 +36,10 @@ public class UsuarioResource {
 	}
 
 	@GetMapping("/usuario/buscar/{id}")
-	public ResponseEntity<?> buscar(@PathVariable Long id) {
+	public ResponseEntity<Usuario> buscar(@PathVariable Long id) {
 		Optional<Usuario> usuario = this.service.find(id);
 
-		return ResponseEntity.ok().body(usuario);
+		return ResponseEntity.ok().body(usuario.get());
 	}
 
 	@PutMapping("/usuario/atualizar")
@@ -50,7 +50,7 @@ public class UsuarioResource {
 	}
 
 	@DeleteMapping("/usuario/excluir/{id}")
-	public ResponseEntity<?> Delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<Usuario> Delete(@PathVariable(value = "id") Long id) {
 		service.delete(id);
 
 		return ResponseEntity.ok().body(null);

@@ -26,15 +26,17 @@ public class MedicamentoService {
 	public List<Medicamento> getAll() {
 		return this.repo.findAll();
 	}
-
+	
+	public List<Medicamento> saveAll(List<Medicamento> list) {
+		 return this.repo.saveAll((Iterable<Medicamento>)list);
+	}
+	
 	public Medicamento save(Medicamento entity) {
 		try { 
-			entity = this.repo.save(entity);
+			return this.repo.save(entity);
 		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return entity;
 	}
 	
 	public Medicamento update(Medicamento entity) {

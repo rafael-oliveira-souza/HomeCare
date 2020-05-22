@@ -27,24 +27,17 @@ public class EducacaoService {
 	public List<Educacao> getAll() {
 		return this.repo.findAll();
 	}
-	
-	public List<Educacao> saveAll(List<Educacao> entity) {
-		for (Educacao educacao: entity) {
-			this.save(educacao);
-		}
-		
-		return entity;
-	}
 
+	public List<Educacao> saveAll(List<Educacao> list) {
+		 return this.repo.saveAll((Iterable<Educacao>)list);
+	}
 
 	public Educacao save(Educacao entity) {
 		try {
-			entity = this.repo.save(entity);
+			return this.repo.save(entity);
 		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return entity;
 	}
 	
 	public Educacao update(Educacao entity)  {

@@ -7,42 +7,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.ProfissaoDTO;
 
 @Entity
-public class Profissao extends AbstractEntity<Profissao> {
+public class Profissao extends AbstractEntity<ProfissaoDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome", nullable = false, unique = true)
     private String nome;
 
+    @Column(name = "descricao")
     private String descricao;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy="profissao")
-    private List<Especialidade> especialidades;
+    @ManyToMany(mappedBy="profissoes")
+    private List<Especialidade> especialidades = new ArrayList<Especialidade>(0);
 
-    @JsonIgnore
-	@ManyToMany
-	@JoinTable(	name="profissional_profissao", 
-				joinColumns = @JoinColumn(name="profissional_id"),
-				inverseJoinColumns = @JoinColumn(name="profissao_id")
-	)
-    private List<Profissional> profissionais = new ArrayList<Profissional>();
-    
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -72,18 +59,6 @@ public class Profissao extends AbstractEntity<Profissao> {
 
 	public void setEspecialidades(List<Especialidade> especialidades) {
 		this.especialidades = especialidades;
-	}
-
-	public List<Profissional> getProfissionais() {
-		return profissionais;
-	}
-
-	public void setProfissionais(List<Profissional> profissionais) {
-		this.profissionais = profissionais;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	@Override

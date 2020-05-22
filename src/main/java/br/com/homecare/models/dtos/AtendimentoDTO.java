@@ -1,27 +1,15 @@
-package br.com.homecare.models.entities;
+package br.com.homecare.models.dtos;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import br.com.homecare.commons.AbstractDTO;
+import br.com.homecare.models.entities.Atendimento;
 
-import br.com.homecare.commons.AbstractEntity;
-import br.com.homecare.models.dtos.AtendimentoDTO;
-
-@Entity
-public class Atendimento extends AbstractEntity<AtendimentoDTO> {
+public class AtendimentoDTO extends AbstractDTO<Atendimento>{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-    @GeneratedValue
+	
     private Long id;
-
-    @Column(name = "data", nullable = false)
     private Date data;
-
-    @Column(name = "descricao", nullable = false)
     private String descricao;
 
 	public Long getId() {
@@ -52,6 +40,5 @@ public class Atendimento extends AbstractEntity<AtendimentoDTO> {
 	public boolean equals(Object obj) {
 		return super.equals(obj, this.id);
 	}
-
-    
+	
 }

@@ -1,37 +1,17 @@
-package br.com.homecare.models.entities;
+package br.com.homecare.models.dtos;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.homecare.commons.AbstractDTO;
+import br.com.homecare.models.entities.Experiencia;
 
-import br.com.homecare.commons.AbstractEntity;
-import br.com.homecare.models.dtos.ExperienciaDTO;
-
-@Entity
-public class Experiencia extends AbstractEntity<ExperienciaDTO>{
+public class ExperienciaDTO extends AbstractDTO<Experiencia>{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "nome", nullable = false)
     private String nome;
-
-    @Column(name = "funcao", nullable = false)
     private String funcao;
-
-    @Column(name = "descricao", nullable = false)
     private String descricao;
-
-    @Column(name = "dataInicio", nullable = false)
     private Date dataInicio;
-
-    @Column(name = "dataFim", nullable = false)
     private Date dataFim;
 
 	public Long getId() {
@@ -86,4 +66,5 @@ public class Experiencia extends AbstractEntity<ExperienciaDTO>{
 	public boolean equals(Object obj) {
 		return super.equals(obj, this.id);
 	}
+	
 }

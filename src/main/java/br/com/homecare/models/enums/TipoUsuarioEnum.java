@@ -1,8 +1,10 @@
 package br.com.homecare.models.enums;
 
-import br.com.homecare.models.interfaces.EnumInterface;
+import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.models.interfaces.InterfaceEnum;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
-public enum TipoUsuarioEnum implements EnumInterface<TipoUsuarioEnum> {
+public enum TipoUsuarioEnum implements InterfaceEnum<TipoUsuarioEnum> {
     PACIENTE(1, "Paciente"),
     PROFISSIONAL(2, "Profissional");
 
@@ -25,15 +27,13 @@ public enum TipoUsuarioEnum implements EnumInterface<TipoUsuarioEnum> {
 		return this.codigo;
 	}
 
-	@Override
-	public TipoUsuarioEnum toEnum(Integer codigo) {
+	public static TipoUsuarioEnum toEnum(Integer codigo) {
 		for(TipoUsuarioEnum enumObj: TipoUsuarioEnum.values()) {
 			if(enumObj.getCode() == codigo) {
 				return enumObj;
 			}
 		}
-		
-		return null;
+		throw new RequestErrorException(ExceptionMessages.enumInvalido(codigo, TipoUsuarioEnum.class));
 	}
 }
 

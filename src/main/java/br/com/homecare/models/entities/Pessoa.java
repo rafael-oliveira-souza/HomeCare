@@ -1,29 +1,31 @@
 package br.com.homecare.models.entities;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.PessoaDTO;
 import br.com.homecare.models.enums.GeneroEnum;
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 import br.com.homecare.utils.messages.ExceptionMessages;
-import br.com.homecare.utils.validators.interfaces.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa extends AbstractEntity<Pessoa> {
+public class Pessoa extends AbstractEntity<PessoaDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,10 +37,13 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-	@ManyToMany(mappedBy = "pessoas")
-    private List<Atendimento> atendimentos;
+	
+	@CollectionTable(name = "pessoa_atendimento")
+    @ElementCollection(fetch = FetchType.LAZY)
+	@Column( name = "atendimento_id")
+	private Set<Atendimento> atendimentos = new HashSet<Atendimento>(0);
 
-	@CPF
+//	@CPF
 	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
 	@Length(min = 14, max = 14, message = ExceptionMessages.CPF_INVALIDO )
     @Column(name = "cpf", unique = true, nullable = false)
@@ -53,9 +58,9 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     @Column(name = "idade", length = 3)
     private Integer idade;
 
-    private GeneroEnum genero;
+    private Integer genero;
 
-    @Email
+//    @Email
 	@NotEmpty(message = "Email não preenchido.")
     @Column(name = "email", unique = true, nullable = false)
     private String email;
@@ -65,7 +70,7 @@ public class Pessoa extends AbstractEntity<Pessoa> {
     private String endereco;
 
     @Column(name = "tipo_usuario", nullable = false)
-    private TipoUsuarioEnum tipoUsuario;
+    private Integer tipoUsuario;
 
 	public Long getId() {
 		return id;
@@ -83,11 +88,11 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 		this.nome = nome;
 	}
 
-	public List<Atendimento> getAtendimentos() {
+	public Set<Atendimento> getAtendimentos() {
 		return atendimentos;
 	}
 
-	public void setAtendimentos(List<Atendimento> atendimentos) {
+	public void setAtendimentos(Set<Atendimento> atendimentos) {
 		this.atendimentos = atendimentos;
 	}
 
@@ -124,11 +129,11 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 	}
 
 	public GeneroEnum getGenero() {
-		return genero;
+		return GeneroEnum.toEnum(this.genero);
 	}
 
 	public void setGenero(GeneroEnum genero) {
-		this.genero = genero;
+		this.genero = genero.getCode();
 	}
 
 	public String getEmail() {
@@ -156,11 +161,11 @@ public class Pessoa extends AbstractEntity<Pessoa> {
 	}
 
 	public TipoUsuarioEnum getTipoUsuario() {
-		return tipoUsuario;
+		return TipoUsuarioEnum.toEnum(this.tipoUsuario);
 	}
 
 	public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+		this.tipoUsuario = tipoUsuario.getCode();
 	}
 	
 	@Override

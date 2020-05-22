@@ -1,52 +1,44 @@
-package br.com.homecare.models.entities;
+package br.com.homecare.models.dtos;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.modelmapper.ModelMapper;
 
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
-@Entity
-public class Profissional extends Pessoa {
+public class ProfissionalDTO extends PessoaDTO{
 	private static final long serialVersionUID = 1L;
 	
-	@CollectionTable(name = "profissional_profissao")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "profissao_id")
-    private List<Profissao> profissoes = new ArrayList<Profissao>(0);
+	private List<AtendimentoDTO> atendimentos;
+    private List<ProfissaoDTO> profissoes = new ArrayList<ProfissaoDTO>();
+    private CurriculoDTO curriculo;
 
-    @JsonManagedReference
-    @OneToOne(mappedBy="profissional", cascade = CascadeType.ALL)
-    private Curriculo curriculo;
-
-	public List<Profissao> getProfissoes() {
+	public ProfissionalDTO() {
+		setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
+	}
+	
+	public List<AtendimentoDTO> getAtendimentos() {
+		return atendimentos;
+	}
+	public void setAtendimentos(List<AtendimentoDTO> atendimentos) {
+		this.atendimentos = atendimentos;
+	}
+	public List<ProfissaoDTO> getProfissoes() {
 		return profissoes;
 	}
-
-	public void setProfissoes(List<Profissao> profissoes) {
+	public void setProfissoes(List<ProfissaoDTO> profissoes) {
 		this.profissoes = profissoes;
 	}
-
-	public Curriculo getCurriculo() {
+	public CurriculoDTO getCurriculo() {
 		return curriculo;
 	}
-
-	public void setCurriculo(Curriculo curriculo) {
+	public void setCurriculo(CurriculoDTO curriculo) {
 		this.curriculo = curriculo;
 	}
 
-
-	public Pessoa getPessoa() {
-		Pessoa pessoa = new Pessoa();
+	public PessoaDTO getPessoa() {
+		PessoaDTO pessoa = new PessoaDTO();
 		pessoa.setId(this.getId());
 		pessoa.setCpf(this.getCpf());
 		pessoa.setNome(this.getNome());
@@ -63,7 +55,7 @@ public class Profissional extends Pessoa {
 		return pessoa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
+	public void setPessoa(PessoaDTO pessoa) {
 		this.setId(pessoa.getId());
 		this.setCpf(pessoa.getCpf());
 		this.setNome(pessoa.getNome());
@@ -77,5 +69,14 @@ public class Profissional extends Pessoa {
 		this.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 		this.setAtendimentos(pessoa.getAtendimentos());
 	}
-  	
+	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj, this.getId());
+	}
+	
+	public <E> E toEntity(Class<E> classe, ProfissionalDTO obj) {
+		return new ModelMapper().map(obj, classe);
+	}
+	
 }

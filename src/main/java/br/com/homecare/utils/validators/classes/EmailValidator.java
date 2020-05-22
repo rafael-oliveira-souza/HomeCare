@@ -8,7 +8,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.homecare.models.entities.Usuario;
 import br.com.homecare.services.UsuarioService;
 import br.com.homecare.utils.messages.ExceptionMessages;
 import br.com.homecare.utils.validators.interfaces.Email;
@@ -36,8 +35,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 				context.buildConstraintViolationWithTemplate(ExceptionMessages.EMAIL_INVALIDO).addPropertyNode(EMAIL)
 						.addConstraintViolation();
 			}
-			Usuario user = this.usuarioService.findByEmail(emailField);
-			if(user == null) {
+			if(this.usuarioService.findByEmail(emailField) == null) {
 				valid = false;
 				context.buildConstraintViolationWithTemplate(ExceptionMessages.EMAIL_NAO_ENCONTRATO).addPropertyNode(EMAIL)
 				.addConstraintViolation();

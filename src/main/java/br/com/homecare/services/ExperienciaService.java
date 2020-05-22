@@ -26,23 +26,17 @@ public class ExperienciaService {
 	public List<Experiencia> getAll() {
 		return this.repo.findAll();
 	}
-
-	public List<Experiencia> saveAll(List<Experiencia> entity) {
-		for (Experiencia experiencia: entity) {
-			this.save(experiencia);
-		}
-		
-		return entity;
+	
+	public List<Experiencia> saveAll(List<Experiencia> list) {
+		 return this.repo.saveAll((Iterable<Experiencia>)list);
 	}
 
 	public Experiencia save(Experiencia entity) {
 		try {
-			entity = this.repo.save(entity);
+			return this.repo.save(entity);
 		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return entity;
 	}
 	
 	public Experiencia update(Experiencia entity)  {

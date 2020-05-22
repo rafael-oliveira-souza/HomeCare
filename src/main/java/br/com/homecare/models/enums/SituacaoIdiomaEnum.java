@@ -1,8 +1,10 @@
 package br.com.homecare.models.enums;
 
-import br.com.homecare.models.interfaces.EnumInterface;
+import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.models.interfaces.InterfaceEnum;
+import br.com.homecare.utils.messages.ExceptionMessages;
 
-public enum SituacaoIdiomaEnum implements EnumInterface<SituacaoIdiomaEnum> {
+public enum SituacaoIdiomaEnum implements InterfaceEnum<SituacaoIdiomaEnum> {
     AVANCADO(1, "Avancado"),
     INTERMEDIARIO(2, "Intermediario"),
     BASICO(3, "Basico");
@@ -26,15 +28,14 @@ public enum SituacaoIdiomaEnum implements EnumInterface<SituacaoIdiomaEnum> {
 		return this.codigo;
 	}
 
-	@Override
-	public SituacaoIdiomaEnum toEnum(Integer codigo) {
+	public static SituacaoIdiomaEnum toEnum(Integer codigo) {
 		for(SituacaoIdiomaEnum enumObj: SituacaoIdiomaEnum.values()) {
 			if(enumObj.getCode() == codigo) {
 				return enumObj;
 			}
 		}
-		
-		return null;
+
+		throw new RequestErrorException(ExceptionMessages.enumInvalido(codigo, SituacaoIdiomaEnum.class));
 	}
 }
 

@@ -5,15 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import br.com.homecare.commons.AbstractEntity;
+import br.com.homecare.models.dtos.IdiomaDTO;
 import br.com.homecare.models.enums.SituacaoIdiomaEnum;
 
 @Entity
-public class Idioma {
+public class Idioma extends AbstractEntity<IdiomaDTO>{
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +22,12 @@ public class Idioma {
     private String nome;
 
     @Column(name = "situacao", nullable = false)
-    private SituacaoIdiomaEnum situacao;
+    private Integer situacao;
 
-    @ManyToOne
-    @JsonBackReference
-	@JoinColumn(name = "curriculo_id")
-    private Curriculo curriculo;
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj, this.id);
+	}
 
 	public Long getId() {
 		return id;
@@ -45,19 +45,13 @@ public class Idioma {
 		this.nome = nome;
 	}
 
-	public Curriculo getCurriculo() {
-		return curriculo;
-	}
-
-	public void setCurriculo(Curriculo curriculo) {
-		this.curriculo = curriculo;
-	}
-
 	public SituacaoIdiomaEnum getSituacao() {
-		return situacao;
+		return SituacaoIdiomaEnum.toEnum(this.situacao);
 	}
 
 	public void setSituacao(SituacaoIdiomaEnum situacao) {
-		this.situacao = situacao;
+		this.situacao = situacao.getCode();
 	}
+	
+	
 }

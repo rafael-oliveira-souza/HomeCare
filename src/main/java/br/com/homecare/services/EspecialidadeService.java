@@ -10,15 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.models.entities.Especialidade;
+import br.com.homecare.models.entities.Sintoma;
 import br.com.homecare.repositories.EspecialidadeRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Service
 @Transactional(rollbackFor = RequestErrorException.class)
 public class EspecialidadeService {
-	
+
 	@Autowired
 	private EspecialidadeRepository repo;
+
+	@Autowired
+	private SintomaService sintomaService;
 
 	public Optional<Especialidade> find(final Long id) {
 		return this.repo.findById(id);
@@ -28,40 +32,56 @@ public class EspecialidadeService {
 		return this.repo.findAll();
 	}
 
+	public List<Especialidade> saveAll(List<Especialidade> list) {
+		for (Especialidade espec : list) {
+			this.save(espec);
+		}
+
+		return list;
+	}
+
 	public Especialidade save(Especialidade entity) {
 		try {
 			entity = this.repo.save(entity);
-		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			
+			List<Sintoma> sintomas = entity.getSintomas();
+			for (Sintoma sintoma : sintomas) {
+				if(sintoma.getId() == null) {
+					sintoma.getEspecialidades().add(entity);
+					this.sintomaService.save(sintoma);
+				}
+			}
+			
+			return this.repo.save(entity);
+		} catch (Exception e) {
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return entity;
 	}
-	
-	public Especialidade update(Especialidade entity)  {
-		if(entity.getId() == null) {
+
+	public Especialidade update(Especialidade entity) {
+		if (entity.getId() == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
-		
+
 		Optional<Especialidade> objeto = this.find(entity.getId());
-        if(objeto.isPresent()){
-             return this.repo.save(entity);
-        }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
-        }
+		if (objeto.isPresent()) {
+			return this.repo.save(entity);
+		} else {
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
+		}
 	}
-	
+
 	public void delete(final Long id) {
-		if(id == null) {
+		if (id == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
-		
+
 		Optional<Especialidade> objeto = this.repo.findById(id);
-        if(objeto.isPresent()){
-    		this.repo.delete(objeto.get());
-        }else {
-        	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
-        }
+		if (objeto.isPresent()) {
+			this.repo.delete(objeto.get());
+		} else {
+			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
+		}
 	}
 
 }

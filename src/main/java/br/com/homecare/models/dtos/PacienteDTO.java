@@ -1,53 +1,40 @@
-package br.com.homecare.models.entities;
+package br.com.homecare.models.dtos;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import org.modelmapper.ModelMapper;
 
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
-@Entity
-public class Paciente extends Pessoa {
+public class PacienteDTO extends PessoaDTO{
 	private static final long serialVersionUID = 1L;
+	
+    private List<DoencaDTO> doencas = new ArrayList<DoencaDTO>();
+    private List<MedicamentoDTO> medicamentos = new ArrayList<MedicamentoDTO>();
 
-	@CollectionTable(name = "paciente_doenca")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "doenca_id")
-	private List<Doenca> doencas = new ArrayList<Doenca>(0);
-
-	@CollectionTable(name = "paciente_medicamento")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "medicamento_id")
-    private List<Medicamento> medicamentos = new ArrayList<Medicamento>(0);
-
-	public Paciente() {
-		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-	}
-
-	public List<Doenca> getDoencas() {
+    public List<DoencaDTO> getDoencas() {
 		return doencas;
 	}
 
-	public void setDoencas(List<Doenca> doencas) {
+	public void setDoencas(List<DoencaDTO> doencas) {
 		this.doencas = doencas;
 	}
 
-	public List<Medicamento> getMedicamentos() {
+	public List<MedicamentoDTO> getMedicamentos() {
 		return medicamentos;
 	}
 
-	public void setMedicamentos(List<Medicamento> medicamentos) {
+	public void setMedicamentos(List<MedicamentoDTO> medicamentos) {
 		this.medicamentos = medicamentos;
 	}
+	
+	public PacienteDTO() {
+		setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+	}
 
-
-	public Pessoa getPessoa() {
-		Pessoa pessoa = new Pessoa();
+	public PessoaDTO getPessoa() {
+		PessoaDTO pessoa = new PessoaDTO();
 		pessoa.setId(this.getId());
 		pessoa.setCpf(this.getCpf());
 		pessoa.setNome(this.getNome());
@@ -64,7 +51,7 @@ public class Paciente extends Pessoa {
 		return pessoa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
+	public void setPessoa(PessoaDTO pessoa) {
 		this.setId(pessoa.getId());
 		this.setCpf(pessoa.getCpf());
 		this.setNome(pessoa.getNome());
@@ -81,7 +68,10 @@ public class Paciente extends Pessoa {
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		return super.equals(obj, this.getId());
+	}
+	
+	public <E> E toEntity(Class<E> classe, ProfissionalDTO obj) {
+		return new ModelMapper().map(obj, classe);
 	}
 }

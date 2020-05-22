@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,14 +27,17 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repo;
 	
-
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	public Usuario findByEmail(String email) {
 		Matcher matcherEmail = VALID_EMAIL_REGEX.matcher(email);
 		if(!matcherEmail.find()) {
 			throw new RequestErrorException(ExceptionMessages.EMAIL_INVALIDO);
 		}
-		
-		return this.repo.findByEmail(email);
+
+		Usuario usuario = this.repo.findByEmail(email);
+    	return usuario;
 	}
 
 	public Usuario login(Usuario usuario) {
@@ -48,8 +52,10 @@ public class UsuarioService {
 		if(!usuario.getSenha().equals(senhaCriptografada)) {
 			throw new RequestErrorException(ExceptionMessages.SENHA_INVALIDA);
 		}
-		
-		return usuario;
+
+    	usuario = this.repo.save(usuario);
+    	
+    	return usuario;
 	}
 
 	public Optional<Usuario> find(Long id) {
@@ -66,12 +72,11 @@ public class UsuarioService {
 		
 		try {
 			usuario.setSenha(this.crypt.encode(usuario.getSenha()));
-			usuario = this.repo.save(usuario);
+        	usuario = this.repo.save(usuario);
+        	return modelMapper.map(usuario, Usuario.class);
 		}catch (Exception e) {
-			throw new RequestErrorException(e.getCause());
+			throw new RequestErrorException(e.getMessage());
 		}
-		
-		return usuario;
 	}
 	
 	public Usuario update(Usuario usuario)  {
@@ -82,7 +87,9 @@ public class UsuarioService {
 		
 		Optional<Usuario> objeto = this.find(usuario.getId());
         if(objeto.isPresent()){
-             return this.repo.save(usuario);
+        	usuario = this.repo.save(usuario);
+        	
+        	return usuario;
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Usuario"));
         }

@@ -1,33 +1,20 @@
-package br.com.homecare.models.entities;
+package br.com.homecare.models.dtos;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.homecare.commons.AbstractDTO;
+import br.com.homecare.models.entities.Medicamento;
 
-import br.com.homecare.commons.AbstractEntity;
-import br.com.homecare.models.dtos.MedicamentoDTO;
-
-@Entity
-public class Medicamento extends AbstractEntity<MedicamentoDTO>{
+public class MedicamentoDTO extends AbstractDTO<Medicamento>{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "descricao", nullable = false)
+	private Long id;
     private String descricao;
-
-    @Column(name = "dataInicio")
     private Date dataInicio;
-
-    @Column(name = "dataFim")
     private Date dataFim;
-
+	private List<PacienteDTO> pacientes = new ArrayList<PacienteDTO>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -60,10 +47,17 @@ public class Medicamento extends AbstractEntity<MedicamentoDTO>{
 		this.dataFim = dataFim;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj, this.id);
+	}
+
+	public List<PacienteDTO> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<PacienteDTO> pacientes) {
+		this.pacientes = pacientes;
 	}
 	
 }
