@@ -6,694 +6,778 @@
 	},
 	"item": [
 		{
-			"name": "profissional-salvar",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDgzMDE3fQ.Jbefz4PDRWDkfjGZuslrhhf1y5DRmj7nscl8YhaORFFhB4rNHzK49ur_cWPYEhIW3aX0Pup3TzP7G7dA2ahcfA",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n   \"pessoa\":{ \n\t   \t\"nome\": \"Rafael Souza\",\n\t    \"cpf\": \"242.213.332-32\",\n\t    \"altura\": 1.52,\n\t    \"peso\": 80.9,\n\t    \"idade\": 26,\n\t    \"atendimentos\": [\n\t    \t{\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n\t    ],\n\t    \"genero\": \"MASCULINO\",\n\t    \"email\": \"raal2f@mail.com\",\n\t    \"telefone\": \"(61)99232-2329\",\n\t    \"endereco\": \"QNB 3 CASA 8\"\n   },\n    \"profissoes\": [ \n    \t{\n            \"nome\": \"Fisioterapeuta\",\n            \"descricao\": \"Auxilia em ...\",\n            \"especialidades\": [\n            \t{\n\t                \"nome\": \"Coluna\",\n\t                \"descricao\": \"Teste\",\n            \t\t\"sintomas\": []\n            \t}\n            ]\n    \t}\n    ],\n    \"curriculo\": {\n\t    \"tipo\" : \"LATTES\",\n\t    \"educacoes\": [\n\t    \t{\n\t    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t\t    \"descricao\": \"Bacharelado\",\n\t\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"experiencias\": [\n\t\t    {\n\t\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t\t    \"descricao\": \"Guardar documentos\",\n\t\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"idiomas\": [\n\t    \t{\n\t\t    \t\"nome\": \"INGLES\",\n\t\t\t    \"situacao\": \"BASICO\"\n\t    \t}\n\t    ]\n    }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "post",
+			"item": [
+				{
+					"name": "profissao-salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profissao/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissao",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/profissional/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profissional",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "profissao-salvar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "profissional-salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDgzMDE3fQ.Jbefz4PDRWDkfjGZuslrhhf1y5DRmj7nscl8YhaORFFhB4rNHzK49ur_cWPYEhIW3aX0Pup3TzP7G7dA2ahcfA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"Rafael Souza\",\n    \"cpf\": \"242.213.332-32\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"atendimentos\": [\n    \t{\n            \"descricao\": \"Bacharelado\",\n            \"data\": \"2020-03-12T03:00:00.000+0000\"\n    \t}\n    ],\n    \"genero\": \"MASCULINO\",\n    \"email\": \"raal2f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n    \"profissoes\": [ \n    \t{\n            \"nome\": \"Fisioterapeuta\",\n            \"descricao\": \"Auxilia em ...\",\n            \"especialidades\": [\n            \t{\n\t                \"nome\": \"Coluna\",\n\t                \"descricao\": \"Teste\",\n            \t\t\"sintomas\": []\n            \t}\n            ]\n    \t}\n    ],\n    \"curriculo\": {\n\t    \"educacoes\": [\n\t    \t{\n\t    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t\t    \"descricao\": \"Bacharelado\",\n\t\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"experiencias\": [\n\t\t    {\n\t\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t\t    \"descricao\": \"Guardar documentos\",\n\t\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"idiomas\": [\n\t    \t{\n\t\t    \t\"nome\": \"INGLES\",\n\t\t\t    \"situacao\": \"BASICO\"\n\t    \t}\n\t    ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profissional/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissional",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/profissao/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profissao",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "profissao-atualizar",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "especialidade-salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"sintomas\": [],\n    \"profissao\":10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/especialidade/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"especialidade",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/profissao/atualizar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profissao",
-						"atualizar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "especialidade-salvar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"sintomas\": [],\n    \"profissao\":10\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "pessoa-salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDgzMDE3fQ.Jbefz4PDRWDkfjGZuslrhhf1y5DRmj7nscl8YhaORFFhB4rNHzK49ur_cWPYEhIW3aX0Pup3TzP7G7dA2ahcfA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"nome\": \"Rafael Souza\",\n        \"cpf\": \"232.123.421-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"telefone\": \"(61)92232-2329\",\n        \"genero\": \"FEMININO\",\n        \"email\": \"rafa2232@gmail.com\",\n\t    \"atendimentos\": [\n\t    \t{\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n    \t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pessoa/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/especialidade/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"especialidade",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "pessoa-buscar",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/app/homecare/pessoa/buscar/5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"app",
-						"homecare",
-						"pessoa",
-						"buscar",
-						"5"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "pessoa-salvar",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDI3MDgyfQ.wc08TA1jg0tirflyOcyt0LxzboKZ1QFBgntiWxFnqIaijp9JKZ2F4H_AHUGdgBOsoGkB4Yb-zBBIfEc9uGtxFQ",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": " {\n        \"nome\": \"Rafael Souza\",\n        \"cpf\": \"232.113.422-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"telefone\": \"(61)99232-2329\",\n        \"genero\": \"FEMININO\",\n        \"email\": \"rafa22@gmail.com\",\n        \"tipoUsuario\": \"PACIENTE\",\n\t    \"atendimentos\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "idioma-salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"ÏNGLES\",\n\t\"situacao\": \"INTERMEDIARIO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/idioma/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"idioma",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/pessoa/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"pessoa",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "paciente-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/paciente/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"paciente",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "especialidade-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/especialidade/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"especialidade",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "profissao-atualziar",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/paciente/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"paciente",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "pessoa-update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"name\": \"RICHARD ROOTTO\",\n    \"height\": 1.97,\n    \"weight\": 100.0,\n    \"age\": 28,\n    \"gender\": \"M\",\n    \"mail\": \"rich@gmail.com\",\n    \"phone\": \"9692888920002\",\n    \"address\": \"rua 12 casa 12\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "curriculo-salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"profissional\": {\n\t\t\"nome\": \"Rafael Souza\",\n\t    \"cpf\": \"242.213.332-32\",\n\t    \"altura\": 1.52,\n\t    \"peso\": 80.9,\n\t    \"idade\": 26,\n\t    \"genero\": \"MASCULINO\",\n\t    \"email\": \"raal2f@mail.com\",\n\t    \"telefone\": \"(61)99232-2329\",\n\t    \"endereco\": \"QNB 3 CASA 8\"\n\t},\n    \"educacoes\": [\n    \t{\n    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t    \"descricao\": \"Bacharelado\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t    }\n    ],\n    \"experiencias\": [\n\t    {\n\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t    \"descricao\": \"Guardar documentos\",\n\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t    }\n    ],\n    \"idiomas\": [\n    \t{\n\t    \t\"nome\": \"INGLES\",\n\t\t    \"situacao\": \"BASICO\"\n    \t}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/curriculo/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"curriculo",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/app/homecare/pessoa/atualizar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"app",
-						"homecare",
-						"pessoa",
-						"atualizar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "historico-salvar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"paciente_id\": 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "usuario/salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDgzNTY1fQ.by6kAYYdNpU7FGOfpng2uQcMHKnT1LlitBsKif9lOQ6PR8J_W5B-d_vmVLm43z4YUeKW6gj583iYky_Z3ZySqQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"senha\": \"12345678\",\n    \"email\": \"22222@gmail.com\",\n    \"perfis\": [\n    \t\"CLIENTE\",\n    \t\"ADMIN\"\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/app/homecare/historico/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"app",
-						"homecare",
-						"historico",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "paciente-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/app/homecare/paciente/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"app",
-						"homecare",
-						"paciente",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "paciente/atualizar",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 6,\n    \"historicos\": [\n    \t{\n    \t\t\"id\": 1\n    \t}\n    ],\n    \"pessoa\": {\n        \"id\": 1,\n        \"nome\": \"SUZANA ROOTS\",\n        \"cpf\": \"047.296.461.52\",\n        \"altura\": 1.47,\n        \"peso\": 50.0,\n        \"idade\": 22,\n        \"genero\": \"F\",\n        \"email\": \"suzana@gmail.com\",\n        \"telefone\": \"969292920002\",\n        \"endereco\": \"rua 12 casa 12\",\n        \"tipoUsuario\":\"\u0000\"\n    }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "doenca/salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/doenca/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"doenca",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/app/homecare/paciente/atualizar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"app",
-						"homecare",
-						"paciente",
-						"atualizar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "usuario/salvar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\n    \"senha\": \"123452678\",\n    \"email\": \"rafa@mail.com\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "paciente/salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"pessoa\":{ \n\t   \t\"nome\": \"Rafael Souza\",\n\t    \"cpf\": \"112.213.332-32\",\n\t    \"altura\": 1.52,\n\t    \"peso\": 80.9,\n\t    \"idade\": 26,\n\t    \"atendimentos\": [\n\t    \t{\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n\t    ],\n\t    \"genero\": \"MASCULINO\",\n\t    \"email\": \"raal222f@mail.com\",\n\t    \"telefone\": \"(61)99232-2329\",\n\t    \"endereco\": \"QNB 3 CASA 8\"\n   },\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/paciente/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"salvar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/usuario/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuario",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "paciente/salvar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"nome\": \"Rafael Souza\",\n    \"atendimentos\": [],\n    \"cpf\": \"990.958.462-92\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"FEMININO\",\n    \"email\": \"ra85f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"senha\": \"12345678\",\n        \"email\": \"rafa22@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/paciente/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"paciente",
-						"salvar"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "medicamento-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/medicamento/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"medicamento",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "doenca-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/medicamento/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"medicamento",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "paciente/update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"nome\": \"Rafael Souza\",\n    \"atendimentos\": [],\n    \"cpf\": \"990.958.462-92\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"FEMININO\",\n    \"email\": \"ra85f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE2\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "get",
+			"item": [
+				{
+					"name": "profissao-atualziar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profissao/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissao",
+								"todos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/paciente/atualizar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"paciente",
-						"atualizar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "doenca/salvar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "profissional-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profissional/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissional",
+								"todos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/doenca/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"doenca",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "educacao-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/educacao/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"educacao",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "idioma-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/idioma/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"idioma",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "experiencia-todos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/experiencia/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"experiencia",
-						"todos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\n        \"senha\": \"12345678\",\n        \"email\": \"rafa@gmail.com\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "paciente-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/paciente/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"todos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"login"
-					]
+				{
+					"name": "pessoa-buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/app/homecare/pessoa/buscar/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"app",
+								"homecare",
+								"pessoa",
+								"buscar",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "especialidade-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/especialidade/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"especialidade",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paciente-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/app/homecare/paciente/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"app",
+								"homecare",
+								"paciente",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "medicamento-todos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhQGdtYWlsLmNvbSIsImV4cCI6MTU4OTk4MzYwMn0.xF1e-98rFYyndqVEfEVvCXVItyLSaQZeVA1nXbjrAndRoTvWP1aCGh6g6yflHSpEg1Wb_7rTIWUb_EqwJU5toA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/medicamento/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"medicamento",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doenca-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/doenca/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"doenca",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "curriculo-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/curriculo/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"curriculo",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atendimento-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/atendimento/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atendimento",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "idioma-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/idioma/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"idioma",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/idioma/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"idioma",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "educacao-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/educacao/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"educacao",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "experiencia-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/experiencia/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"experiencia",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario/buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/buscar/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"buscar",
+								"id"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "usuario/buscar",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/usuario/buscar/id",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuario",
-						"buscar",
-						"id"
-					]
-				}
-			},
-			"response": []
+			"name": "delete",
+			"item": [],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "profissao-salvar Copy",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "put",
+			"item": [
+				{
+					"name": "paciente/update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n    \"nome\": \"Rafael Souza\",\n    \"atendimentos\": [],\n    \"cpf\": \"990.958.462-92\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"FEMININO\",\n    \"email\": \"ra85f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE2\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/paciente/atualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"atualizar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/profissao/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profissao",
-						"salvar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "profissao-salvar Copy",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "pessoa-update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"RICHARD ROOTTO\",\n    \"height\": 1.97,\n    \"weight\": 100.0,\n    \"age\": 28,\n    \"gender\": \"M\",\n    \"mail\": \"rich@gmail.com\",\n    \"phone\": \"9692888920002\",\n    \"address\": \"rua 12 casa 12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/app/homecare/pessoa/atualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"app",
+								"homecare",
+								"pessoa",
+								"atualizar"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/profissao/salvar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"profissao",
-						"salvar"
-					]
+				{
+					"name": "profissao-atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 8,\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": [\n    \t{\n\t        \"id\": 3,\n\t        \"nome\": \"Medico\",\n\t        \"descricao\": \"dadsada\",\n\t        \"sintomas\": []\n\t    }\t\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profissao/atualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissao",
+								"atualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paciente/atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 6,\n    \"historicos\": [\n    \t{\n    \t\t\"id\": 1\n    \t}\n    ],\n    \"pessoa\": {\n        \"id\": 1,\n        \"nome\": \"SUZANA ROOTS\",\n        \"cpf\": \"047.296.461.52\",\n        \"altura\": 1.47,\n        \"peso\": 50.0,\n        \"idade\": 22,\n        \"genero\": \"F\",\n        \"email\": \"suzana@gmail.com\",\n        \"telefone\": \"969292920002\",\n        \"endereco\": \"rua 12 casa 12\",\n        \"tipoUsuario\":\"\u0000\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/app/homecare/paciente/atualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"app",
+								"homecare",
+								"paciente",
+								"atualizar"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

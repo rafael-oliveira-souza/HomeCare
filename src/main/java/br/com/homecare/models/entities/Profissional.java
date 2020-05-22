@@ -10,12 +10,15 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
 @Entity
+@PrimaryKeyJoinColumn(name="id")
 public class Profissional extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
@@ -45,6 +48,7 @@ public class Profissional extends Pessoa {
 	}
 
 
+	@JsonIgnore
 	public Pessoa getPessoa() {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setId(this.getId());
@@ -63,6 +67,7 @@ public class Profissional extends Pessoa {
 		return pessoa;
 	}
 
+	@JsonIgnore
 	public void setPessoa(Pessoa pessoa) {
 		this.setId(pessoa.getId());
 		this.setCpf(pessoa.getCpf());

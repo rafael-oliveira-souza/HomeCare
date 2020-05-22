@@ -1,5 +1,6 @@
 package br.com.homecare.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,6 +61,10 @@ public class UsuarioService {
 
 	public Optional<Usuario> find(Long id) {
 		return this.repo.findById(id);
+	}
+
+	public List<Usuario> getAll(){
+		return this.repo.findAll();
 	}
 
 	public Usuario save(Usuario usuario) {

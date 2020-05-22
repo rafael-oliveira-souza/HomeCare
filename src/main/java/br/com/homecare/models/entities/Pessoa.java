@@ -69,7 +69,7 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 
     private String endereco;
 
-    @Column(name = "tipo_usuario", nullable = false)
+    @Column(name = "tipo_usuario"	)
     private Integer tipoUsuario;
 
 	public Long getId() {

@@ -1,5 +1,6 @@
 package br.com.homecare.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,13 @@ public class UsuarioResource {
 		Optional<Usuario> usuario = this.service.find(id);
 
 		return ResponseEntity.ok().body(usuario.get());
+	}
+	
+	@GetMapping("/usuario/todos")
+	public ResponseEntity<List<Usuario>> todos() {
+		List<Usuario> usuarios = this.service.getAll();
+
+		return ResponseEntity.ok().body(usuarios);
 	}
 
 	@PutMapping("/usuario/atualizar")
