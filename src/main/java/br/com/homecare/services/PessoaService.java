@@ -1,5 +1,6 @@
 package br.com.homecare.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.models.entities.Pessoa;
-import br.com.homecare.repositories.AtendimentoRepository;
 import br.com.homecare.repositories.PessoaRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
@@ -20,19 +20,24 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository repo;
 
-	@Autowired
-	private AtendimentoRepository atendimentoRepo;
-	
 	public Optional<Pessoa> find(Long id) {
 		return this.repo.findById(id);
 	}
 
 	public List<Pessoa> saveAll(List<Pessoa> entity) {
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
 		for (Pessoa pessoa : entity) {
-			this.save(pessoa);
+			pessoas.add(this.save(pessoa));
 		}
+		return pessoas;
+	}
 
-		return entity;
+	public List<Pessoa> updateAll(List<Pessoa> entity) {
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		for (Pessoa pessoa : entity) {
+			pessoas.add(this.update(pessoa));
+		}
+		return pessoas;
 	}
 
 	public List<Pessoa> getAll() {
@@ -41,8 +46,8 @@ public class PessoaService {
 
 	public Pessoa save(Pessoa entity) {
 		try {
-			this.atendimentoRepo.saveAll(entity.getAtendimentos());
-			return this.repo.save(entity);
+			Pessoa pessoa = this.repo.save(entity);
+			return pessoa;
 		} catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
 		}
@@ -68,7 +73,8 @@ public class PessoaService {
 
 		Optional<Pessoa> objeto = this.repo.findById(id);
 		if (objeto.isPresent()) {
-			this.repo.delete(objeto.get());
+			Pessoa pessoa = objeto.get();
+			this.repo.delete(pessoa);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Pessoa"));
 		}

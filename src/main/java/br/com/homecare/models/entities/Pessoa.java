@@ -1,19 +1,12 @@
 package br.com.homecare.models.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MapKeyColumn;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -37,12 +30,6 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 	@Length(min = 5, max = 80, message = ExceptionMessages.NUM_CARACTER_INVALIDO )
     @Column(name = "nome", nullable = false)
     private String nome;
-
-	@Column(name = "atendimento_id")
-	@MapKeyColumn(name = "pessoa_id")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@CollectionTable(name = "pessoa_atendimento")
-	private List<Atendimento> atendimentos = new ArrayList<Atendimento>(0);
 
 //	@CPF
 	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
@@ -87,14 +74,6 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 		
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<Atendimento> getAtendimentos() {
-		return atendimentos;
-	}
-
-	public void setAtendimentos(List<Atendimento> atendimentos) {
-		this.atendimentos = atendimentos;
 	}
 
 	public String getCpf() {

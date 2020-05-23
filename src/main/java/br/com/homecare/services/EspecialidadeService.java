@@ -34,7 +34,19 @@ public class EspecialidadeService {
 
 	public List<Especialidade> saveAll(List<Especialidade> list) {
 		for (Especialidade espec : list) {
-			this.save(espec);
+			if(espec.getId() == null) {
+				this.save(espec);
+			}
+		}
+
+		return list;
+	}
+	
+	public List<Especialidade> updateAll(List<Especialidade> list) {
+		for (Especialidade espec : list) {
+			if(espec.getId() != null) {
+				this.save(espec);
+			}
 		}
 
 		return list;
@@ -51,7 +63,12 @@ public class EspecialidadeService {
 	public Especialidade save(Especialidade entity) {
 		try {
 			entity = this.repo.save(entity);
-			this.saveSintomas(entity);
+			for (Sintoma sintoma : entity.getSintomas()) {
+				if (sintoma.getId() == null) {
+					sintoma.getEspecialidades().add(entity);
+					this.sintomaService.save(sintoma);
+				}
+			}
 			return this.repo.save(entity);
 		} catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
@@ -85,15 +102,6 @@ public class EspecialidadeService {
 			this.repo.delete(espec);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
-		}
-	}
-
-	private void saveSintomas(Especialidade espec) {
-		for (Sintoma sintoma : espec.getSintomas()) {
-			if (sintoma.getId() == null) {
-				sintoma.getEspecialidades().add(espec);
-				this.sintomaService.save(sintoma);
-			}
 		}
 	}
 

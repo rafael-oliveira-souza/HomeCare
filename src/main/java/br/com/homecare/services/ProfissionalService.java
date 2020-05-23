@@ -44,7 +44,9 @@ public class ProfissionalService {
 	
 	public List<Profissional> saveAll(List<Profissional> entity) {
 		for (Profissional profissional: entity) {
-			this.save(profissional);
+			if(profissional.getId() == null) {
+				this.save(profissional);
+			}
 		}
 		
 		return entity;
@@ -52,7 +54,6 @@ public class ProfissionalService {
 	
 	public Profissional save(Profissional entity) {
 		try {
-			this.atendimentoService.saveAll(entity.getAtendimentos());
 			this.profissaoService.saveAll(entity.getProfissoes());
 			entity.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 			entity = this.repo.save(entity);

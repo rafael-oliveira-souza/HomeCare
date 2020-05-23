@@ -33,12 +33,24 @@ public class ProfissaoService {
 	
 	public List<Profissao> saveAll(List<Profissao> entity) {
 		for (Profissao profissao: entity) {
-			this.save(profissao);
+			if(profissao.getId() == null) {
+				this.save(profissao);
+			}
 		}
 		
 		return entity;
 	}
 
+	public List<Profissao> updateAll(List<Profissao> entity) {
+		for (Profissao profissao: entity) {
+			if(profissao.getId() != null) {
+				this.update(profissao);
+			}
+		}
+		
+		return entity;
+	}
+	
 	public Profissao save(Profissao entity) {
 		try {
 			entity = this.repo.save(entity);
@@ -62,6 +74,11 @@ public class ProfissaoService {
 		
 		Optional<Profissao> objeto = this.find(entity.getId());
         if(objeto.isPresent()){
+			List<Especialidade> especialidades = entity.getEspecialidades();
+			for (Especialidade especialidade: especialidades) {
+				especialidade.getProfissoes().add(entity);
+			}
+			this.especialidadeService.updateAll(especialidades);
              return this.repo.save(entity);
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));

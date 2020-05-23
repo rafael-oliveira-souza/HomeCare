@@ -24,6 +24,12 @@ public class Atendimento extends AbstractEntity<AtendimentoDTO> {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Column(name = "paciente_id", nullable = false)
+    private Long pacienteId;
+
+    @Column(name = "profissional_id", nullable = false)
+    private Long profissionalId;
+
 	public Long getId() {
 		return id;
 	}
@@ -46,6 +52,22 @@ public class Atendimento extends AbstractEntity<AtendimentoDTO> {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Long getPacienteId() {
+		return pacienteId;
+	}
+
+	public void setPacienteId(Long pacienteId) {
+		this.pacienteId = pacienteId;
+	}
+
+	public Long getProfissionalId() {
+		return profissionalId;
+	}
+
+	public void setProfissionalId(Long profissionalId) {
+		this.profissionalId = profissionalId;
 	}
 
 	@Override

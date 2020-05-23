@@ -1,8 +1,8 @@
 package br.com.homecare.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class AtendimentoService {
 	
 	@Autowired
 	private AtendimentoRepository repo;
-
+	
 	public Optional<Atendimento> find(final Long id) {
 		return this.repo.findById(id);
 	}
@@ -28,18 +28,22 @@ public class AtendimentoService {
 		return this.repo.findAll();
 	}
 
-	public List<Atendimento> updateAll(List<Atendimento> atendimentos) {
-		 return this.repo.saveAll((Iterable<Atendimento>)atendimentos);
-	}
-	
-	public List<Atendimento> saveAll(List<Atendimento> atendimentos) {
-		 return this.repo.saveAll((Iterable<Atendimento>)atendimentos);
+
+	public List<Atendimento> saveAll(List<Atendimento> entity) {
+		List<Atendimento> atendimentos = new ArrayList<Atendimento>();
+		for (Atendimento atendimento : entity) {
+			atendimentos.add(this.save(atendimento));
+		}
+		return atendimentos;
 	}
 
-	public void deleteAll(Set<Atendimento> atendimentos) {
-		 this.repo.deleteAll((Iterable<Atendimento>)atendimentos);
+	public List<Atendimento> updateAll(List<Atendimento> entity) {
+		List<Atendimento> atendimentos = new ArrayList<Atendimento>();
+		for (Atendimento atendimento : entity) {
+			atendimentos.add(this.update(atendimento));
+		}
+		return atendimentos;
 	}
-	
 	public Atendimento save(Atendimento entity) {
 		try {
 			return this.repo.save(entity);

@@ -62,7 +62,6 @@ public class Profissional extends Pessoa {
 		pessoa.setTelefone(this.getTelefone());
 		pessoa.setEndereco(this.getEndereco());
 		pessoa.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
-		pessoa.setAtendimentos(this.getAtendimentos());
 		
 		return pessoa;
 	}
@@ -80,7 +79,6 @@ public class Profissional extends Pessoa {
 		this.setTelefone(pessoa.getTelefone());
 		this.setEndereco(pessoa.getEndereco());
 		this.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
-		this.setAtendimentos(pessoa.getAtendimentos());
 	}
   	
 }

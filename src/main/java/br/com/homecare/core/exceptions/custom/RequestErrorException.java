@@ -28,6 +28,10 @@ public class RequestErrorException extends RuntimeException {
 			return ExceptionMessages.ERRO_DESCONHECIDO;
 		}
 		
+		if(e.getMessage().contains("ERROR")) {
+			return e.getMessage();
+		}
+		
         if(e.getCause() != null){
            return recoverCause(e.getCause());
         }

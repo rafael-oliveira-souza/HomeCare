@@ -64,7 +64,6 @@ public class Paciente extends Pessoa {
 		pessoa.setTelefone(this.getTelefone());
 		pessoa.setEndereco(this.getEndereco());
 		pessoa.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-		pessoa.setAtendimentos(this.getAtendimentos());
 		
 		return pessoa;
 	}
@@ -83,7 +82,6 @@ public class Paciente extends Pessoa {
 		this.setTelefone(pessoa.getTelefone());
 		this.setEndereco(pessoa.getEndereco());
 		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-		this.setAtendimentos(pessoa.getAtendimentos());
 	}
 	
 	@Override
