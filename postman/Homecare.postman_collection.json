@@ -73,6 +73,41 @@
 					"response": []
 				},
 				{
+					"name": "atendimento-salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDgzMDE3fQ.Jbefz4PDRWDkfjGZuslrhhf1y5DRmj7nscl8YhaORFFhB4rNHzK49ur_cWPYEhIW3aX0Pup3TzP7G7dA2ahcfA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Bacharelado\",\n    \"data\": \"2020-03-12T03:00:00.000+0000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/atendimento/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atendimento",
+								"salvar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "especialidade-salvar",
 					"request": {
 						"method": "POST",
@@ -114,7 +149,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"nome\": \"Rafael Souza\",\n        \"cpf\": \"232.123.421-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"telefone\": \"(61)92232-2329\",\n        \"genero\": \"FEMININO\",\n        \"email\": \"rafa2232@gmail.com\",\n\t    \"atendimentos\": [\n\t    \t{\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n    \t]\n}",
+							"raw": " {\n        \"nome\": \"Rafael Souza\",\n        \"cpf\": \"232.123.424-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"telefone\": \"(61)92232-2329\",\n        \"genero\": \"FEMININO\",\n        \"email\": \"rafa22232@gmail.com\",\n        \"tipoUsuario\": \"PACIENTE\",\n\t    \"atendimentos\": [\n\t    \t{\n\t    \t\t\"id\": 1,\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n    \t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,7 +207,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"profissional\": {\n\t\t\"nome\": \"Rafael Souza\",\n\t    \"cpf\": \"242.213.332-32\",\n\t    \"altura\": 1.52,\n\t    \"peso\": 80.9,\n\t    \"idade\": 26,\n\t    \"genero\": \"MASCULINO\",\n\t    \"email\": \"raal2f@mail.com\",\n\t    \"telefone\": \"(61)99232-2329\",\n\t    \"endereco\": \"QNB 3 CASA 8\"\n\t},\n    \"educacoes\": [\n    \t{\n    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t    \"descricao\": \"Bacharelado\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t    }\n    ],\n    \"experiencias\": [\n\t    {\n\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t    \"descricao\": \"Guardar documentos\",\n\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t    }\n    ],\n    \"idiomas\": [\n    \t{\n\t    \t\"nome\": \"INGLES\",\n\t\t    \"situacao\": \"BASICO\"\n    \t}\n    ]\n}",
+							"raw": "{\n\t\"profissional\": {\n\t\t\"nome\": \"Rafael Souza\",\n\t    \"cpf\": \"242.333.332-32\",\n\t    \"altura\": 1.52,\n\t    \"peso\": 80.9,\n\t    \"idade\": 26,\n\t    \"genero\": \"MASCULINO\",\n\t    \"email\": \"raal32f@mail.com\",\n\t    \"telefone\": \"(61)99232-2329\",\n\t    \"endereco\": \"QNB 3 CASA 8\"\n\t},\n    \"educacoes\": [\n    \t{\n    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t    \"descricao\": \"Bacharelado\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t    }\n    ],\n    \"experiencias\": [\n\t    {\n\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t    \"descricao\": \"Guardar documentos\",\n\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t    }\n    ],\n    \"idiomas\": [\n    \t{\n\t    \t\"nome\": \"INGLES\",\n\t\t    \"situacao\": \"BASICO\"\n    \t}\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,7 +300,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"pessoa\":{ \n\t   \t\"nome\": \"Rafael Souza\",\n\t    \"cpf\": \"112.213.332-32\",\n\t    \"altura\": 1.52,\n\t    \"peso\": 80.9,\n\t    \"idade\": 26,\n\t    \"atendimentos\": [\n\t    \t{\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n\t    ],\n\t    \"genero\": \"MASCULINO\",\n\t    \"email\": \"raal222f@mail.com\",\n\t    \"telefone\": \"(61)99232-2329\",\n\t    \"endereco\": \"QNB 3 CASA 8\"\n   },\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
+							"raw": "{\n   \t\"nome\": \"Rafael Souza\",\n    \"cpf\": \"112.213.332-32\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"atendimentos\": [\n    \t{\n            \"descricao\": \"Bacharelado\",\n            \"data\": \"2020-03-12T03:00:00.000+0000\"\n    \t}\n    ],\n    \"genero\": \"MASCULINO\",\n    \"email\": \"raal2222f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,7 +357,7 @@
 			"name": "get",
 			"item": [
 				{
-					"name": "profissao-atualziar",
+					"name": "profissao-todos",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -558,14 +593,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/idioma/todos",
+							"raw": "http://localhost:8080/usuario/todos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"idioma",
+								"usuario",
 								"todos"
 							]
 						}
@@ -644,13 +679,118 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "pessoa-todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pessoa/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa",
+								"todos"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "delete",
-			"item": [],
+			"item": [
+				{
+					"name": "profissao-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profissao/excluir/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissao",
+								"excluir",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pessoa-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pessoa/excluir/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa",
+								"excluir",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profissional-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profissional/excluir/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissional",
+								"excluir",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paciente-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/paciente/excluir/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"excluir",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{

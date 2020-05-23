@@ -1,7 +1,7 @@
 package br.com.homecare.models.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MapKeyColumn;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -37,11 +38,11 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-	
-	@CollectionTable(name = "pessoa_atendimento")
+	@Column(name = "atendimento_id")
+	@MapKeyColumn(name = "pessoa_id")
     @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "atendimento_id")
-	private Set<Atendimento> atendimentos = new HashSet<Atendimento>(0);
+	@CollectionTable(name = "pessoa_atendimento")
+	private List<Atendimento> atendimentos = new ArrayList<Atendimento>(0);
 
 //	@CPF
 	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
@@ -88,11 +89,11 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 		this.nome = nome;
 	}
 
-	public Set<Atendimento> getAtendimentos() {
+	public List<Atendimento> getAtendimentos() {
 		return atendimentos;
 	}
 
-	public void setAtendimentos(Set<Atendimento> atendimentos) {
+	public void setAtendimentos(List<Atendimento> atendimentos) {
 		this.atendimentos = atendimentos;
 	}
 

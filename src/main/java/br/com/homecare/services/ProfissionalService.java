@@ -52,7 +52,7 @@ public class ProfissionalService {
 	
 	public Profissional save(Profissional entity) {
 		try {
-//			this.atendimentoService.saveAll(entity.getAtendimentos());
+			this.atendimentoService.saveAll(entity.getAtendimentos());
 			this.profissaoService.saveAll(entity.getProfissoes());
 			entity.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 			entity = this.repo.save(entity);

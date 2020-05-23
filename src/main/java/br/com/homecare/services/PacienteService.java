@@ -47,7 +47,7 @@ public class PacienteService {
 	public Paciente save(Paciente entity) {
 		try {
 			entity.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-//			this.atendimentoService.saveAll(entity.getAtendimentos());
+			this.atendimentoService.saveAll(entity.getAtendimentos());
 			this.medService.saveAll(entity.getMedicamentos());
 			this.doencaService.saveAll(entity.getDoencas());
 			
