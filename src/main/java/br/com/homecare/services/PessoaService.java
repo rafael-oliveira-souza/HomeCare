@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.models.entities.Atendimento;
 import br.com.homecare.models.entities.Pessoa;
+import br.com.homecare.models.entities.PessoaAtendimento;
+import br.com.homecare.repositories.AtendimentoRepository;
+import br.com.homecare.repositories.PessoaAtendimentoRepository;
 import br.com.homecare.repositories.PessoaRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
@@ -20,7 +24,10 @@ public class PessoaService {
 	private PessoaRepository repo;
 
 	@Autowired
-	private AtendimentoService atendimentoService;
+	private AtendimentoRepository atendimentoRepo;
+	
+	@Autowired
+	private PessoaAtendimentoRepository pessoaAtendRepo;
 
 	public Optional<Pessoa> find(Long id) {
 		return this.repo.findById(id);
@@ -40,12 +47,20 @@ public class PessoaService {
 
 	public Pessoa save(Pessoa entity) {
 		try {
-			this.atendimentoService.saveAll(entity.getAtendimentos());
 			entity = this.repo.save(entity);
+//			List<Atendimento> atendimentos = entity.getAtendimentos();
+//			atendimentos = this.atendimentoRepo.saveAll(atendimentos);
+			for(Atendimento atend: entity.getAtendimentos()) {
+				PessoaAtendimento pessoaAtend = new PessoaAtendimento();
+				pessoaAtend.setAtendimentoId(atend.getId());
+				pessoaAtend.setPessoaId(entity.getId());
+				this.pessoaAtendRepo.save(pessoaAtend);
+			}
+			
 		} catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
 		}
-
+		
 		return entity;
 	}
 

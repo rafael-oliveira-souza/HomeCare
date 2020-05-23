@@ -21,6 +21,9 @@ public class PacienteService {
 
 	@Autowired
 	private DoencaService doencaService;
+	
+	@Autowired
+	private AtendimentoService atendimentoService;
 
 	@Autowired
 	private PacienteRepository repo;
@@ -44,6 +47,7 @@ public class PacienteService {
 	public Paciente save(Paciente entity) {
 		try {
 			entity.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+//			this.atendimentoService.saveAll(entity.getAtendimentos());
 			this.medService.saveAll(entity.getMedicamentos());
 			this.doencaService.saveAll(entity.getDoencas());
 			
@@ -60,6 +64,8 @@ public class PacienteService {
 		
 		Optional<Paciente> objeto = this.find(entity.getId());
         if(objeto.isPresent()){
+			this.medService.saveAll(entity.getMedicamentos());
+			this.doencaService.saveAll(entity.getDoencas());
              return this.repo.save(entity);
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Paciente"));
@@ -73,7 +79,10 @@ public class PacienteService {
 		
 		Optional<Paciente> objeto = this.repo.findById(id);
         if(objeto.isPresent()){
-    		this.repo.delete(objeto.get());
+        	Paciente paciente = objeto.get();
+			this.medService.deleteAll(paciente.getMedicamentos());
+			this.doencaService.deleteAll(paciente.getDoencas());
+    		this.repo.delete(paciente);
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Paciente"));
         }

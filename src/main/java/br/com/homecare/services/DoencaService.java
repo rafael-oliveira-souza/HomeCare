@@ -1,5 +1,6 @@
 package br.com.homecare.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,25 +33,28 @@ public class DoencaService {
 	}
 
 	public List<Doenca> saveAll(List<Doenca> list) {
+		List<Doenca> doen = new ArrayList<Doenca>();
 		for(Doenca doenca: list) {
-			this.save(doenca);
+			if(doenca.getId() == null) {
+				this.save(doenca);
+			}
 		}
 		
-		return list;
+		return doen;
+	}
+	
+	public void deleteAll(List<Doenca> list) {
+		for(Doenca doenca: list) {
+			if(doenca.getId() != null) {
+				this.delete(doenca.getId());
+			}
+		}
 	}
 
 	public Doenca save(Doenca entity) {
 		try {
 			entity = this.repo.save(entity);
-			
-			List<Sintoma> sintomas = entity.getSintomas();
-			for(Sintoma sintoma: sintomas) {
-				if(sintoma.getId() == null) {
-					sintoma.getDoencas().add(entity);
-					this.sintomaService.save(sintoma);
-				}
-			}
-			
+			this.saveSintomas(entity);
 			return this.repo.save(entity);
 		} catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
@@ -58,13 +62,15 @@ public class DoencaService {
 	}
 
 	public Doenca update(Doenca entity) {
-		if (entity.getId() == null) {
+		if (entity == null || entity.getId() == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
 
 		Optional<Doenca> objeto = this.find(entity.getId());
 		if (objeto.isPresent()) {
-			return this.repo.save(entity);
+			Doenca doenca = objeto.get();
+			this.updateSintomas(doenca);
+			return this.repo.save(doenca);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));
 		}
@@ -77,9 +83,43 @@ public class DoencaService {
 
 		Optional<Doenca> objeto = this.find(id);
 		if (objeto.isPresent()) {
-			this.repo.delete(objeto.get());
+			Doenca doenca = objeto.get();
+			this.deleteSintomas(doenca);
+			this.repo.delete(doenca);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Educacao"));
+		}
+	}
+	
+	public List<Sintoma> updateSintomas(Doenca doenca) {
+		List<Sintoma> sintomas = new ArrayList<Sintoma>();
+		for(Sintoma sintoma: doenca.getSintomas()) {
+			if(sintoma.getId() != null) {
+				sintomas.add(sintoma);
+				this.sintomaService.save(sintoma);
+			}
+		}
+		
+		return sintomas;
+	}
+	
+	private List<Sintoma> saveSintomas(Doenca doenca) {
+		for(Sintoma sintoma: doenca.getSintomas()) {
+			if(sintoma.getId() == null) {
+				sintoma.getDoencas().add(doenca);
+				this.sintomaService.save(sintoma);
+			}
+		}
+		
+		return doenca.getSintomas();
+	}
+
+	private void deleteSintomas(Doenca doenca) {
+		for(Sintoma sintoma: doenca.getSintomas()) {
+			if(sintoma.getId() == null) {
+				sintoma.getDoencas().clear();
+				this.sintomaService.delete(sintoma.getId());
+			}
 		}
 	}
 }

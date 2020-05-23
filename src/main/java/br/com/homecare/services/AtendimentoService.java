@@ -27,12 +27,19 @@ public class AtendimentoService {
 	public List<Atendimento> getAll() {
 		return this.repo.findAll();
 	}
-	
+
+	public List<Atendimento> updateAll(Set<Atendimento> atendimentos) {
+		 return this.repo.saveAll((Iterable<Atendimento>)atendimentos);
+	}
 	
 	public List<Atendimento> saveAll(Set<Atendimento> atendimentos) {
 		 return this.repo.saveAll((Iterable<Atendimento>)atendimentos);
 	}
 
+	public void deleteAll(Set<Atendimento> atendimentos) {
+		 this.repo.deleteAll((Iterable<Atendimento>)atendimentos);
+	}
+	
 	public Atendimento save(Atendimento entity) {
 		try {
 			return this.repo.save(entity);

@@ -27,10 +27,18 @@ public class ExperienciaService {
 		return this.repo.findAll();
 	}
 	
+	public List<Experiencia> updateAll(List<Experiencia> list) {
+		 return this.repo.saveAll((Iterable<Experiencia>)list);
+	}
+	
 	public List<Experiencia> saveAll(List<Experiencia> list) {
 		 return this.repo.saveAll((Iterable<Experiencia>)list);
 	}
 
+	public void deleteAll(List<Experiencia> list) {
+		 this.repo.deleteAll((Iterable<Experiencia>)list);
+	}
+	
 	public Experiencia save(Experiencia entity) {
 		try {
 			return this.repo.save(entity);

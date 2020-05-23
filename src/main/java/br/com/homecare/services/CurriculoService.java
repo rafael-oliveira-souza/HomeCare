@@ -40,12 +40,22 @@ public class CurriculoService {
 	public List<Curriculo> saveAll(List<Curriculo> curriculos) {
 		List<Curriculo> curr = new ArrayList<Curriculo>();
 		for (Curriculo curriculo : curriculos) {
-			curr.add(this.save(curriculo));
+			if(curriculo.getId() == null) {
+				curr.add(this.save(curriculo));
+			}
 		}
 
 		return curr;
 	}
-
+	
+	public void deleteAll(List<Curriculo> curriculos) {
+		for (Curriculo curriculo : curriculos) {
+			if(curriculo.getId() != null) {
+				this.delete(curriculo.getId());
+			}
+		}
+	}
+	
 	public Curriculo save(Curriculo entity) {
 		try {
 			this.idiomaService.saveAll(entity.getIdiomas());
@@ -65,6 +75,10 @@ public class CurriculoService {
 
 		Optional<Curriculo> objeto = this.find(entity.getId());
 		if (objeto.isPresent()) {
+			Curriculo curriculo = objeto.get();
+			this.idiomaService.updateAll(curriculo.getIdiomas());
+			this.educacaoService.updateAll(curriculo.getEducacoes());
+			this.experienciaService.updateAll(curriculo.getExperiencias());
 			return this.repo.save(entity);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Curriculo"));
@@ -75,10 +89,14 @@ public class CurriculoService {
 		if (id == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
-
+		
 		Optional<Curriculo> objeto = this.repo.findById(id);
 		if (objeto.isPresent()) {
-			this.repo.delete(objeto.get());
+			Curriculo curriculo = objeto.get();
+			this.idiomaService.deleteAll(curriculo.getIdiomas());
+			this.educacaoService.deleteAll(curriculo.getEducacoes());
+			this.experienciaService.deleteAll(curriculo.getExperiencias());
+			this.repo.delete(curriculo);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Curriculo"));
 		}

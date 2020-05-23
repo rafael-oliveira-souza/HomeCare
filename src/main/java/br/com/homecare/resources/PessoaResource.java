@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.homecare.models.entities.Pessoa;
@@ -25,7 +24,7 @@ public class PessoaResource {
 	@Autowired
 	private PessoaService service;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping("/todos")
 	public ResponseEntity<List<Pessoa>> getAll() {
 		List<Pessoa> todos = service.getAll();
 

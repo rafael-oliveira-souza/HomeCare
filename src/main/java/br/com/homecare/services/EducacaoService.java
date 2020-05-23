@@ -27,9 +27,17 @@ public class EducacaoService {
 	public List<Educacao> getAll() {
 		return this.repo.findAll();
 	}
+	
+	public List<Educacao> updateAll(List<Educacao> list) {
+		 return this.repo.saveAll((Iterable<Educacao>)list);
+	}
 
 	public List<Educacao> saveAll(List<Educacao> list) {
 		 return this.repo.saveAll((Iterable<Educacao>)list);
+	}
+
+	public void deleteAll(List<Educacao> list) {
+		 this.repo.deleteAll((Iterable<Educacao>)list);
 	}
 
 	public Educacao save(Educacao entity) {

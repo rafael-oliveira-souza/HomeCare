@@ -31,6 +31,10 @@ public class MedicamentoService {
 		 return this.repo.saveAll((Iterable<Medicamento>)list);
 	}
 	
+	public void deleteAll(List<Medicamento> list) {
+		 this.repo.deleteAll((Iterable<Medicamento>)list);
+	}
+	
 	public Medicamento save(Medicamento entity) {
 		try { 
 			return this.repo.save(entity);

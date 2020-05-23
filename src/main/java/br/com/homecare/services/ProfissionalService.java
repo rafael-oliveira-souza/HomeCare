@@ -52,7 +52,7 @@ public class ProfissionalService {
 	
 	public Profissional save(Profissional entity) {
 		try {
-			this.atendimentoService.saveAll(entity.getAtendimentos());
+//			this.atendimentoService.saveAll(entity.getAtendimentos());
 			this.profissaoService.saveAll(entity.getProfissoes());
 			entity.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 			entity = this.repo.save(entity);
@@ -73,7 +73,10 @@ public class ProfissionalService {
 
 		Optional<Profissional> objeto = this.find(entity.getId());
 		if (objeto.isPresent()) {
-			return this.repo.save(entity);
+			Profissional prof = objeto.get();
+			prof.getCurriculo().setProfissional(prof);
+			this.curriculoService.save(prof.getCurriculo());
+			return this.repo.save(prof);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissional"));
 		}
@@ -86,7 +89,9 @@ public class ProfissionalService {
 
 		Optional<Profissional> objeto = this.repo.findById(id);
 		if (objeto.isPresent()) {
-			this.repo.delete(objeto.get());
+			Profissional prof = objeto.get();
+			this.curriculoService.delete(prof.getId());
+			this.repo.delete(prof);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissional"));
 		}

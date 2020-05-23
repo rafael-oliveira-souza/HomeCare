@@ -19,7 +19,7 @@ public class ProfissaoService {
 	
 	@Autowired
 	private ProfissaoRepository repo;
-	
+
 	@Autowired
 	private EspecialidadeService especialidadeService;
 
@@ -75,7 +75,9 @@ public class ProfissaoService {
 		
 		Optional<Profissao> objeto = this.repo.findById(id);
         if(objeto.isPresent()){
-    		this.repo.delete(objeto.get());
+        	Profissao profissao = objeto.get();
+//    		this.especialidadeService.deleteAll(profissao.getEspecialidades());
+    		this.repo.delete(profissao);
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));
         }

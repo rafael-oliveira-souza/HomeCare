@@ -27,8 +27,16 @@ public class IdiomaService {
 		return this.repo.findAll();
 	}
 	
+	public List<Idioma> updateAll(List<Idioma> list) {
+		 return this.repo.saveAll((Iterable<Idioma>)list);
+	}
+	
 	public List<Idioma> saveAll(List<Idioma> list) {
 		 return this.repo.saveAll((Iterable<Idioma>)list);
+	}
+
+	public void deleteAll(List<Idioma> list) {
+		 this.repo.deleteAll((Iterable<Idioma>)list);
 	}
 
 	public Idioma save(Idioma entity) {

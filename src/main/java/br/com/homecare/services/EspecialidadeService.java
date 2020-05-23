@@ -40,18 +40,18 @@ public class EspecialidadeService {
 		return list;
 	}
 
+	public void deleteAll(List<Especialidade> list) {
+		for (Especialidade espec : list) {
+			if (espec.getId() == null) {
+				this.delete(espec.getId());
+			}
+		}
+	}
+
 	public Especialidade save(Especialidade entity) {
 		try {
 			entity = this.repo.save(entity);
-			
-			List<Sintoma> sintomas = entity.getSintomas();
-			for (Sintoma sintoma : sintomas) {
-				if(sintoma.getId() == null) {
-					sintoma.getEspecialidades().add(entity);
-					this.sintomaService.save(sintoma);
-				}
-			}
-			
+			this.saveSintomas(entity);
 			return this.repo.save(entity);
 		} catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
@@ -78,10 +78,31 @@ public class EspecialidadeService {
 
 		Optional<Especialidade> objeto = this.repo.findById(id);
 		if (objeto.isPresent()) {
-			this.repo.delete(objeto.get());
+			Especialidade espec = objeto.get();
+//			this.deleteSintomas(espec.getSintomas());
+			espec.getProfissoes().clear();
+			espec.getSintomas().clear();
+			this.repo.delete(espec);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Especialidade"));
 		}
 	}
 
+	private void saveSintomas(Especialidade espec) {
+		for (Sintoma sintoma : espec.getSintomas()) {
+			if (sintoma.getId() == null) {
+				sintoma.getEspecialidades().add(espec);
+				this.sintomaService.save(sintoma);
+			}
+		}
+	}
+
+	private void deleteSintomas(List<Sintoma> sintomas) {
+		for (Sintoma sintoma : sintomas) {
+			if (sintoma.getId() != null) {
+				sintoma.getEspecialidades().clear();
+				this.sintomaService.delete(sintoma.getId());
+			}
+		}
+	}
 }
