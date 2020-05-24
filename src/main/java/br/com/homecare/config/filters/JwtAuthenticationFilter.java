@@ -1,22 +1,22 @@
 package br.com.homecare.config.filters;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import br.com.homecare.config.security.JwtUtil;
 import br.com.homecare.config.security.UserSecurity;
@@ -41,7 +41,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		try {
 			UsuarioDTO usuario = new ObjectMapper().readValue(request.getInputStream(), UsuarioDTO.class);
-			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
+			List<SimpleGrantedAuthority> authorities = usuario.getPerfis().stream().map(perf -> new SimpleGrantedAuthority(perf.getValue())) .collect(Collectors.toList());
+			
+			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha(), authorities);
 			Authentication auth = authManager.authenticate(authToken);
 			
 			return auth;

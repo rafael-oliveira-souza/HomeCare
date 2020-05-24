@@ -6,6 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.com.homecare.services.EmailService;
+import br.com.homecare.services.commons.InterfaceEmailService;
+
 @SpringBootApplication(scanBasePackages = { "br.com.homecare" })
 public class HomecareApplication implements CommandLineRunner {
 
@@ -16,6 +19,11 @@ public class HomecareApplication implements CommandLineRunner {
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
+	}
+
+	@Bean
+	public InterfaceEmailService emailService() {
+		return new EmailService();
 	}
 
 	// Operacao de instanciacao. Instancia objetos ao subir o servidor

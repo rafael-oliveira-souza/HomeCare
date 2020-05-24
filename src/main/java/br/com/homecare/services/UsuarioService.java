@@ -7,23 +7,31 @@ import java.util.regex.Pattern;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.homecare.config.security.UserSecurity;
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.dtos.UsuarioDTO;
+import br.com.homecare.models.dtos.EmailDTO;
 import br.com.homecare.models.entities.Usuario;
 import br.com.homecare.repositories.UsuarioRepository;
+import br.com.homecare.services.commons.InterfaceEmailService;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
 @Service
+@Transactional(rollbackFor = RequestErrorException.class)
 public class UsuarioService {
 	public static final Pattern VALID_EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
 			Pattern.CASE_INSENSITIVE);
 	
 	public static final String VALID_SENHA_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 
+	@Value("${mail.sender}")
+	private String senderEmail;
+	
 	@Autowired
 	private BCryptPasswordEncoder crypt;
 	
@@ -32,10 +40,13 @@ public class UsuarioService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private InterfaceEmailService emailService;
 
-	public static UsuarioDTO usuarioLogado() {
+	public static UserSecurity usuarioLogado() {
 		try {
-			return (UsuarioDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			return (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		}catch (Exception e) {
 			return null;
 		}
@@ -85,8 +96,13 @@ public class UsuarioService {
 		}
 		
 		try {
+			EmailDTO emailDTO = new EmailDTO.Builder().usuario(usuario).template("email/confirmacao")
+					.subject("Homecare - Email de confirmacção.").msg("Olá, seja bem vindo.")
+					.chave("sender").valor(senderEmail).build();
+			
 			usuario.setSenha(this.crypt.encode(usuario.getSenha()));
         	usuario = this.repo.save(usuario);
+        	this.emailService.sendEmailConfirmationHTML(emailDTO);
         	return modelMapper.map(usuario, Usuario.class);
 		}catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
