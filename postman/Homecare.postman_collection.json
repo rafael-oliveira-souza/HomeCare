@@ -12,10 +12,16 @@
 					"name": "profissao-salvar",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWxmQGdtYWlsLmNvbSIsImV4cCI6MTU5MDMxMjI5MH0.TsfiXsTyxiEUXKa5Ib9vi6Z3d9Bt8xnZe1SCG9u03cA15VY7y2pj7zCTbVDgZKeslF71Dy2sQbY7SRY3qDj22A",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": []\n}",
+							"raw": "\n{\n    \"nome\": \"Fisioterapeuta23\",\n    \"descricao\": \"Auxilia em ...\",\n    \"especialidades\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,7 +56,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"Rafael Souza\",\n    \"cpf\": \"242.213.332-32\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"atendimentos\": [\n    \t{\n            \"descricao\": \"Bacharelado\",\n            \"data\": \"2020-03-12T03:00:00.000+0000\"\n    \t}\n    ],\n    \"genero\": \"MASCULINO\",\n    \"email\": \"raal2f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n    \"profissoes\": [ \n    \t{\n            \"nome\": \"Fisioterapeuta\",\n            \"descricao\": \"Auxilia em ...\",\n            \"especialidades\": [\n            \t{\n\t                \"nome\": \"Coluna\",\n\t                \"descricao\": \"Teste\",\n            \t\t\"sintomas\": []\n            \t}\n            ]\n    \t}\n    ],\n    \"curriculo\": {\n\t    \"educacoes\": [\n\t    \t{\n\t    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t\t    \"descricao\": \"Bacharelado\",\n\t\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"experiencias\": [\n\t\t    {\n\t\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t\t    \"descricao\": \"Guardar documentos\",\n\t\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"idiomas\": [\n\t    \t{\n\t\t    \t\"nome\": \"INGLES\",\n\t\t\t    \"situacao\": \"BASICO\"\n\t    \t}\n\t    ]\n    }\n}",
+							"raw": "{\n\t\"nome\": \"Mario Silva\",\n    \"cpf\": \"002.000.112-00\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"MASCULINO\",\n    \"email\": \"mario11223f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n    \"profissoes\": [],\n    \"curriculo\": {\n\t    \"educacoes\": [\n\t    \t{\n\t    \t\t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"curso\": \"Engenharia de Computacao\",\n\t\t\t    \"descricao\": \"Bacharelado\",\n\t\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"experiencias\": [\n\t\t    {\n\t\t    \t\"nome\": \"Universidade de Brasilia\",\n\t\t\t    \"funcao\": \"Auxiliar administrativo\",\n\t\t\t    \"descricao\": \"Guardar documentos\",\n\t\t\t    \"dataInicio\": \"2012-03-09T03:00:00.000Z\",\n\t\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t    }\n\t    ],\n\t    \"idiomas\": [\n\t    \t{\n\t\t    \t\"nome\": \"INGLES\",\n\t\t\t    \"situacao\": \"BASICO\"\n\t    \t}\n\t    ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,7 +91,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"descricao\": \"Bacharelado\",\n    \"data\": \"2020-03-12T03:00:00.000+0000\"\n}",
+							"raw": "{\n    \"descricao\": \"Consulta Dermatologica\",\n    \"data\": \"2020-03-12T03:00:00.000+0000\",\n    \"profissionalId\": 1,\n    \"pacienteId\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,7 +120,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"sintomas\": [],\n    \"profissao\":10\n}",
+							"raw": "{\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"sintomas\": [\n    \t{\n\t\t    \"id\": 1,\n\t\t    \"nome\": \"sintoma 1\",\n\t\t    \"descricao\": \"TESTE\"\n\t\t}\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -149,7 +155,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"nome\": \"Rafael Souza\",\n        \"cpf\": \"232.123.424-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"telefone\": \"(61)92232-2329\",\n        \"genero\": \"FEMININO\",\n        \"email\": \"rafa22232@gmail.com\",\n        \"tipoUsuario\": \"PACIENTE\",\n\t    \"atendimentos\": [\n\t    \t{\n\t    \t\t\"id\": 1,\n\t            \"descricao\": \"Bacharelado\",\n\t            \"data\": \"2020-03-12T03:00:00.000+0000\"\n\t    \t}\n    \t]\n}",
+							"raw": "{\n        \"nome\": \"Bento Souza\",\n        \"cpf\": \"232.333.098-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"genero\": \"MASCULINO\",\n        \"email\": \"bento@gmail.com\",\n        \"telefone\": \"(61)92232-2329\",\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"tipoUsuario\": \"PACIENTE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -242,7 +248,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n    \"senha\": \"12345678\",\n    \"email\": \"22222@gmail.com\",\n    \"perfis\": [\n    \t\"CLIENTE\",\n    \t\"ADMIN\"\n\t]\n}",
+							"raw": " {\n    \"senha\": \"12345678\",\n    \"email\": \"rafa@gmail.com\",\n    \"perfis\": [\n    \t\"CLIENTE\",\n    \t\"ADMIN\"\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -294,13 +300,42 @@
 					"response": []
 				},
 				{
+					"name": "sintoma/salvar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n\t\"nome\": \"sintoma 1\",\n    \"descricao\": \"TESTE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sintoma/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sintoma",
+								"salvar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "paciente/salvar",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \t\"nome\": \"Rafael Souza\",\n    \"cpf\": \"112.213.332-32\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"atendimentos\": [\n    \t{\n            \"descricao\": \"Bacharelado\",\n            \"data\": \"2020-03-12T03:00:00.000+0000\"\n    \t}\n    ],\n    \"genero\": \"MASCULINO\",\n    \"email\": \"raal2222f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
+							"raw": "{\n   \t\"nome\": \"Rafael Souza\",\n    \"cpf\": \"112.213.332-32\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"MASCULINO\",\n    \"email\": \"raal2222f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -329,7 +364,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"senha\": \"12345678\",\n        \"email\": \"rafa22@gmail.com\"\n}",
+							"raw": " {\n        \"senha\": \"Dcc4W25Vgb\",\n        \"email\": \"rafaelsoec@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -349,6 +384,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "usuario/recuperar-senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhMjJAZ21haWwuY29tIiwiZXhwIjoxNTkwMDgzNTY1fQ.by6kAYYdNpU7FGOfpng2uQcMHKnT1LlitBsKif9lOQ6PR8J_W5B-d_vmVLm43z4YUeKW6gj583iYky_Z3ZySqQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"email\": \"rafaelsoec@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/recuperar-senha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"recuperar-senha"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -360,7 +430,13 @@
 					"name": "profissao-todos",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhZWxAZ21haWwuY29tIiwiZXhwIjoxNTkwMzA5NTgzfQ.TY7s2ZYHpcspFct8ukag64d7MYLxSNK2UR3in3rz6NDJxib_Q_W-FjcyoXbJU69NSp4plYoTOyjPNzdPgak0Mw",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/profissao/todos",
 							"protocol": "http",
@@ -686,15 +762,37 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pessoa/todos",
+							"raw": "http://localhost:8080/usuario/todos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"pessoa",
+								"usuario",
 								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pessoa-buscar-atendimento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/atendimento/buscar/pessoa/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atendimento",
+								"buscar",
+								"pessoa",
+								"1"
 							]
 						}
 					},
@@ -712,7 +810,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/profissao/excluir/2",
+							"raw": "http://localhost:8080/profissao/excluir/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -721,7 +819,7 @@
 							"path": [
 								"profissao",
 								"excluir",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -775,7 +873,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/paciente/excluir/1",
+							"raw": "http://localhost:8080/paciente/excluir/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -784,7 +882,49 @@
 							"path": [
 								"paciente",
 								"excluir",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atendimento-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/atendimento/excluir/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atendimento",
+								"excluir",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/excluir/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"excluir",
+								"5"
 							]
 						}
 					},
@@ -797,13 +937,13 @@
 			"name": "put",
 			"item": [
 				{
-					"name": "paciente/update",
+					"name": "paciente/atualizar",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": 1,\n    \"nome\": \"Rafael Souza\",\n    \"atendimentos\": [],\n    \"cpf\": \"990.958.462-92\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"FEMININO\",\n    \"email\": \"ra85f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n\t\"doencas\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE2\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n\t\"medicamentos\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t]\n}",
+							"raw": "{\n    \"id\": 4,\n    \"nome\": \"Rafael Souza\",\n    \"atendimentos\": [\n        {\n            \"id\": 5,\n            \"data\": \"2020-03-12T03:00:00.000+0000\",\n            \"descricao\": \"Bacharelado\"\n        }\n    ],\n    \"cpf\": \"332.113.112-12\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"MASCULINO\",\n    \"email\": \"raal2222f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n    \"tipoUsuario\": \"PACIENTE\",\n    \"doencas\": [\n        {\n            \"id\": 3,\n            \"descricao\": \"TESTE\",\n            \"dataInicio\": \"2020-03-12T03:00:00.000+0000\",\n            \"dataFim\": \"2020-03-12T03:00:00.000+0000\",\n            \"sintomas\": []\n        }\n    ],\n    \"medicamentos\": [\n        {\n            \"id\": 3,\n            \"descricao\": \"TESTE\",\n            \"dataInicio\": \"2020-03-12T03:00:00.000+0000\",\n            \"dataFim\": \"2020-03-12T03:00:00.000+0000\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -826,13 +966,13 @@
 					"response": []
 				},
 				{
-					"name": "pessoa-update",
+					"name": "pessoa-atualizar",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"name\": \"RICHARD ROOTTO\",\n    \"height\": 1.97,\n    \"weight\": 100.0,\n    \"age\": 28,\n    \"gender\": \"M\",\n    \"mail\": \"rich@gmail.com\",\n    \"phone\": \"9692888920002\",\n    \"address\": \"rua 12 casa 12\"\n}",
+							"raw": "{\n        \"id\": 1,\n        \"nome\": \"Bento Souza\",\n        \"cpf\": \"232.333.098-32\",\n        \"altura\": 1.52,\n        \"peso\": 80.9,\n        \"idade\": 26,\n        \"genero\": \"MASCULINO\",\n        \"email\": \"bento@gmail.com\",\n        \"telefone\": \"(61)92232-2329\",\n        \"endereco\": \"QNB 3 CASA 8\",\n        \"tipoUsuario\": \"PACIENTE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -840,15 +980,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/app/homecare/pessoa/atualizar",
+							"raw": "http://localhost:8080/pessoa/atualizar",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"app",
-								"homecare",
 								"pessoa",
 								"atualizar"
 							]
@@ -863,7 +1001,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": 8,\n    \"descricao\": \"dadsada\",\n    \"nome\": \"Medico\",\n    \"especialidades\": [\n    \t{\n\t        \"id\": 3,\n\t        \"nome\": \"Medico\",\n\t        \"descricao\": \"dadsada\",\n\t        \"sintomas\": []\n\t    }\t\n    ]\n}",
+							"raw": "{\n\t\"id\": 1,\n    \"descricao\": \"Medica\",\n    \"nome\": \"Medico\",\n    \"especialidades\": [\n\t\t{\n\t\t\t\"id\": 2\n\t\t}\t\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -910,6 +1048,64 @@
 								"app",
 								"homecare",
 								"paciente",
+								"atualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profissional-atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"Mario Silva\",\n    \"cpf\": \"002.000.112-00\",\n    \"altura\": 1.52,\n    \"peso\": 80.9,\n    \"idade\": 26,\n    \"genero\": \"MASCULINO\",\n    \"email\": \"mario11223f@mail.com\",\n    \"telefone\": \"(61)99232-2329\",\n    \"endereco\": \"QNB 3 CASA 8\",\n    \"tipoUsuario\": \"PROFISSIONAL\",\n    \"profissoes\": [\n        {\n            \"id\": 1,\n            \"nome\": \"Fisioterapeuta\",\n            \"descricao\": \"Auxilia em ...\",\n            \"especialidades\": []\n        }\n    ],\n    \"curriculo\": {\n        \"id\": 1,\n        \"educacoes\": [\n            {\n                \"id\": 1,\n                \"nome\": \"Universidade de Brasilia\",\n                \"descricao\": \"Bacharelado\",\n                \"curso\": \"Engenharia de Computacao\",\n                \"dataInicio\": \"2020-03-12T03:00:00.000+0000\",\n                \"dataFim\": \"2020-03-12T03:00:00.000+0000\"\n            }\n        ],\n        \"experiencias\": [\n            {\n                \"id\": 1,\n                \"nome\": \"Universidade de Brasilia\",\n                \"funcao\": \"Auxiliar administrativo\",\n                \"descricao\": \"Guardar documentos\",\n                \"dataInicio\": \"2012-03-09T03:00:00.000+0000\",\n                \"dataFim\": \"2020-03-12T03:00:00.000+0000\"\n            }\n        ],\n        \"idiomas\": [\n            {\n                \"id\": 1,\n                \"nome\": \"ESPANHOL\",\n                \"situacao\": \"BASICO\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profissional/atualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profissional",
+								"atualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sintoma-atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"nome\": \"teste\",\n    \"descricao\": \"TESTE\",\n    \"especialidades\": [\n\t\t{\n\t\t    \"descricao\": \"TESTE\",\n\t\t    \"dataInicio\": \"2020-03-12T03:00:00.000Z\",\n\t\t    \"dataFim\": \"2020-03-12T03:00:00.000Z\"\n\t\t}\n\t],\n    \"doencas\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sintoma/atualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sintoma",
 								"atualizar"
 							]
 						}
