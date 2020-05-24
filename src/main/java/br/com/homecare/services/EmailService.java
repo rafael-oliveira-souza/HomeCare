@@ -32,4 +32,10 @@ public class EmailService extends AbstractEmailService{
 		
 	}
 
+	@Override
+	public void recoverPassword(MimeMessage msg) {
+		this.javaMailSender.send(msg);
+		LOG.info("Email enviado.");
+	}
+
 }

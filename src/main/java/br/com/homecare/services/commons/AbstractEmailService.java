@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.models.dtos.EmailDTO;
 
 public abstract class AbstractEmailService implements InterfaceEmailService {
@@ -41,6 +42,16 @@ public abstract class AbstractEmailService implements InterfaceEmailService {
 		}
 	}
 
+	@Override
+	public void sendEmailRecoverPassword(EmailDTO emailDTO) {
+		try {
+			MimeMessage mime = prepareMimeMessage(emailDTO);
+			recoverPassword(mime);
+		}catch (MessagingException e) {
+			throw new RequestErrorException(e);
+		}
+	}
+
 	protected SimpleMailMessage prepareSimpleMailMessage(EmailDTO emailDTO) {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setSentDate(new Date(System.currentTimeMillis()));
@@ -54,6 +65,9 @@ public abstract class AbstractEmailService implements InterfaceEmailService {
 	
 	protected String htmlFromTemplate(EmailDTO emailDTO) {
 		Context context = new Context();
+		context.setVariable("msg", emailDTO.getMsg());
+		context.setVariable("titulo", emailDTO.getTitulo());
+		context.setVariable("destinatario", senderEmail);
 		context.setVariable(emailDTO.getChave(), emailDTO.getValor());
 		return templateEngine.process(emailDTO.getTemplate(), context);
 	}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:remove="all">Pedido de Confirmacao</title>
+<title th:remove="all" th:text="${titulo}"></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -9,10 +9,11 @@
 		<h1>
 			Olá, seja bem vindo ao Ubcare. Saúde como projeto de vida.
 		</h1>
-		<p>
+		<h3>
 			Estamos muito felizes de ter você conosco. Voce está aqui para melhorar vidas.
-		</p>
-		 <p>Enviado por <span th:text="${sender}"></span> </p>
+		</h3>
+		 <h4 th:text="${msg}"></h4>
+		 <p>Enviado por <span th:text="${destinatario}"></span> </p>
 		<!-- <img src="../imgs/ubcare.jpg"  style="height: 40px; width: 80px"/> -->
 	</div>
 </body>

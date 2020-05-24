@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.homecare.models.entities.Usuario;
+import br.com.homecare.services.AuthService;
 import br.com.homecare.services.UsuarioService;
 
 @RestController
@@ -21,6 +22,9 @@ public class UsuarioResource {
 
 	@Autowired
 	private UsuarioService service;
+
+	@Autowired
+	private AuthService authService;
 
 	@PostMapping("/login")
 	public Usuario login(@RequestBody Usuario usuario) {
@@ -34,6 +38,13 @@ public class UsuarioResource {
 		usuario = this.service.save(usuario);
 
 		return ResponseEntity.ok().body(usuario);
+	}
+
+	@PostMapping("/usuario/recuperar-senha")
+	public ResponseEntity<String>  recoverPassword(@RequestBody Usuario usuario) {
+		this.authService.recoverPassword(usuario);
+
+		return ResponseEntity.ok().body("Senha recuperada.");
 	}
 
 	@GetMapping("/usuario/buscar/{id}")

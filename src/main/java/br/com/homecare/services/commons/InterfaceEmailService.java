@@ -14,5 +14,9 @@ public interface InterfaceEmailService {
 
 	public void sendEmailConfirmationHTML(EmailDTO emailDTO);
 
+	public void sendEmailRecoverPassword(EmailDTO emailDTO);
+	
+	public void recoverPassword(MimeMessage msg);
+
 	public void sendEmailHTML(MimeMessage msg);
 }

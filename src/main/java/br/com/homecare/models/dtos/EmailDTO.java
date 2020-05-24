@@ -1,10 +1,14 @@
 package br.com.homecare.models.dtos;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import br.com.homecare.models.entities.Usuario;
 
 public class EmailDTO {
+	private String destinatario;
 	private Usuario usuario;
 	private String msg;
+	private String titulo;
 	private String subject;
 	private String template;
 	private String chave;
@@ -23,6 +27,8 @@ public class EmailDTO {
 		this.chave = builder.chave;
 		this.valor = builder.valor;
 		this.template = builder.template;
+		this.titulo = builder.titulo;
+		this.destinatario = builder.destinatario;
 	}
 	
 	public Usuario getUsuario() {
@@ -62,6 +68,22 @@ public class EmailDTO {
 		this.valor = valor;
 	}
 	
+	public String getDestinatario() {
+		return destinatario;
+	}
+
+	public void setDestinatario(String destinatario) {
+		this.destinatario = destinatario;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public static class Builder {
 		private Usuario usuario;
 		private String msg;
@@ -69,6 +91,8 @@ public class EmailDTO {
 		private String template;
 		private String chave;
 		private Object valor;
+		private String destinatario;
+		private String titulo;
 		
 		public Builder usuario(Usuario usuario) {
 			this.usuario = usuario;
@@ -95,6 +119,15 @@ public class EmailDTO {
 			return this;
 		}
 
+		public Builder destinatario(String destinatario) {
+			this.destinatario = destinatario;
+			return this;
+		}
+		
+		public Builder titulo(String titulo) {
+			this.titulo = titulo;
+			return this;
+		}
 		public Builder valor(Object valor) {
 			this.valor = valor;
 			return this;

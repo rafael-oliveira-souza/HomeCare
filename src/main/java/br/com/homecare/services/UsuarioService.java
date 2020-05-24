@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,6 @@ public class UsuarioService {
 			Pattern.CASE_INSENSITIVE);
 	
 	public static final String VALID_SENHA_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-
-	@Value("${mail.sender}")
-	private String senderEmail;
 	
 	@Autowired
 	private BCryptPasswordEncoder crypt;
@@ -51,7 +47,6 @@ public class UsuarioService {
 			return null;
 		}
 	}
-	
 	
 	public Usuario findByEmail(String email) {
 		Matcher matcherEmail = VALID_EMAIL_REGEX.matcher(email);
@@ -96,9 +91,11 @@ public class UsuarioService {
 		}
 		
 		try {
-			EmailDTO emailDTO = new EmailDTO.Builder().usuario(usuario).template("email/confirmacao")
-					.subject("Homecare - Email de confirmacção.").msg("Olá, seja bem vindo.")
-					.chave("sender").valor(senderEmail).build();
+			EmailDTO emailDTO = new EmailDTO.Builder()
+					.subject("Homecare - Email de confirmacção.")
+					.usuario(usuario).template("email/padrao")
+					.titulo("Confirmacao de email")
+					.msg("Olá, seja bem vindo.").build();
 			
 			usuario.setSenha(this.crypt.encode(usuario.getSenha()));
         	usuario = this.repo.save(usuario);
