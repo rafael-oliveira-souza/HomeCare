@@ -11,6 +11,9 @@ public class AtendimentoDTO extends AbstractDTO<Atendimento>{
     private Long id;
     private Date data;
     private String descricao;
+    private Long pacienteId;
+    private Long profissionalId;
+
 
 	public Long getId() {
 		return id;
@@ -35,6 +38,23 @@ public class AtendimentoDTO extends AbstractDTO<Atendimento>{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public Long getPacienteId() {
+		return pacienteId;
+	}
+
+	public void setPacienteId(Long pacienteId) {
+		this.pacienteId = pacienteId;
+	}
+
+	public Long getProfissionalId() {
+		return profissionalId;
+	}
+
+	public void setProfissionalId(Long profissionalId) {
+		this.profissionalId = profissionalId;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

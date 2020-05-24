@@ -6,7 +6,8 @@ import br.com.homecare.utils.messages.ExceptionMessages;
 
 public enum TipoUsuarioEnum implements InterfaceEnum<TipoUsuarioEnum> {
     PACIENTE(1, "Paciente"),
-    PROFISSIONAL(2, "Profissional");
+    PROFISSIONAL(2, "Profissional"),
+    VISITANTE(3, "Visitante");
 
 	private String tipo;
 	private Integer codigo;

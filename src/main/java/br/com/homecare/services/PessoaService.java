@@ -2,6 +2,7 @@ package br.com.homecare.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.models.entities.Pessoa;
-import br.com.homecare.repositories.AtendimentoRepository;
 import br.com.homecare.repositories.PessoaRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
@@ -20,28 +20,22 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository repo;
 
-	@Autowired
-	private AtendimentoRepository atendimentoRepo;
-	
 	public Optional<Pessoa> find(Long id) {
 		return this.repo.findById(id);
 	}
 
-	public List<Pessoa> saveAll(List<Pessoa> entity) {
-		for (Pessoa pessoa : entity) {
-			this.save(pessoa);
-		}
-
-		return entity;
+	public List<Pessoa> saveAll(List<Pessoa> entities) {
+		return this.repo.saveAll(entities);
 	}
 
 	public List<Pessoa> getAll() {
-		return this.repo.findAll();
+		return this.repo.findAll().stream()
+				.map(pessoa-> pessoa.getPessoa())
+				.collect(Collectors.toList());
 	}
 
 	public Pessoa save(Pessoa entity) {
 		try {
-			this.atendimentoRepo.saveAll(entity.getAtendimentos());
 			return this.repo.save(entity);
 		} catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());

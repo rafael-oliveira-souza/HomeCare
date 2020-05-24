@@ -13,7 +13,6 @@ public class DoencaDTO extends AbstractDTO<Doenca>{
     private String descricao;
     private Date dataInicio;
     private Date dataFim;
-	private List<PacienteDTO> pacientes = new ArrayList<PacienteDTO>();
 	private List<SintomaDTO> sintomas = new ArrayList<SintomaDTO>();
 	
 	public Long getId() {
@@ -53,13 +52,6 @@ public class DoencaDTO extends AbstractDTO<Doenca>{
 		return super.equals(obj, this.id);
 	}
 
-	public List<PacienteDTO> getPacientes() {
-		return pacientes;
-	}
-
-	public void setPacientes(List<PacienteDTO> pacientes) {
-		this.pacientes = pacientes;
-	}
 
 	public List<SintomaDTO> getSintomas() {
 		return sintomas;

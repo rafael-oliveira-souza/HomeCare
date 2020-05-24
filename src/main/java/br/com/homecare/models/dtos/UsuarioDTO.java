@@ -1,7 +1,8 @@
 package br.com.homecare.models.dtos;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.homecare.commons.AbstractDTO;
 import br.com.homecare.models.entities.Usuario;
@@ -13,7 +14,7 @@ public class UsuarioDTO extends AbstractDTO<Usuario>{
 	private Long id;
     private String email;
 	private String senha;
-	private Set<Integer> perfis;
+	private List<Integer> perfis = new ArrayList<Integer>();
 	
 	public Long getId() {
 		return id;
@@ -37,23 +38,13 @@ public class UsuarioDTO extends AbstractDTO<Usuario>{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Set<PerfilEnum> getPerfis() {
-		Set<PerfilEnum> perfs = new HashSet<PerfilEnum>();
-		
-		for(Integer codigo: this.perfis) {
-			perfs.add(PerfilEnum.toEnum(codigo));
-		}
-		
-		return perfs;
+
+	public List<PerfilEnum> getPerfis() {
+		return perfis.stream().map(codigo -> PerfilEnum.toEnum(codigo)).collect(Collectors.toList());
 	}
-	public void setPerfis(Set<PerfilEnum> perfis) {
-		Set<Integer> perfs = new HashSet<Integer>();
-		
-		for(PerfilEnum perfil: perfis) {
-			perfs.add(perfil.getCode());
-		}
-		
-		this.perfis = perfs;
+
+	public void setPerfis(List<PerfilEnum> perfis) {
+		this.perfis = perfis.stream().map(perfil -> perfil.getCode()).collect(Collectors.toList());
 	}
 
 	@Override

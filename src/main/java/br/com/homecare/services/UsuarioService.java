@@ -7,10 +7,12 @@ import java.util.regex.Pattern;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
+import br.com.homecare.models.dtos.UsuarioDTO;
 import br.com.homecare.models.entities.Usuario;
 import br.com.homecare.repositories.UsuarioRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
@@ -30,6 +32,15 @@ public class UsuarioService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+
+	public static UsuarioDTO usuarioLogado() {
+		try {
+			return (UsuarioDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}catch (Exception e) {
+			return null;
+		}
+	}
+	
 	
 	public Usuario findByEmail(String email) {
 		Matcher matcherEmail = VALID_EMAIL_REGEX.matcher(email);
@@ -42,7 +53,7 @@ public class UsuarioService {
 	}
 
 	public Usuario login(Usuario usuario) {
-		this.validarLogin(usuario);
+		this.validarUsuario(usuario);
 
 		String senhaCriptografada = crypt.encode(usuario.getSenha());
 		usuario =  this.repo.findByEmail(usuario.getEmail());
@@ -53,8 +64,6 @@ public class UsuarioService {
 		if(!usuario.getSenha().equals(senhaCriptografada)) {
 			throw new RequestErrorException(ExceptionMessages.SENHA_INVALIDA);
 		}
-
-    	usuario = this.repo.save(usuario);
     	
     	return usuario;
 	}
@@ -68,7 +77,7 @@ public class UsuarioService {
 	}
 
 	public Usuario save(Usuario usuario) {
-		this.validarLogin(usuario);
+		this.validarUsuario(usuario);
 		
 		boolean usuarioCadastrado = (this.repo.findByEmail(usuario.getEmail()) != null);
 		if(usuarioCadastrado) {
@@ -85,16 +94,14 @@ public class UsuarioService {
 	}
 	
 	public Usuario update(Usuario usuario)  {
-		this.validarLogin(usuario);
+		this.validarUsuario(usuario);
 		if(usuario.getId() == null) {
 			throw new RequestErrorException(ExceptionMessages.campoNulo("id"));
 		}
 		
 		Optional<Usuario> objeto = this.find(usuario.getId());
         if(objeto.isPresent()){
-        	usuario = this.repo.save(usuario);
-        	
-        	return usuario;
+        	return this.repo.save(usuario);
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Usuario"));
         }
@@ -117,7 +124,7 @@ public class UsuarioService {
 		this.repo.deleteByEmail(email);
 	}
 	
-	public void validarLogin(Usuario usuario) {
+	public void validarUsuario(Usuario usuario) {
 		if(usuario.getSenha() == null || usuario.getEmail() == null) {
 			throw new RequestErrorException(ExceptionMessages.CAMPOS_VAZIOS);
 		}

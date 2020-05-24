@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import br.com.homecare.commons.AbstractEntity;
@@ -17,19 +20,20 @@ public class Profissao extends AbstractEntity<ProfissaoDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue
-    private Long id;
+	@GeneratedValue
+	private Long id;
 
-    @Column(name = "nome", nullable = false, unique = true)
-    private String nome;
+	@Column(name = "nome", nullable = false, unique = true)
+	private String nome;
 
-    @Column(name = "descricao")
-    private String descricao;
+	@Column(name = "descricao")
+	private String descricao;
 
-    @ManyToMany(mappedBy="profissoes")
-    private List<Especialidade> especialidades = new ArrayList<Especialidade>(0);
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "profissao_especialidade", joinColumns = @JoinColumn(name = "profissao_id"), inverseJoinColumns = @JoinColumn(name = "especialidade_id"))
+	private List<Especialidade> especialidades = new ArrayList<Especialidade>(0);
 
-    public Long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -66,6 +70,5 @@ public class Profissao extends AbstractEntity<ProfissaoDTO> {
 		// TODO Auto-generated method stub
 		return super.equals(obj, this.id);
 	}
-    
 
 }

@@ -3,11 +3,11 @@ package br.com.homecare.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,15 +19,13 @@ import br.com.homecare.models.enums.TipoUsuarioEnum;
 public class Paciente extends Pessoa {
 	private static final long serialVersionUID = 1L;
 
-	@CollectionTable(name = "paciente_doenca")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "doenca_id")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "paciente_doenca", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "doenca_id"))
 	private List<Doenca> doencas = new ArrayList<Doenca>(0);
 
-	@CollectionTable(name = "paciente_medicamento")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "medicamento_id")
-    private List<Medicamento> medicamentos = new ArrayList<Medicamento>(0);
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "paciente_medicamento", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "medicamento_id"))
+	 private List<Medicamento> medicamentos = new ArrayList<Medicamento>(0);
 
 	public Paciente() {
 		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
@@ -49,22 +47,10 @@ public class Paciente extends Pessoa {
 		this.medicamentos = medicamentos;
 	}
 
-
 	@JsonIgnore
 	public Pessoa getPessoa() {
-		Pessoa pessoa = new Pessoa();
-		pessoa.setId(this.getId());
-		pessoa.setCpf(this.getCpf());
-		pessoa.setNome(this.getNome());
-		pessoa.setPeso(this.getPeso());
-		pessoa.setIdade(this.getIdade());
-		pessoa.setEmail(this.getEmail());
-		pessoa.setGenero(this.getGenero());
-		pessoa.setAltura(this.getAltura());
-		pessoa.setTelefone(this.getTelefone());
-		pessoa.setEndereco(this.getEndereco());
+		Pessoa pessoa = super.getPessoa();
 		pessoa.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-		pessoa.setAtendimentos(this.getAtendimentos());
 		
 		return pessoa;
 	}
@@ -72,23 +58,12 @@ public class Paciente extends Pessoa {
 
 	@JsonIgnore	
 	public void setPessoa(Pessoa pessoa) {
-		this.setId(pessoa.getId());
-		this.setCpf(pessoa.getCpf());
-		this.setNome(pessoa.getNome());
-		this.setPeso(pessoa.getPeso());
-		this.setIdade(pessoa.getIdade());
-		this.setEmail(pessoa.getEmail());
-		this.setGenero(pessoa.getGenero());
-		this.setAltura(pessoa.getAltura());
-		this.setTelefone(pessoa.getTelefone());
-		this.setEndereco(pessoa.getEndereco());
-		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-		this.setAtendimentos(pessoa.getAtendimentos());
+		pessoa.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+		super.setPessoa(pessoa);
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		return super.equals(obj, this.getId());
 	}
 }

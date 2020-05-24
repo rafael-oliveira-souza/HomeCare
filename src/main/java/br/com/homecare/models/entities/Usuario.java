@@ -1,7 +1,8 @@
 package br.com.homecare.models.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -41,16 +42,16 @@ public class Usuario extends AbstractEntity<UsuarioDTO> {
 	@CollectionTable(name = "usuario_perfil")
     @ElementCollection(fetch = FetchType.EAGER)
 	@Column( name = "perfil_id")
-	private Set<PerfilEnum> perfis = new HashSet<PerfilEnum>(0);
+	private List<Integer> perfis = new ArrayList<Integer>(0);
 
 	public Usuario() {
-		this.perfis.add(PerfilEnum.VISITANTE);
+		this.perfis.add(PerfilEnum.VISITANTE.getCode());
 	}
 	
 	public Usuario(String email, String senha) {
 		this.email = email;
 		this.senha = senha;
-		this.perfis.add(PerfilEnum.VISITANTE);
+		this.perfis.add(PerfilEnum.VISITANTE.getCode());
 	}
 
 	public Long getId() {
@@ -77,12 +78,12 @@ public class Usuario extends AbstractEntity<UsuarioDTO> {
 		this.senha = senha;
 	}
 
-	public Set<PerfilEnum> getPerfis() {
-		return perfis;
+	public List<PerfilEnum> getPerfis() {
+		return perfis.stream().map(codigo -> PerfilEnum.toEnum(codigo)).collect(Collectors.toList());
 	}
 
-	public void setPerfis(Set<PerfilEnum> perfis) {
-		this.perfis = perfis;
+	public void setPerfis(List<PerfilEnum> perfis) {
+		this.perfis = perfis.stream().map(perfil -> perfil.getCode()).collect(Collectors.toList());
 	}
 
 	@Override

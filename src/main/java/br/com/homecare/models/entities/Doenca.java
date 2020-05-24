@@ -1,6 +1,5 @@
 package br.com.homecare.models.entities;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import br.com.homecare.commons.AbstractEntity;
@@ -20,21 +21,22 @@ public class Doenca extends AbstractEntity<DoencaDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "descricao", nullable = false)
-    private String descricao;
+	@Column(name = "descricao", nullable = false)
+	private String descricao;
 
-    @Column(name = "dataInicio")
-    private Date dataInicio;
+	@Column(name = "dataInicio")
+	private Date dataInicio;
 
-    @Column(name = "dataFim")
-    private Date dataFim;
+	@Column(name = "dataFim")
+	private Date dataFim;
 
-	@ManyToMany(mappedBy = "doencas")
+	@ManyToMany
+	@JoinTable(name = "doenca_sintoma", joinColumns = @JoinColumn(name = "doenca_id"), inverseJoinColumns = @JoinColumn(name = "sintoma_id"))
 	private List<Sintoma> sintomas = new ArrayList<Sintoma>();
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -79,6 +81,5 @@ public class Doenca extends AbstractEntity<DoencaDTO> {
 	public boolean equals(Object obj) {
 		return super.equals(obj, this.id);
 	}
-    
-    
+
 }

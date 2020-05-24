@@ -1,22 +1,17 @@
 package br.com.homecare.models.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MapKeyColumn;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.dtos.PessoaDTO;
@@ -37,12 +32,6 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 	@Length(min = 5, max = 80, message = ExceptionMessages.NUM_CARACTER_INVALIDO )
     @Column(name = "nome", nullable = false)
     private String nome;
-
-	@Column(name = "atendimento_id")
-	@MapKeyColumn(name = "pessoa_id")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@CollectionTable(name = "pessoa_atendimento")
-	private List<Atendimento> atendimentos = new ArrayList<Atendimento>(0);
 
 //	@CPF
 	@NotEmpty(message = ExceptionMessages.CAMPO_VAZIO)
@@ -70,8 +59,8 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 
     private String endereco;
 
-    @Column(name = "tipo_usuario"	)
-    private Integer tipoUsuario;
+    @Column(name = "tipo_usuario", nullable = false)
+    private Integer tipoUsuario = TipoUsuarioEnum.VISITANTE.getCode();
 
 	public Long getId() {
 		return id;
@@ -87,14 +76,6 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 		
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<Atendimento> getAtendimentos() {
-		return atendimentos;
-	}
-
-	public void setAtendimentos(List<Atendimento> atendimentos) {
-		this.atendimentos = atendimentos;
 	}
 
 	public String getCpf() {
@@ -167,6 +148,40 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 
 	public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
 		this.tipoUsuario = tipoUsuario.getCode();
+	}
+	
+	@JsonIgnore
+	public Pessoa getPessoa() {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(this.getId());
+		pessoa.setCpf(this.getCpf());
+		pessoa.setNome(this.getNome());
+		pessoa.setPeso(this.getPeso());
+		pessoa.setIdade(this.getIdade());
+		pessoa.setEmail(this.getEmail());
+		pessoa.setGenero(this.getGenero());
+		pessoa.setAltura(this.getAltura());
+		pessoa.setTelefone(this.getTelefone());
+		pessoa.setEndereco(this.getEndereco());
+		pessoa.setTipoUsuario(this.getTipoUsuario());
+		
+		return pessoa;
+	}
+
+
+	@JsonIgnore	
+	public void setPessoa(Pessoa pessoa) {
+		this.setId(pessoa.getId());
+		this.setCpf(pessoa.getCpf());
+		this.setNome(pessoa.getNome());
+		this.setPeso(pessoa.getPeso());
+		this.setIdade(pessoa.getIdade());
+		this.setEmail(pessoa.getEmail());
+		this.setGenero(pessoa.getGenero());
+		this.setAltura(pessoa.getAltura());
+		this.setTelefone(pessoa.getTelefone());
+		this.setEndereco(pessoa.getEndereco());
+		this.setTipoUsuario(this.getTipoUsuario());
 	}
 	
 	@Override

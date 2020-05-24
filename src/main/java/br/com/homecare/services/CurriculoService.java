@@ -75,10 +75,9 @@ public class CurriculoService {
 
 		Optional<Curriculo> objeto = this.find(entity.getId());
 		if (objeto.isPresent()) {
-			Curriculo curriculo = objeto.get();
-			this.idiomaService.updateAll(curriculo.getIdiomas());
-			this.educacaoService.updateAll(curriculo.getEducacoes());
-			this.experienciaService.updateAll(curriculo.getExperiencias());
+			this.idiomaService.updateAll(entity.getIdiomas());
+			this.educacaoService.updateAll(entity.getEducacoes());
+			this.experienciaService.updateAll(entity.getExperiencias());
 			return this.repo.save(entity);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Curriculo"));

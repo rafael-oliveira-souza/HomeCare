@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -18,18 +18,17 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id")
+@Table(name = "profissional")
 public class Profissional extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
-	@CollectionTable(name = "profissional_profissao")
-    @ElementCollection(fetch = FetchType.LAZY)
-	@Column( name = "profissao_id")
-    private List<Profissao> profissoes = new ArrayList<Profissao>(0);
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "profissional_profissao", joinColumns = @JoinColumn(name = "profissional_id"), inverseJoinColumns = @JoinColumn(name = "profissao_id"))
+	private List<Profissao> profissoes = new ArrayList<Profissao>(0);
 
-    @JsonManagedReference
-    @OneToOne(mappedBy="profissional", cascade = CascadeType.ALL)
-    private Curriculo curriculo;
+	@JsonManagedReference
+	@OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL)
+	private Curriculo curriculo;
 
 	public List<Profissao> getProfissoes() {
 		return profissoes;
@@ -47,40 +46,18 @@ public class Profissional extends Pessoa {
 		this.curriculo = curriculo;
 	}
 
-
 	@JsonIgnore
 	public Pessoa getPessoa() {
-		Pessoa pessoa = new Pessoa();
-		pessoa.setId(this.getId());
-		pessoa.setCpf(this.getCpf());
-		pessoa.setNome(this.getNome());
-		pessoa.setPeso(this.getPeso());
-		pessoa.setIdade(this.getIdade());
-		pessoa.setEmail(this.getEmail());
-		pessoa.setGenero(this.getGenero());
-		pessoa.setAltura(this.getAltura());
-		pessoa.setTelefone(this.getTelefone());
-		pessoa.setEndereco(this.getEndereco());
+		Pessoa pessoa = super.getPessoa();
 		pessoa.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
-		pessoa.setAtendimentos(this.getAtendimentos());
 		
 		return pessoa;
 	}
 
-	@JsonIgnore
+	@JsonIgnore	
 	public void setPessoa(Pessoa pessoa) {
-		this.setId(pessoa.getId());
-		this.setCpf(pessoa.getCpf());
-		this.setNome(pessoa.getNome());
-		this.setPeso(pessoa.getPeso());
-		this.setIdade(pessoa.getIdade());
-		this.setEmail(pessoa.getEmail());
-		this.setGenero(pessoa.getGenero());
-		this.setAltura(pessoa.getAltura());
-		this.setTelefone(pessoa.getTelefone());
-		this.setEndereco(pessoa.getEndereco());
-		this.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
-		this.setAtendimentos(pessoa.getAtendimentos());
+		pessoa.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
+		super.setPessoa(pessoa);
 	}
-  	
+
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.homecare.core.exceptions.custom.RequestErrorException;
-import br.com.homecare.models.entities.Especialidade;
 import br.com.homecare.models.entities.Profissao;
 import br.com.homecare.repositories.ProfissaoRepository;
 import br.com.homecare.utils.messages.ExceptionMessages;
@@ -20,9 +19,6 @@ public class ProfissaoService {
 	@Autowired
 	private ProfissaoRepository repo;
 
-	@Autowired
-	private EspecialidadeService especialidadeService;
-
 	public Optional<Profissao> find(final Long id) {
 		return this.repo.findById(id);
 	}
@@ -32,23 +28,11 @@ public class ProfissaoService {
 	}
 	
 	public List<Profissao> saveAll(List<Profissao> entity) {
-		for (Profissao profissao: entity) {
-			this.save(profissao);
-		}
-		
-		return entity;
+		return this.repo.saveAll(entity);
 	}
 
 	public Profissao save(Profissao entity) {
 		try {
-			entity = this.repo.save(entity);
-			
-			List<Especialidade> especialidades = entity.getEspecialidades();
-			for (Especialidade especialidade: especialidades) {
-				especialidade.getProfissoes().add(entity);
-			}
-			this.especialidadeService.saveAll(especialidades);
-
 			return this.repo.save(entity);
 		}catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());
@@ -76,7 +60,6 @@ public class ProfissaoService {
 		Optional<Profissao> objeto = this.repo.findById(id);
         if(objeto.isPresent()){
         	Profissao profissao = objeto.get();
-//    		this.especialidadeService.deleteAll(profissao.getEspecialidades());
     		this.repo.delete(profissao);
         }else {
         	throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissao"));

@@ -8,6 +8,10 @@ import br.com.homecare.models.entities.Profile;
 import br.com.homecare.repositories.ProfileRepository;
 
 public class ProfileUtils {
+	public final static String HAS_ROLE_ADMIN = "hasAnyRole('ADMIN')";
+	public final static String HAS_ROLE_CLIENTE = "hasAnyRole('CLIENTE')";
+	public final static String HAS_ROLE_VISITANTE = "hasAnyRole('VISITANTE')";
+	
 	@Autowired
 	private ProfileRepository repo;
 

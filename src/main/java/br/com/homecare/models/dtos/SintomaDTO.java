@@ -1,8 +1,5 @@
 package br.com.homecare.models.dtos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.homecare.commons.AbstractDTO;
 import br.com.homecare.models.entities.Sintoma;
 
@@ -12,7 +9,6 @@ public class SintomaDTO extends AbstractDTO<Sintoma>{
 	private Long id;
 	private String nome;
 	private String descricao;
-	private List<EspecialidadeDTO> especialidades = new ArrayList<EspecialidadeDTO>();
 	
 	public Long getId() {
 		return id;
@@ -36,14 +32,6 @@ public class SintomaDTO extends AbstractDTO<Sintoma>{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public List<EspecialidadeDTO> getEspecialidades() {
-		return especialidades;
-	}
-
-	public void setEspecialidades(List<EspecialidadeDTO> especialidades) {
-		this.especialidades = especialidades;
 	}
 
 	@Override

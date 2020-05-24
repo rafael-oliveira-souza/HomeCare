@@ -15,52 +15,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.homecare.config.security.JwtUtil;
 import br.com.homecare.models.entities.Profissao;
+import br.com.homecare.services.AuthService;
 import br.com.homecare.services.ProfissaoService;
 import br.com.homecare.utils.ProfileUtils;
 
 @RestController
-@RequestMapping("/profissao")
-public class ProfissaoResource {
+@RequestMapping("/auth")
+public class AuthResource {
 
 	@Autowired
-	private ProfissaoService service;
+	private JwtUtil jwtUtil;
+	
+	@Autowired
+	private AuthService service;
 
-	@GetMapping("/todos")
-	public ResponseEntity<List<Profissao>> getAll() {
-		List<Profissao> todos = service.getAll();
 
-		return ResponseEntity.ok().body(todos);
-	}
-
-	@GetMapping("/buscar/{id}")
-	public ResponseEntity<Optional<Profissao>> find(@PathVariable(value = "id") Long id) {
-		Optional<Profissao> objeto = service.find(id);
-
-		return ResponseEntity.ok().body(objeto);
-	}
-
-	@PostMapping("/salvar")
+	@PostMapping("/refresh-token")
 	@PreAuthorize(ProfileUtils.HAS_ROLE_ADMIN)
 	public ResponseEntity<Profissao> save(@RequestBody Profissao Profissao) {
-		Profissao objeto = service.save(Profissao);
 
-		return ResponseEntity.ok().body(objeto);
-	}
-
-	@PutMapping("/atualizar")
-	@PreAuthorize(ProfileUtils.HAS_ROLE_ADMIN)
-	public ResponseEntity<Profissao> update(@RequestBody Profissao Profissao) {
-		Profissao objeto = service.update(Profissao);
-
-		return ResponseEntity.ok().body(objeto);
-	}
-
-	@DeleteMapping("/excluir/{id}")
-	@PreAuthorize(ProfileUtils.HAS_ROLE_ADMIN)
-	public ResponseEntity<?> Delete(@PathVariable(value = "id") Long id) {
-		service.delete(id);
-		
 		return ResponseEntity.ok().body(null);
 	}
 }

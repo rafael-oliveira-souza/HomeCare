@@ -19,7 +19,9 @@ import br.com.homecare.core.exceptions.custom.RequestErrorException;
 import br.com.homecare.utils.messages.ExceptionMessages;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-	private UserDetailsService userDetailService;
+	private static final String PUBLIC_URL = "/usuario/";
+	
+			private UserDetailsService userDetailService;
 	
 	private JwtUtil jwtUtil;
 
@@ -32,18 +34,21 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-
-		String authHeader = request.getHeader(jwtUtil.AUTHORIZATION);
-		if(authHeader != null && authHeader.startsWith(jwtUtil.BEARER)) {
-			//remover bearer
-			String tokenNoBearer = authHeader.replaceAll(jwtUtil.BEARER, "");
-//			String tokenNoBearer = authHeader.substring(7);
-			UsernamePasswordAuthenticationToken auth = getAuthentication(request, tokenNoBearer);
-			if(auth != null) {
-				SecurityContextHolder.getContext().setAuthentication(auth);
+		
+		if(!request.getRequestURI().contains(PUBLIC_URL)){
+			String authHeader = request.getHeader(jwtUtil.AUTHORIZATION);
+			if(authHeader != null && authHeader.startsWith(jwtUtil.BEARER)) {
+				//remover bearer
+				String tokenNoBearer = authHeader.replaceAll(jwtUtil.BEARER, "");
+//				String tokenNoBearer = authHeader.substring(7);
+				UsernamePasswordAuthenticationToken auth = getAuthentication(request, tokenNoBearer);
+				if(auth != null) {
+					SecurityContextHolder.getContext().setAuthentication(auth);
+				}
+			}else {
+				throw new RequestErrorException(ExceptionMessages.FALHA_AUTENTICACAO);
 			}
-		}else {
-			throw new RequestErrorException(ExceptionMessages.FALHA_AUTENTICACAO);
+			
 		}
 		
 		chain.doFilter(request, response);

@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.homecare.commons.AbstractEntity;
 import br.com.homecare.models.dtos.EspecialidadeDTO;
 
@@ -22,7 +20,7 @@ public class Especialidade extends AbstractEntity<EspecialidadeDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "nome")
@@ -31,67 +29,41 @@ public class Especialidade extends AbstractEntity<EspecialidadeDTO> {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@ManyToMany(mappedBy = "especialidades")
-	private List<Sintoma> sintomas = new ArrayList<Sintoma>(0);
-	
-    @JsonIgnore
 	@ManyToMany
-	@JoinTable(	name="profissao_especialidade", 
-				joinColumns = @JoinColumn(name="profissao_id"),
-				inverseJoinColumns = @JoinColumn(name="especialidade_id")
-	)
-	private List<Profissao> profissoes = new ArrayList<Profissao>();
-
+	@JoinTable(name = "especialidade_sintoma", joinColumns = @JoinColumn(name = "especialidade_id"), inverseJoinColumns = @JoinColumn(name = "sintoma_id"))
+	private List<Sintoma> sintomas = new ArrayList<Sintoma>(0);
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 	public List<Sintoma> getSintomas() {
 		return sintomas;
 	}
 
-
 	public void setSintomas(List<Sintoma> sintomas) {
 		this.sintomas = sintomas;
 	}
-
-
-	public List<Profissao> getProfissoes() {
-		return profissoes;
-	}
-
-
-	public void setProfissoes(List<Profissao> profissoes) {
-		this.profissoes = profissoes;
-	}
-
 
 	@Override
 	public boolean equals(Object obj) {

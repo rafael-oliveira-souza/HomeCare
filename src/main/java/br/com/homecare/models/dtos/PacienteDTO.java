@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.homecare.models.entities.Pessoa;
 import br.com.homecare.models.enums.TipoUsuarioEnum;
 
 public class PacienteDTO extends PessoaDTO{
@@ -33,37 +36,19 @@ public class PacienteDTO extends PessoaDTO{
 		setTipoUsuario(TipoUsuarioEnum.PACIENTE);
 	}
 
-	public PessoaDTO getPessoa() {
-		PessoaDTO pessoa = new PessoaDTO();
-		pessoa.setId(this.getId());
-		pessoa.setCpf(this.getCpf());
-		pessoa.setNome(this.getNome());
-		pessoa.setPeso(this.getPeso());
-		pessoa.setIdade(this.getIdade());
-		pessoa.setEmail(this.getEmail());
-		pessoa.setGenero(this.getGenero());
-		pessoa.setAltura(this.getAltura());
-		pessoa.setTelefone(this.getTelefone());
-		pessoa.setEndereco(this.getEndereco());
+	@JsonIgnore
+	public Pessoa getPessoa() {
+		Pessoa pessoa = super.getPessoa();
 		pessoa.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-		pessoa.setAtendimentos(this.getAtendimentos());
 		
 		return pessoa;
 	}
 
-	public void setPessoa(PessoaDTO pessoa) {
-		this.setId(pessoa.getId());
-		this.setCpf(pessoa.getCpf());
-		this.setNome(pessoa.getNome());
-		this.setPeso(pessoa.getPeso());
-		this.setIdade(pessoa.getIdade());
-		this.setEmail(pessoa.getEmail());
-		this.setGenero(pessoa.getGenero());
-		this.setAltura(pessoa.getAltura());
-		this.setTelefone(pessoa.getTelefone());
-		this.setEndereco(pessoa.getEndereco());
-		this.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-		this.setAtendimentos(pessoa.getAtendimentos());
+
+	@JsonIgnore	
+	public void setPessoa(Pessoa pessoa) {
+		pessoa.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
+		super.setPessoa(pessoa);
 	}
 	
 	@Override

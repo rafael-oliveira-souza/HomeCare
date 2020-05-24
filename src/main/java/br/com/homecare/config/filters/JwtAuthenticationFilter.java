@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import br.com.homecare.config.security.JwtUtil;
 import br.com.homecare.config.security.UserSecurity;
@@ -39,7 +41,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		try {
 			UsuarioDTO usuario = new ObjectMapper().readValue(request.getInputStream(), UsuarioDTO.class);
-			
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
 			Authentication auth = authManager.authenticate(authToken);
 			
@@ -56,5 +57,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String email = user.getEmail();
 		String token = jwtUtil.generateToken(email);
 		response.addHeader(jwtUtil.AUTHORIZATION, jwtUtil.BEARER + token);
+		response.getWriter().write("Login autenticado.");
+		response.getWriter().flush();
+		response.getWriter().close();
 	}
 }

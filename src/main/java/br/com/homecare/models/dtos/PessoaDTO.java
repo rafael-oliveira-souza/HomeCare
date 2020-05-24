@@ -1,7 +1,6 @@
 package br.com.homecare.models.dtos;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.homecare.commons.AbstractDTO;
 import br.com.homecare.models.entities.Pessoa;
@@ -20,9 +19,8 @@ public class PessoaDTO extends AbstractDTO<Pessoa> {
 	private Double altura;
 	private String telefone;
 	private String endereco;
-	private GeneroEnum genero;
-	private TipoUsuarioEnum tipoUsuario;
-	private List<AtendimentoDTO> atendimentos = new ArrayList<AtendimentoDTO>();
+	private Integer genero;
+	private Integer tipoUsuario;
 
 	public Long getId() {
 		return id;
@@ -38,14 +36,6 @@ public class PessoaDTO extends AbstractDTO<Pessoa> {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<AtendimentoDTO> getAtendimentos() {
-		return atendimentos;
-	}
-
-	public void setAtendimentos(List<AtendimentoDTO> atendimentos) {
-		this.atendimentos = atendimentos;
 	}
 
 	public String getCpf() {
@@ -81,11 +71,11 @@ public class PessoaDTO extends AbstractDTO<Pessoa> {
 	}
 
 	public GeneroEnum getGenero() {
-		return genero;
+		return GeneroEnum.toEnum(this.genero);
 	}
 
 	public void setGenero(GeneroEnum genero) {
-		this.genero = genero;
+		this.genero = genero.getCode();
 	}
 
 	public String getEmail() {
@@ -113,11 +103,45 @@ public class PessoaDTO extends AbstractDTO<Pessoa> {
 	}
 
 	public TipoUsuarioEnum getTipoUsuario() {
-		return tipoUsuario;
+		return TipoUsuarioEnum.toEnum(this.tipoUsuario);
 	}
 
 	public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+		this.tipoUsuario = tipoUsuario.getCode();
+	}
+	
+	@JsonIgnore
+	public Pessoa getPessoa() {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(this.getId());
+		pessoa.setCpf(this.getCpf());
+		pessoa.setNome(this.getNome());
+		pessoa.setPeso(this.getPeso());
+		pessoa.setIdade(this.getIdade());
+		pessoa.setEmail(this.getEmail());
+		pessoa.setGenero(this.getGenero());
+		pessoa.setAltura(this.getAltura());
+		pessoa.setTelefone(this.getTelefone());
+		pessoa.setEndereco(this.getEndereco());
+		pessoa.setTipoUsuario(this.getTipoUsuario());
+		
+		return pessoa;
+	}
+
+
+	@JsonIgnore	
+	public void setPessoa(Pessoa pessoa) {
+		this.setId(pessoa.getId());
+		this.setCpf(pessoa.getCpf());
+		this.setNome(pessoa.getNome());
+		this.setPeso(pessoa.getPeso());
+		this.setIdade(pessoa.getIdade());
+		this.setEmail(pessoa.getEmail());
+		this.setGenero(pessoa.getGenero());
+		this.setAltura(pessoa.getAltura());
+		this.setTelefone(pessoa.getTelefone());
+		this.setEndereco(pessoa.getEndereco());
+		this.setTipoUsuario(this.getTipoUsuario());
 	}
 
 	@Override

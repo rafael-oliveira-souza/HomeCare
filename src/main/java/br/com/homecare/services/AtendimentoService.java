@@ -27,6 +27,10 @@ public class AtendimentoService {
 	public List<Atendimento> getAll() {
 		return this.repo.findAll();
 	}
+	
+	public List<Atendimento>  findAtendimentoByIdPessoa(final Long id) {
+		return this.repo.findAtendimentoByIdPessoa(id);
+	}
 
 	public List<Atendimento> updateAll(List<Atendimento> atendimentos) {
 		 return this.repo.saveAll((Iterable<Atendimento>)atendimentos);

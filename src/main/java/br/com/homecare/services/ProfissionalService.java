@@ -28,12 +28,6 @@ public class ProfissionalService {
 	@Autowired
 	private CurriculoService curriculoService;
 
-	@Autowired
-	private ProfissaoService profissaoService;
-
-	@Autowired
-	private AtendimentoService atendimentoService;
-
 	public Optional<Profissional> find(final Long id) {
 		return this.repo.findById(id);
 	}
@@ -52,8 +46,6 @@ public class ProfissionalService {
 	
 	public Profissional save(Profissional entity) {
 		try {
-			this.atendimentoService.saveAll(entity.getAtendimentos());
-			this.profissaoService.saveAll(entity.getProfissoes());
 			entity.setTipoUsuario(TipoUsuarioEnum.PROFISSIONAL);
 			entity = this.repo.save(entity);
 			
@@ -73,10 +65,8 @@ public class ProfissionalService {
 
 		Optional<Profissional> objeto = this.find(entity.getId());
 		if (objeto.isPresent()) {
-			Profissional prof = objeto.get();
-			prof.getCurriculo().setProfissional(prof);
-			this.curriculoService.save(prof.getCurriculo());
-			return this.repo.save(prof);
+			this.curriculoService.update(entity.getCurriculo());
+			return this.repo.save(entity);
 		} else {
 			throw new RequestErrorException(ExceptionMessages.objetoNaoEncontrado("Profissional"));
 		}

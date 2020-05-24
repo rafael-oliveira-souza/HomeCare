@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.homecare.models.entities.Especialidade;
 import br.com.homecare.services.EspecialidadeService;
+import br.com.homecare.utils.ProfileUtils;
 
 @RestController
 @RequestMapping("/especialidade")
@@ -39,6 +41,7 @@ public class EspecialidadeResource {
 	}
 
 	@PostMapping("/salvar")
+	@PreAuthorize(ProfileUtils.HAS_ROLE_ADMIN)
 	public ResponseEntity<Especialidade> save(@RequestBody Especialidade especialidade) {
 		Especialidade objeto = service.save(especialidade);
 
@@ -46,6 +49,7 @@ public class EspecialidadeResource {
 	}
 
 	@PutMapping("/atualizar")
+	@PreAuthorize(ProfileUtils.HAS_ROLE_ADMIN)
 	public ResponseEntity<Especialidade> update(@RequestBody Especialidade especialidade) {
 		Especialidade objeto = service.update(especialidade);
 
@@ -53,6 +57,7 @@ public class EspecialidadeResource {
 	}
 
 	@DeleteMapping("/excluir/{id}")
+	@PreAuthorize(ProfileUtils.HAS_ROLE_ADMIN)
 	public ResponseEntity<?> Delete(@PathVariable(value = "id") Long id) {
 		service.delete(id);
 		

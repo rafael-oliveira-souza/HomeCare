@@ -3,19 +3,15 @@ package br.com.homecare.commons;
 import java.io.Serializable;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractDTO<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Autowired
-	private ModelMapper modelMapper;
-
 	@Override
 	public abstract boolean equals(Object obj);
 
 	public <E> E toEntity(Class<E> classe, T obj) {
-		return modelMapper.map(obj, classe);
+		return new ModelMapper().map(obj, classe);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -12,7 +12,6 @@ public class EspecialidadeDTO extends AbstractDTO<Especialidade>{
 	private String nome;
 	private String descricao;
 	private List<SintomaDTO> sintomas = new ArrayList<SintomaDTO>();
-	private List<ProfissaoDTO> profissoes = new ArrayList<ProfissaoDTO>();
 	
 	public Long getId() {
 		return id;
@@ -51,11 +50,4 @@ public class EspecialidadeDTO extends AbstractDTO<Especialidade>{
 		this.sintomas = sintomas;
 	}
 
-	public List<ProfissaoDTO> getProfissoes() {
-		return profissoes;
-	}
-
-	public void setProfissoes(List<ProfissaoDTO> profissoes) {
-		this.profissoes = profissoes;
-	}
 }

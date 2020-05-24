@@ -23,9 +23,6 @@ public class PacienteService {
 	private DoencaService doencaService;
 	
 	@Autowired
-	private AtendimentoService atendimentoService;
-
-	@Autowired
 	private PacienteRepository repo;
 
 	public Optional<Paciente> find(final Long id) {
@@ -47,10 +44,6 @@ public class PacienteService {
 	public Paciente save(Paciente entity) {
 		try {
 			entity.setTipoUsuario(TipoUsuarioEnum.PACIENTE);
-			this.atendimentoService.saveAll(entity.getAtendimentos());
-			this.medService.saveAll(entity.getMedicamentos());
-			this.doencaService.saveAll(entity.getDoencas());
-			
 			return this.repo.save(entity);
 		}catch (Exception e) {
 			throw new RequestErrorException(e.getMessage());

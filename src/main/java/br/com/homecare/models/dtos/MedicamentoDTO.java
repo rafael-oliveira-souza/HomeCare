@@ -1,8 +1,6 @@
 package br.com.homecare.models.dtos;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import br.com.homecare.commons.AbstractDTO;
 import br.com.homecare.models.entities.Medicamento;
@@ -13,7 +11,6 @@ public class MedicamentoDTO extends AbstractDTO<Medicamento>{
     private String descricao;
     private Date dataInicio;
     private Date dataFim;
-	private List<PacienteDTO> pacientes = new ArrayList<PacienteDTO>();
 	
 	public Long getId() {
 		return id;
@@ -52,12 +49,5 @@ public class MedicamentoDTO extends AbstractDTO<Medicamento>{
 		return super.equals(obj, this.id);
 	}
 
-	public List<PacienteDTO> getPacientes() {
-		return pacientes;
-	}
-
-	public void setPacientes(List<PacienteDTO> pacientes) {
-		this.pacientes = pacientes;
-	}
 	
 }
