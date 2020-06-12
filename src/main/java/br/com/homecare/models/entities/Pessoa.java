@@ -57,6 +57,8 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 
     private String telefone;
 
+    private String img;
+
     private String endereco;
 
     @Column(name = "tipo_usuario", nullable = false)
@@ -154,6 +156,7 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 	public Pessoa getPessoa() {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setId(this.getId());
+		pessoa.setImg(this.getImg());
 		pessoa.setCpf(this.getCpf());
 		pessoa.setNome(this.getNome());
 		pessoa.setPeso(this.getPeso());
@@ -172,6 +175,7 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 	@JsonIgnore	
 	public void setPessoa(Pessoa pessoa) {
 		this.setId(pessoa.getId());
+		this.setImg(pessoa.getImg());
 		this.setCpf(pessoa.getCpf());
 		this.setNome(pessoa.getNome());
 		this.setPeso(pessoa.getPeso());
@@ -188,6 +192,14 @@ public class Pessoa extends AbstractEntity<PessoaDTO> {
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		return super.equals(obj, this.id);
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }

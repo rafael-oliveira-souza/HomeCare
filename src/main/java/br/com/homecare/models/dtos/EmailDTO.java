@@ -1,7 +1,5 @@
 package br.com.homecare.models.dtos;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import br.com.homecare.models.entities.Usuario;
 
 public class EmailDTO {
