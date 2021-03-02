@@ -35,21 +35,21 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		if(!request.getRequestURI().contains(PUBLIC_URL)){
-			String authHeader = request.getHeader(jwtUtil.AUTHORIZATION);
-			if(authHeader != null && authHeader.startsWith(jwtUtil.BEARER)) {
-				//remover bearer
-				String tokenNoBearer = authHeader.replaceAll(jwtUtil.BEARER, "");
-//				String tokenNoBearer = authHeader.substring(7);
-				UsernamePasswordAuthenticationToken auth = getAuthentication(request, tokenNoBearer);
-				if(auth != null) {
-					SecurityContextHolder.getContext().setAuthentication(auth);
-				}
-			}else {
-				throw new RequestErrorException(ExceptionMessages.FALHA_AUTENTICACAO);
-			}
-			
-		}
+//		if(!request.getRequestURI().contains(PUBLIC_URL)){
+//			String authHeader = request.getHeader(jwtUtil.AUTHORIZATION);
+//			if(authHeader != null && authHeader.startsWith(jwtUtil.BEARER)) {
+//				//remover bearer
+//				String tokenNoBearer = authHeader.replaceAll(jwtUtil.BEARER, "");
+////				String tokenNoBearer = authHeader.substring(7);
+//				UsernamePasswordAuthenticationToken auth = getAuthentication(request, tokenNoBearer);
+//				if(auth != null) {
+//					SecurityContextHolder.getContext().setAuthentication(auth);
+//				}
+//			}else {
+//				throw new RequestErrorException(ExceptionMessages.FALHA_AUTENTICACAO);
+//			}
+//			
+//		}
 		
 		chain.doFilter(request, response);
 	}

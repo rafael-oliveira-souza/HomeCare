@@ -36,9 +36,9 @@ public class AuthService {
 	private InterfaceEmailService emailService;
 	
 	public void refreshToken(HttpServletResponse response) {
-		UserSecurity user = UsuarioService.usuarioLogado();
-		String token = jwtUtil.generateToken(user.getEmail());
-		response.addHeader(jwtUtil.AUTHORIZATION, jwtUtil.BEARER + token);
+//		UserSecurity user = UsuarioService.usuarioLogado();
+//		String token = jwtUtil.generateToken(user.getEmail());
+//		response.addHeader(jwtUtil.AUTHORIZATION, jwtUtil.BEARER + token);
 	}
 	
 	public void recoverPassword(Usuario usuario) {
