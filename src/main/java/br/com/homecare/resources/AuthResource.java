@@ -3,13 +3,14 @@ package br.com.homecare.resources;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.homecare.services.AuthService;
 
-@RestController
+@Controller
 @RequestMapping("/auth")
 public class AuthResource {
 
